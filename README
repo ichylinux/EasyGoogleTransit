@@ -1,0 +1,7 @@
+使い方
+
+TransitQuery query = new TransitQuery();
+query.setFrom("品川");
+query.setTo("東京");
+TransitSearcher searcher = TransitSearcherFactory.createMobileSearcher(Platform.ANDROID);
+TransitResult result = searcher.search(query);
