@@ -17,16 +17,14 @@
  */
 package jp.co.hybitz.googletransit;
 
-import jp.co.hybitz.googletransit.searcher.MobilePullSearcher20100517;
-
-import org.xmlpull.v1.XmlPullParser;
+import jp.co.hybitz.googletransit.searcher.MobileSearcher20100517;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
 public class TransitSearcherFactory {
 
-    public static TransitSearcher createMobilePullSearcher(XmlPullParser parser) {
-        return new MobilePullSearcher20100517(parser);
+    public static TransitSearcher createMobileSearcher(Platform platform) {
+        return new MobileSearcher20100517(platform);
     }
 }

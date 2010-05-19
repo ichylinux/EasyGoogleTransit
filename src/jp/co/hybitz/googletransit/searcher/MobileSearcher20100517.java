@@ -25,26 +25,27 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import jp.co.hybitz.googletransit.Platform;
 import jp.co.hybitz.googletransit.TransitSearchException;
 import jp.co.hybitz.googletransit.TransitSearcher;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
-import jp.co.hybitz.googletransit.parser.TransitParser;
-import jp.co.hybitz.googletransit.parser.MobilePullParser20100517;
 
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import android.util.Xml;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobilePullSearcher20100517 implements TransitSearcher {
+public class MobileSearcher20100517 implements TransitSearcher {
 	private static final String GOOGLE = "http://www.google.co.jp/m/directions";
 	
-	private TransitParser transitParser;
+	private Platform platform;
 	
-	public MobilePullSearcher20100517(XmlPullParser parser) {
-	    this.transitParser = new MobilePullParser20100517(parser);
+	public MobileSearcher20100517(Platform platform) {
+		this.platform = platform;
 	}
 	
 	public TransitResult search(TransitQuery query) throws TransitSearchException {
@@ -56,6 +57,16 @@ public class MobilePullSearcher20100517 implements TransitSearcher {
 			con.setRequestMethod("GET");
 			con.connect();
 			in = con.getInputStream();
+			
+			TransitParser transitParser = null;
+			if (platform == Platform.ANDROID) {
+				transitParser = new MobileParser20100517(Xml.newPullParser());
+			} else if (platform == Platform.GENERIC) {
+			    transitParser = new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
+			} else {
+				throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
+			}
+			
 			return transitParser.parse(in);
 			
 		} catch (MalformedURLException e) {

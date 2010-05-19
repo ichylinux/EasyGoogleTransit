@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.googletransit.searcher;
 
 import java.io.InputStream;
 
@@ -24,7 +24,6 @@ import jp.co.hybitz.googletransit.model.TransitResult;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface TransitParser {
-
-	public TransitResult parse(InputStream in) throws Exception;
+interface TransitParser {
+	TransitResult parse(InputStream in) throws Exception;
 }

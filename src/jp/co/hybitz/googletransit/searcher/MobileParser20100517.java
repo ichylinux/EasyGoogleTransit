@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.googletransit.searcher;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,13 +31,13 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobilePullParser20100517 implements TransitParser {
+class MobileParser20100517 implements TransitParser {
     private XmlPullParser parser;
     private TransitResult result = new TransitResult();
 	private Transit transit;
 	private TransitDetail transitDetail;
 	
-	public MobilePullParser20100517(XmlPullParser parser) {
+	public MobileParser20100517(XmlPullParser parser) {
 	    this.parser = parser;
 	}
 
