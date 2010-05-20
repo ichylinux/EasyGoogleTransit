@@ -65,6 +65,9 @@ class MobileParser20100517 implements TransitParser {
 	    if (text.matches(".*～.* [0-9]{1,2}:[0-9]{2}(発|着)")) {
 	        result.setTitle(text);
 	    }
+	    else if (text.matches(".*～.* 終電")) {
+            result.setTitle(text);
+	    }
 	    else if (text.matches(".*[0-9]*円.*")) {
             if (transit != null) {
                 if (transitDetail != null) {

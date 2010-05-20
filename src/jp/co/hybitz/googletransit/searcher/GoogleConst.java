@@ -15,12 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.googletransit.searcher;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public enum Platform {
-	ANDROID,
-	GENERIC,
+public interface GoogleConst {
+    public static final String GOOGLE_TRANSIT_MOBILE_URL = "http://www.google.co.jp/m/directions";
 }

@@ -20,14 +20,13 @@ package jp.co.hybitz.googletransit.searcher;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 
 import jp.co.hybitz.googletransit.Platform;
 import jp.co.hybitz.googletransit.TransitSearchException;
 import jp.co.hybitz.googletransit.TransitSearcher;
+import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
@@ -39,8 +38,7 @@ import android.util.Xml;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileSearcher20100517 implements TransitSearcher {
-	private static final String GOOGLE = "http://www.google.co.jp/m/directions";
+public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	
 	private Platform platform;
 	
@@ -52,11 +50,7 @@ public class MobileSearcher20100517 implements TransitSearcher {
 		InputStream in = null;
 
 		try {
-			URL url = new URL(GOOGLE + createQueryString(query));
-			HttpURLConnection con = (HttpURLConnection) url.openConnection();
-			con.setRequestMethod("GET");
-			con.connect();
-			in = con.getInputStream();
+			in = openConnection(query);
 			
 			TransitParser transitParser = null;
 			if (platform == Platform.ANDROID) {
@@ -69,10 +63,6 @@ public class MobileSearcher20100517 implements TransitSearcher {
 			
 			return transitParser.parse(in);
 			
-		} catch (MalformedURLException e) {
-		    throw new TransitSearchException(e.getMessage(), e);
-		} catch (ProtocolException e) {
-            throw new TransitSearchException(e.getMessage(), e);
 		} catch (IOException e) {
             throw new TransitSearchException(e.getMessage(), e);
 		} catch (XmlPullParserException e) {
@@ -84,11 +74,49 @@ public class MobileSearcher20100517 implements TransitSearcher {
 		}
 	}
 	
+	protected InputStream openConnection(TransitQuery query) throws IOException {
+        URL url = new URL(GOOGLE_TRANSIT_MOBILE_URL + createQueryString(query));
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.connect();
+        return con.getInputStream();
+	}
+	
 	private String createQueryString(TransitQuery query) {
 		StringBuilder sb = new StringBuilder();
+		
+		// 出発地
 		sb.append("?saddr=").append(URLEncoder.encode(query.getFrom()));
+		
+		// 到着地
 		sb.append("&daddr=").append(URLEncoder.encode(query.getTo()));
-		sb.append("&time=&ttype=dep&ie=UTF8&f=d&dirmode=transit&num=3&dirflg=r");
+		
+        // 出発時刻か到着時刻か
+        if (query.getTimeType() != null) {
+            String ttype = "";
+            if (query.getTimeType() == TimeType.DEPARTURE) {
+                ttype = "dep";
+            }
+            else if (query.getTimeType() == TimeType.ARRIVAL) {
+                ttype = "arr";
+            }
+            else if (query.getTimeType() == TimeType.LAST) {
+                ttype = "last";
+            }
+            sb.append("&ttype=").append(ttype);
+        }
+        
+		// 日付
+		if (query.getDate() != null && query.getDate().length() > 0) {
+		    sb.append("&date=").append(query.getDate());
+		}
+		
+		// 時刻
+		if (query.getTime() != null && query.getTime().length() > 0) {
+		    sb.append("&time=").append(query.getTime());
+		}
+		
+		sb.append("&ie=UTF8&f=d&dirmode=transit&num=3&dirflg=r");
 		return sb.toString();
 	}
 }

@@ -24,7 +24,7 @@ import jp.co.hybitz.googletransit.searcher.MobileSearcher20100517;
  */
 public class TransitSearcherFactory {
 
-    public static TransitSearcher createMobileSearcher(Platform platform) {
+    public static TransitSearcher createSearcher(Platform platform) {
         return new MobileSearcher20100517(platform);
     }
 }
