@@ -44,8 +44,9 @@ class MobileParser20100517 implements TransitParser {
 	public TransitResult parse(InputStream in) throws XmlPullParserException, IOException {
 		parser.setInput(in, null);
 		
+		boolean stopParsing = false;
 		int eventType = parser.getEventType();
-		do {
+		while (true) {
 			switch (eventType) {
 			case XmlPullParser.START_TAG :
 				break;
@@ -53,15 +54,30 @@ class MobileParser20100517 implements TransitParser {
 				break;
 			case XmlPullParser.TEXT :
 				String text = parser.getText().trim();
-				handleText(text);
+				stopParsing = handleText(text);
 				break;
 			}
-		} while ((eventType = parser.next()) != XmlPullParser.END_DOCUMENT);
+			
+			if (stopParsing) {
+			    break;
+			}
+
+			eventType = parser.next();
+			if (eventType == XmlPullParser.END_DOCUMENT) {
+			    break;
+			}
+		}
 
 		return result;
 	}
 	
-	private void handleText(String text) {
+	/**
+	 * テキスト部分を解析します。
+	 * 
+	 * @param text
+	 * @return true：必要な情報までパースした場合、false：パース続行
+	 */
+	private boolean handleText(String text) {
 	    if (text.matches(".*～.* [0-9]{1,2}:[0-9]{2}(発|着)")) {
 	        result.setTitle(text);
 	    }
@@ -81,6 +97,7 @@ class MobileParser20100517 implements TransitParser {
                 result.addTransit(transit);
             }
             transit = null;
+            return true;
         } else if (text.length() > 0) {
             if (text.matches("[0-9]{1,2}:[0-9]{2}発 .*")) {
                 handleDeparture(text);            }
@@ -90,6 +107,8 @@ class MobileParser20100517 implements TransitParser {
                 handleRoute(text);
             }
         }
+	    
+	    return false;
 	}
 	
 	private void handleTimeAndFare(String text) {

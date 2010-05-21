@@ -48,7 +48,7 @@ public class MobileHtmlDump20100517 extends MobileSearcher20100517 {
         query.setTime(new SimpleDateFormat("hhmm").format(c.getTime()));
         query.setTimeType(TimeType.DEPARTURE);
 
-        InputStream in = new MobileHtmlDump20100517(Platform.ANDROID).openConnection(query);
+        InputStream in = new MobileHtmlDump20100517(Platform.GENERIC).openConnection(query);
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String line = null;
         while ((line = br.readLine()) != null) {

@@ -3,12 +3,20 @@
 	<property file="build.properties"/>
 	<path id="compile.classpath">
 		<fileset dir="lib">
-			<include name="**/*.jar"/>
+			<include name="*.jar"/>
         </fileset>
 	</path>
+    <path id="test.compile.classpath">
+        <fileset dir="lib">
+            <include name="*.jar"/>
+            <include name="test/*.jar"/>
+        	<exclude name="android.jar"/>
+        </fileset>
+    </path>
 	
   <target name="dist">
-    <antcall target="jar"/>
+    <antcall target="clean"/>
+  	<antcall target="jar"/>
   </target>
 	
 	<target name="clean">
@@ -18,7 +26,7 @@
 	
 	<target name="compile">
 		<mkdir dir="${classes.dir}"/>
-		<javac srcdir="src" destdir="${classes.dir}" encoding="UTF-8" debug="true" optimize="true" fork="true">
+		<javac srcdir="src" destdir="${classes.dir}" encoding="UTF-8" debug="true" optimize="true">
 			<classpath refid="compile.classpath"/>
 		</javac>
 	</target>
@@ -31,4 +39,29 @@
 			</manifest>
 		</jar>
 	</target>
+	
+    <target name="test.compile" depends="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="test" destdir="${classes.dir}" encoding="UTF-8" debug="true" optimize="true">
+            <classpath refid="test.compile.classpath"/>
+        </javac>
+    </target>
+	
+    <target name="test" depends="test.compile">
+      <junit printsummary="yes" haltonfailure="yes" haltonerror="yes" fork="yes" showoutput="true">
+        <jvmarg value="-Xmx128m"/>
+      
+        <formatter type="plain" usefile="false"/>
+      
+        <classpath>
+          <path refid="test.compile.classpath"/>
+          <pathelement location="${classes.dir}"/>
+          <pathelement location="test/fixtures"/>
+        </classpath>
+      
+        <batchtest fork="yes">
+          <fileset dir="test" includes="**/*Test.java"/>
+        </batchtest>
+      </junit>
+    </target>
 </project>
