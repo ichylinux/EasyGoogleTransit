@@ -69,16 +69,7 @@ class MobileParser20100517 implements TransitParser {
             result.setTitle(text);
 	    }
 	    else if (text.matches(".*[0-9]*円.*")) {
-            if (transit != null) {
-                if (transitDetail != null) {
-                    transit.addDetail(transitDetail);
-                    transitDetail = null;
-                }
-
-                result.addTransit(transit);
-            }
-            transit = new Transit();
-            transit.setTimeAndFee(text);
+	        handleTimeAndFare(text);
         }
         else if ("逆方向の経路を表示".equals(text)) {
             if (transit != null) {
@@ -99,6 +90,19 @@ class MobileParser20100517 implements TransitParser {
                 handleRoute(text);
             }
         }
+	}
+	
+	private void handleTimeAndFare(String text) {
+        if (transit != null) {
+            if (transitDetail != null) {
+                transit.addDetail(transitDetail);
+                transitDetail = null;
+            }
+
+            result.addTransit(transit);
+        }
+        transit = new Transit();
+        transit.setTimeAndFare(text);
 	}
 	
 	private void handleDeparture(String text) {
