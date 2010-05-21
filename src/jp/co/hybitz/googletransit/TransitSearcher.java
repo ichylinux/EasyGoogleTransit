@@ -24,5 +24,15 @@ import jp.co.hybitz.googletransit.model.TransitResult;
  * @author ichy <ichylinux@gmail.com>
  */
 public interface TransitSearcher {
+
+    /**
+     * Googleトランジットを利用して検索します。
+     * <br/>
+     * nullを返すことはありません。
+     * 
+     * @param query
+     * @return
+     * @throws TransitSearchException
+     */
     public TransitResult search(TransitQuery query) throws TransitSearchException;
 }

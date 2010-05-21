@@ -42,13 +42,13 @@ public class MobileHtmlDump20100517 extends MobileSearcher20100517 {
         c.add(Calendar.MINUTE, 10);
         
         TransitQuery query = new TransitQuery();
-        query.setFrom("八丁堀");
-        query.setTo("東札幌");
+        query.setFrom("品川");
+        query.setTo("甲州街道");
         query.setDate(new SimpleDateFormat("yyyyMMdd").format(c.getTime()));
         query.setTime(new SimpleDateFormat("hhmm").format(c.getTime()));
         query.setTimeType(TimeType.DEPARTURE);
 
-        InputStream in = new MobileHtmlDump20100517(Platform.GENERIC).openConnection(query);
+        InputStream in = new MobileHtmlDump20100517(Platform.GENERIC).openConnection(query).getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String line = null;
         while ((line = br.readLine()) != null) {

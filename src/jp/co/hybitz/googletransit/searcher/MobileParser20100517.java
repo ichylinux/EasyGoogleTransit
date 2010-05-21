@@ -19,6 +19,7 @@ package jp.co.hybitz.googletransit.searcher;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
 import jp.co.hybitz.googletransit.model.Transit;
@@ -42,6 +43,7 @@ class MobileParser20100517 implements TransitParser {
 	}
 
 	public TransitResult parse(InputStream in) throws XmlPullParserException, IOException {
+	    result.setResponseCode(HttpURLConnection.HTTP_OK);
 		parser.setInput(in, null);
 		
 		boolean stopParsing = false;

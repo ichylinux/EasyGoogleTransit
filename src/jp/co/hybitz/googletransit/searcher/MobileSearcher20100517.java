@@ -50,19 +50,15 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		InputStream in = null;
 
 		try {
-			in = openConnection(query);
-			
-			TransitParser transitParser = null;
-			if (platform == Platform.ANDROID) {
-				transitParser = new MobileParser20100517(Xml.newPullParser());
-			} else if (platform == Platform.GENERIC) {
-			    transitParser = new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
-			} else {
-				throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
-			}
-			
-			return transitParser.parse(in);
-			
+		    HttpURLConnection con = openConnection(query);
+		    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+		        return createParser().parse(con.getInputStream());
+		    }
+		    else {
+		        TransitResult result = new TransitResult();
+		        result.setResponseCode(con.getResponseCode());
+		        return result;
+		    }
 		} catch (IOException e) {
             throw new TransitSearchException(e.getMessage(), e);
 		} catch (XmlPullParserException e) {
@@ -74,12 +70,22 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		}
 	}
 	
-	protected InputStream openConnection(TransitQuery query) throws IOException {
+	private TransitParser createParser() throws XmlPullParserException {
+        if (platform == Platform.ANDROID) {
+            return new MobileParser20100517(Xml.newPullParser());
+        } else if (platform == Platform.GENERIC) {
+            return new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
+        } else {
+            throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
+        }
+	}
+	
+	protected HttpURLConnection openConnection(TransitQuery query) throws IOException {
         URL url = new URL(GOOGLE_TRANSIT_MOBILE_URL + createQueryString(query));
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
         con.connect();
-        return con.getInputStream();
+        return con;
 	}
 	
 	private String createQueryString(TransitQuery query) {

@@ -26,9 +26,18 @@ import java.util.List;
  */
 public class TransitResult implements Serializable {
 
+    private int responseCode;
     private String title;
     private List<Transit> transits = new ArrayList<Transit>();
     
+    public int getResponseCode() {
+        return responseCode;
+    }
+
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
     public String getTitle() {
         return title;
     }
