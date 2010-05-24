@@ -32,6 +32,11 @@ public class Time implements Serializable {
         this.minute = minute;
     }
     
+    public Time(String hour, String minute) {
+        this.hour = Integer.parseInt(hour);
+        this.minute = Integer.parseInt(minute);
+    }
+    
     public int getHour() {
         return hour;
     }

@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 
 import jp.co.hybitz.googletransit.Platform;
 import jp.co.hybitz.googletransit.TransitSearchException;
@@ -50,22 +51,32 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		InputStream in = null;
 
 		try {
+		    TransitResult result;
+		    
 		    HttpURLConnection con = openConnection(query);
 		    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-		        return createParser().parse(con.getInputStream());
+		        result = createParser().parse(con.getInputStream());
 		    }
 		    else {
-		        TransitResult result = new TransitResult();
-		        result.setResponseCode(con.getResponseCode());
-		        return result;
+		        result = new TransitResult();
 		    }
-		} catch (IOException e) {
+		    
+            result.setResponseCode(con.getResponseCode());
+            if (query.getDate() != null) {
+                result.setDate(new SimpleDateFormat("yyyyMMdd").parse(query.getDate()));
+            }
+            return result;
+		}
+		catch (IOException e) {
             throw new TransitSearchException(e.getMessage(), e);
-		} catch (XmlPullParserException e) {
+		}
+		catch (XmlPullParserException e) {
             throw new TransitSearchException(e.getMessage(), e);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
             throw new TransitSearchException(e.getMessage(), e);
-		} finally {
+		}
+		finally {
 			if (in != null) { try {in.close();} catch (IOException e){} }
 		}
 	}
@@ -73,9 +84,11 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	private TransitParser createParser() throws XmlPullParserException {
         if (platform == Platform.ANDROID) {
             return new MobileParser20100517(Xml.newPullParser());
-        } else if (platform == Platform.GENERIC) {
+        }
+        else if (platform == Platform.GENERIC) {
             return new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
-        } else {
+        }
+        else {
             throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
         }
 	}

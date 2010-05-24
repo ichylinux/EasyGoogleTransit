@@ -19,10 +19,10 @@ package jp.co.hybitz.googletransit.searcher;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
 
 import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
+import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.Transit;
 import jp.co.hybitz.googletransit.model.TransitDetail;
 import jp.co.hybitz.googletransit.model.TransitResult;
@@ -44,7 +44,6 @@ class MobileParser20100517 implements TransitParser {
 	}
 
 	public TransitResult parse(InputStream in) throws XmlPullParserException, IOException {
-	    result.setResponseCode(HttpURLConnection.HTTP_OK);
 		parser.setInput(in, null);
 		
 		boolean stopParsing = false;
@@ -81,11 +80,14 @@ class MobileParser20100517 implements TransitParser {
 	 * @return true：必要な情報までパースした場合、false：パース続行
 	 */
 	private boolean handleText(String text) {
-	    if (text.matches(".*～.* [0-9]{1,2}:[0-9]{2}(発|着)")) {
-	        result.setTitle(text);
+	    if (text.matches(".*～.* [0-9]{1,2}:[0-9]{2}発")) {
+	        handleSummary(text, TimeType.DEPARTURE);
 	    }
+	    else if (text.matches(".*～.* [0-9]{1,2}:[0-9]{2}着")) {
+            handleSummary(text, TimeType.ARRIVAL);
+        }
 	    else if (text.matches(".*～.* 終電")) {
-            result.setTitle(text);
+            handleSummary(text, TimeType.LAST);
 	    }
 	    else if (text.matches(".*[0-9]*円.*")) {
 	        handleTimeAndFare(text);
@@ -112,6 +114,27 @@ class MobileParser20100517 implements TransitParser {
         }
 	    
 	    return false;
+	}
+	
+	private void handleSummary(String text, TimeType timeType) {
+	    result.setTimeType(timeType);
+	    
+	    if (timeType == TimeType.LAST) {
+	        String[] split = text.split("～");
+	        result.setFrom(split[0].trim());
+	        result.setTo(split[1].trim().split(" ")[0]);
+	    }
+	    else {
+            String[] split = text.split("～");
+            result.setFrom(split[0].trim());
+            
+            String[] split2 = split[1].trim().replaceAll("(発|着)", "").trim().split(" ");
+            result.setTo(split2[0]);
+            
+            String[] split3 = split2[1].trim().split(":");
+            result.setTime(new Time(split3[0], split3[1]));
+	    }
+	    
 	}
 	
 	private void handleTimeAndFare(String text) {

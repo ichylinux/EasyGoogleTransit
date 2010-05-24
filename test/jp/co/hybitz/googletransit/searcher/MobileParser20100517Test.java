@@ -17,6 +17,7 @@
  */
 package jp.co.hybitz.googletransit.searcher;
 
+import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitResult;
 import junit.framework.TestCase;
 
@@ -46,7 +47,10 @@ public class MobileParser20100517Test extends TestCase {
             fail(e.getMessage());
         }
         
-        assertEquals("タイトル", "八丁堀駅（東京）～東札幌駅（北海道） 7:02発", result.getTitle());
+        assertEquals("出発地", "八丁堀駅（東京）", result.getFrom());
+        assertEquals("到着地", "東札幌駅（北海道）", result.getTo());
+        assertEquals("時刻タイプ", TimeType.DEPARTURE, result.getTimeType());
+        assertEquals("時刻", "0702", result.getTime().getTimeAsString());
         assertEquals("候補は3件", 3, result.getTransitCount());
     }
 }
