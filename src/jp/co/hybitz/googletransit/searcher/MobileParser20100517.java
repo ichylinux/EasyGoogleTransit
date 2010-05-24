@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 
+import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
 import jp.co.hybitz.googletransit.model.Transit;
 import jp.co.hybitz.googletransit.model.TransitDetail;
@@ -128,12 +129,16 @@ class MobileParser20100517 implements TransitParser {
 	
 	private void handleDeparture(String text) {
         String[] split = text.split("発 ");
-        transitDetail.setDeparture(new TimeAndPlace(split[0], split[1]));
+        String[] splitTime = split[0].split(":");
+        Time time = new Time(Integer.parseInt(splitTime[0]), Integer.parseInt(splitTime[1]));
+        transitDetail.setDeparture(new TimeAndPlace(time, split[1]));
 	}
 	
 	private void handleArrival(String text) {
         String[] split = text.split("着 ");
-        transitDetail.setArrival(new TimeAndPlace(split[0], split[1]));
+        String[] splitTime = split[0].split(":");
+        Time time = new Time(Integer.parseInt(splitTime[0]), Integer.parseInt(splitTime[1]));
+        transitDetail.setArrival(new TimeAndPlace(time, split[1]));
 	}
 	
 	private void handleRoute(String text) {

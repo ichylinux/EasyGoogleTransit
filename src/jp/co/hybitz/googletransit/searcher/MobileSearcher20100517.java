@@ -122,6 +122,16 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		    sb.append("&time=").append(query.getTime());
 		}
 		
+		// 有料特急
+		if (!query.isUseExpress()) {
+		    sb.append("&noexp=1");
+		}
+		
+		// 飛行機
+		if (!query.isUseAirline()) {
+		    sb.append("&noal=1");
+		}
+		
 		sb.append("&ie=UTF8&f=d&dirmode=transit&num=3&dirflg=r");
 		return sb.toString();
 	}

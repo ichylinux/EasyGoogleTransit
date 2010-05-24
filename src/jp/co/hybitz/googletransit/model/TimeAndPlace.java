@@ -24,15 +24,15 @@ import java.io.Serializable;
  */
 public class TimeAndPlace implements Serializable {
 
-    private String time;
+    private Time time;
     private String place;
 
-    public TimeAndPlace(String time, String place) {
+    public TimeAndPlace(Time time, String place) {
         this.time = time;
         this.place = place;
     }
     
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
     public String getPlace() {

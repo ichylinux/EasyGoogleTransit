@@ -29,6 +29,8 @@ public class TransitQuery implements Serializable {
 	private String date;
 	private String time;
 	private TimeType timeType;
+	private boolean useExpress;
+	private boolean useAirline;
 
 	public String getFrom() {
 		return from;
@@ -59,5 +61,17 @@ public class TransitQuery implements Serializable {
     }
     public void setTimeType(TimeType timeType) {
         this.timeType = timeType;
+    }
+    public boolean isUseExpress() {
+        return useExpress;
+    }
+    public void setUseExpress(boolean useExpress) {
+        this.useExpress = useExpress;
+    }
+    public boolean isUseAirline() {
+        return useAirline;
+    }
+    public void setUseAirline(boolean useAirline) {
+        this.useAirline = useAirline;
     }
 }
