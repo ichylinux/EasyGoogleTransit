@@ -26,9 +26,9 @@ public class TransitQuery implements Serializable {
 
 	private String from;
 	private String to;
+    private TimeType timeType;
 	private String date;
-	private String time;
-	private TimeType timeType;
+	private Time time;
 	private boolean useExpress;
 	private boolean useAirline;
 
@@ -44,23 +44,23 @@ public class TransitQuery implements Serializable {
 	public void setTo(String to) {
 		this.to = to;
 	}
+    public TimeType getTimeType() {
+        return timeType;
+    }
+    public void setTimeType(TimeType timeType) {
+        this.timeType = timeType;
+    }
     public String getDate() {
         return date;
     }
     public void setDate(String date) {
         this.date = date;
     }
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
-    public void setTime(String time) {
+    public void setTime(Time time) {
         this.time = time;
-    }
-    public TimeType getTimeType() {
-        return timeType;
-    }
-    public void setTimeType(TimeType timeType) {
-        this.timeType = timeType;
     }
     public boolean isUseExpress() {
         return useExpress;

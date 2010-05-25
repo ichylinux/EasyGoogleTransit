@@ -45,6 +45,19 @@ public class Transit implements Serializable {
 		details.add(detail);
 	}
 	
+	public TransitDetail getFirstPublicTransportation() {
+	    for (Iterator<TransitDetail> it = details.iterator(); it.hasNext();) {
+	        TransitDetail detail = it.next();
+	        if (detail.isWalking()) {
+	            continue;
+	        }
+	        
+	        return detail;
+	    }
+	    
+	    return null;
+	}
+	
 	public int getTransferCount() {
 		int ret = 0;
 		boolean isFirst = true;

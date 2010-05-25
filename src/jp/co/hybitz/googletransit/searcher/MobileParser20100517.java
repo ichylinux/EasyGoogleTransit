@@ -45,30 +45,26 @@ class MobileParser20100517 implements TransitParser {
 
 	public TransitResult parse(InputStream in) throws XmlPullParserException, IOException {
 		parser.setInput(in, null);
-		
-		boolean stopParsing = false;
-		int eventType = parser.getEventType();
-		while (true) {
-			switch (eventType) {
-			case XmlPullParser.START_TAG :
-				break;
-			case XmlPullParser.END_TAG :
-				break;
-			case XmlPullParser.TEXT :
-				String text = parser.getText().trim();
-				stopParsing = handleText(text);
-				break;
-			}
-			
-			if (stopParsing) {
-			    break;
-			}
 
-			eventType = parser.next();
-			if (eventType == XmlPullParser.END_DOCUMENT) {
-			    break;
-			}
-		}
+        boolean stopParsing = false;
+        int eventType = parser.getEventType();
+        while (true) {
+            switch (eventType) {
+            case XmlPullParser.TEXT :
+                String text = parser.getText().trim();
+                stopParsing = handleText(text);
+                break;
+            }
+            
+            if (stopParsing) {
+                break;
+            }
+            
+            eventType = parser.next();
+            if (eventType == XmlPullParser.END_DOCUMENT) {
+                break;
+            }
+        }
 
 		return result;
 	}
@@ -77,7 +73,7 @@ class MobileParser20100517 implements TransitParser {
 	 * テキスト部分を解析します。
 	 * 
 	 * @param text
-	 * @return true：必要な情報までパースした場合、false：パース続行
+	 * @return true：検索結果のパースを終了し残りの情報のパースに遷移、false：検索結果のパース続行
 	 */
 	private boolean handleText(String text) {
 	    if (text.matches(".*～.* [0-9]{1,2}:[0-9]{2}発")) {

@@ -23,11 +23,16 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Iterator;
 
 import jp.co.hybitz.googletransit.Platform;
 import jp.co.hybitz.googletransit.TransitSearchException;
 import jp.co.hybitz.googletransit.TransitSearcher;
+import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
+import jp.co.hybitz.googletransit.model.Transit;
+import jp.co.hybitz.googletransit.model.TransitDetail;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
@@ -48,6 +53,10 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	}
 	
 	public TransitResult search(TransitQuery query) throws TransitSearchException {
+	    if (query.getTimeType() == TimeType.FIRST) {
+	        return searchFirst(query);
+	    }
+	    
 		InputStream in = null;
 
 		try {
@@ -101,6 +110,70 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
         return con;
 	}
 	
+	private TransitResult searchFirst(TransitQuery query) throws TransitSearchException {
+        // 始発検索の場合は、まず終電を検索して、始発検索用の出発時刻を算出する
+	    TransitQuery queryForLast = new TransitQuery();
+	    queryForLast.setFrom(query.getFrom());
+	    queryForLast.setTo(query.getTo());
+	    queryForLast.setTimeType(TimeType.LAST);
+	    queryForLast.setUseExpress(query.isUseExpress());
+	    queryForLast.setUseAirline(query.isUseAirline());
+	    
+	    TransitResult result = search(queryForLast);
+	    if (result.getResponseCode() != HttpURLConnection.HTTP_OK) {
+	        return result;
+	    }
+	    
+	    // 候補の中から最後に出発する時刻を取得
+	    Time timeToSearch = null;
+	    for (Iterator<Transit> it = result.getTransits().iterator(); it.hasNext();) {
+	        Transit t = it.next();
+	        TransitDetail td = t.getFirstPublicTransportation();
+	        if (td == null) {
+	            continue;
+	        }
+
+	        Time time = td.getDeparture().getTime();
+	        if (timeToSearch == null || timeToSearch.compareTo(time) < 0) {
+	            timeToSearch = time;
+	        }
+	    }
+	    if (timeToSearch == null) {
+	        timeToSearch = new Time(0, 0);
+	    }
+	    else if (timeToSearch.getHour() == 23) {
+	        timeToSearch = new Time(0, timeToSearch.getMinute());
+	    }
+	    else {
+            timeToSearch = new Time(timeToSearch.getHour() + 1, timeToSearch.getMinute());
+	    }
+	    
+	    // ざっくりと、、
+	    // 現在時刻が午前中の場合は当日の始発を検索
+	    // 現在時刻が午後の場合は翌日の始発を検索
+	    // 時刻は最終が出発した1時間後
+	    Calendar c = Calendar.getInstance();
+	    if (c.get(Calendar.AM_PM) == Calendar.PM) {
+	        c.add(Calendar.DATE, 1);
+	    }
+	    
+        TransitQuery queryForFirst = new TransitQuery();
+        queryForFirst.setFrom(query.getFrom());
+        queryForFirst.setTo(query.getTo());
+        queryForFirst.setTimeType(TimeType.DEPARTURE);
+        queryForFirst.setDate(new SimpleDateFormat("yyyyMMdd").format(c.getTime()));
+        queryForFirst.setTime(timeToSearch);
+        queryForFirst.setUseExpress(query.isUseExpress());
+        queryForFirst.setUseAirline(query.isUseAirline());
+	    
+        TransitResult ret = search(queryForFirst);
+        ret.setTimeType(TimeType.FIRST);
+        ret.setDate(c.getTime());
+        ret.setTime(null);
+        
+        return ret;
+	}
+	
 	private String createQueryString(TransitQuery query) {
 		StringBuilder sb = new StringBuilder();
 		
@@ -131,8 +204,8 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		}
 		
 		// 時刻
-		if (query.getTime() != null && query.getTime().length() > 0) {
-		    sb.append("&time=").append(query.getTime());
+		if (query.getTime() != null) {
+		    sb.append("&time=").append(query.getTime().getTimeAsString());
 		}
 		
 		// 有料特急

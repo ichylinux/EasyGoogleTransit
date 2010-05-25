@@ -23,7 +23,7 @@ import java.io.Serializable;
  * @author ichy <ichylinux@gmail.com>
  *
  */
-public class Time implements Serializable {
+public class Time implements Serializable, Comparable<Time> {
     private int hour;
     private int minute;
 
@@ -64,5 +64,18 @@ public class Time implements Serializable {
         else {
             return getHourAsString() + getMinuteAsString();
         }
+    }
+
+    /**
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
+    @Override
+    public int compareTo(Time o) {
+        int ret = hour - o.hour;
+        if (ret != 0) {
+            return ret;
+        }
+        
+        return minute - o.minute;
     }
 }
