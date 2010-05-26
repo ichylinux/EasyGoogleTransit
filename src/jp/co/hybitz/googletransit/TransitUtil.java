@@ -31,7 +31,7 @@ import jp.co.hybitz.googletransit.model.TransitResult;
 public class TransitUtil {
 
     /**
-     * 乗り換え候補の中から出発地の最初の出発時刻を取得します。
+     * 乗り換え候補の中から最初に出発する出発時刻を取得します。
      * 
      * @param result
      * @return
@@ -54,12 +54,12 @@ public class TransitUtil {
     }
     
     /**
-     * 乗り換え候補の中から到着地の最初の到着時刻を取得します。
+     * 乗り換え候補の中から最後に到着する到着時刻を取得します。
      * 
      * @param result
      * @return
      */
-    public static Time getFirstArrivalTime(TransitResult result) {
+    public static Time getLastArrivalTime(TransitResult result) {
         Time timeToSearch = null;
         for (Iterator<Transit> it = result.getTransits().iterator(); it.hasNext();) {
             Transit t = it.next();

@@ -182,7 +182,7 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
         
 		// 日付・時刻
 		if (query.getTime() != null) {
-	        if (query.getDate() == null || query.getDate().length() > 0) {
+	        if (query.getDate() == null || query.getDate().length() == 0) {
 	            throw new IllegalArgumentException("時刻を指定する際には日付の指定も必要です。");
 	        }
             sb.append("&date=").append(query.getDate());
