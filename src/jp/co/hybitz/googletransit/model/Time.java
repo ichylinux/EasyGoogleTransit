@@ -65,7 +65,7 @@ public class Time implements Serializable, Comparable<Time> {
             return getHourAsString() + getMinuteAsString();
         }
     }
-
+    
     /**
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */

@@ -24,15 +24,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Iterator;
 
 import jp.co.hybitz.googletransit.Platform;
 import jp.co.hybitz.googletransit.TransitSearchException;
 import jp.co.hybitz.googletransit.TransitSearcher;
+import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
-import jp.co.hybitz.googletransit.model.Transit;
-import jp.co.hybitz.googletransit.model.TransitDetail;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
@@ -71,9 +69,6 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		    }
 		    
             result.setResponseCode(con.getResponseCode());
-            if (query.getDate() != null) {
-                result.setDate(new SimpleDateFormat("yyyyMMdd").parse(query.getDate()));
-            }
             return result;
 		}
 		catch (IOException e) {
@@ -125,19 +120,7 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	    }
 	    
 	    // 候補の中から最後に出発する時刻を取得
-	    Time timeToSearch = null;
-	    for (Iterator<Transit> it = result.getTransits().iterator(); it.hasNext();) {
-	        Transit t = it.next();
-	        TransitDetail td = t.getFirstPublicTransportation();
-	        if (td == null) {
-	            continue;
-	        }
-
-	        Time time = td.getDeparture().getTime();
-	        if (timeToSearch == null || timeToSearch.compareTo(time) < 0) {
-	            timeToSearch = time;
-	        }
-	    }
+	    Time timeToSearch = TransitUtil.getFirstDepartureTime(result);
 	    if (timeToSearch == null) {
 	        timeToSearch = new Time(0, 0);
 	    }
@@ -168,7 +151,6 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	    
         TransitResult ret = search(queryForFirst);
         ret.setTimeType(TimeType.FIRST);
-        ret.setDate(c.getTime());
         ret.setTime(null);
         
         return ret;
@@ -198,13 +180,12 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
             sb.append("&ttype=").append(ttype);
         }
         
-		// 日付
-		if (query.getDate() != null && query.getDate().length() > 0) {
-		    sb.append("&date=").append(query.getDate());
-		}
-		
-		// 時刻
+		// 日付・時刻
 		if (query.getTime() != null) {
+	        if (query.getDate() == null || query.getDate().length() > 0) {
+	            throw new IllegalArgumentException("時刻を指定する際には日付の指定も必要です。");
+	        }
+            sb.append("&date=").append(query.getDate());
 		    sb.append("&time=").append(query.getTime().getTimeAsString());
 		}
 		
