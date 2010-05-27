@@ -32,9 +32,13 @@ public class Time implements Serializable, Comparable<Time> {
         this.minute = minute;
     }
     
-    public Time(String hour, String minute) {
-        this.hour = Integer.parseInt(hour);
-        this.minute = Integer.parseInt(minute);
+    public Time(String HH, String mm) {
+        this.hour = Integer.parseInt(HH);
+        this.minute = Integer.parseInt(mm);
+    }
+    
+    public Time(String HHmm) {
+        this(HHmm.substring(0, 2), HHmm.substring(2));
     }
     
     public int getHour() {
@@ -66,6 +70,45 @@ public class Time implements Serializable, Comparable<Time> {
         }
     }
     
+    public boolean before(Time time) {
+        return compareTo(time) < 0;
+    }
+    
+    public boolean after(Time time) {
+        return compareTo(time) > 0;
+    }
+    
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + hour;
+        result = prime * result + minute;
+        return result;
+    }
+
+    /**
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Time other = (Time) obj;
+        if (hour != other.hour)
+            return false;
+        if (minute != other.minute)
+            return false;
+        return true;
+    }
+
     /**
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
@@ -78,4 +121,13 @@ public class Time implements Serializable, Comparable<Time> {
         
         return minute - o.minute;
     }
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return getTimeAsString(true);
+    }
+    
 }

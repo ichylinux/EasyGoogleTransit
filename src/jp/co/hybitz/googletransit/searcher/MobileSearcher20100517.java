@@ -119,33 +119,25 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	        return result;
 	    }
 	    
-	    // 候補の中から最後に出発する時刻を取得
-	    Time timeToSearch = TransitUtil.getFirstDepartureTime(result);
-	    if (timeToSearch == null) {
-	        timeToSearch = new Time(0, 0);
-	    }
-	    else if (timeToSearch.getHour() == 23) {
-	        timeToSearch = new Time(0, timeToSearch.getMinute());
-	    }
-	    else {
-            timeToSearch = new Time(timeToSearch.getHour() + 1, timeToSearch.getMinute());
-	    }
-	    
 	    // ざっくりと、、
 	    // 現在時刻が午前中の場合は当日の始発を検索
 	    // 現在時刻が午後の場合は翌日の始発を検索
 	    // 時刻は最終が出発した1時間後
-	    Calendar c = Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
 	    if (c.get(Calendar.AM_PM) == Calendar.PM) {
 	        c.add(Calendar.DATE, 1);
 	    }
+	    Time timeToSearch = TransitUtil.getFirstDepartureTime(result);
+        if (timeToSearch != null) {
+            c.set(Calendar.HOUR_OF_DAY, timeToSearch.getHour() + 1);
+            c.set(Calendar.MINUTE, timeToSearch.getMinute());
+        }
 	    
         TransitQuery queryForFirst = new TransitQuery();
         queryForFirst.setFrom(query.getFrom());
         queryForFirst.setTo(query.getTo());
         queryForFirst.setTimeType(TimeType.DEPARTURE);
-        queryForFirst.setDate(new SimpleDateFormat("yyyyMMdd").format(c.getTime()));
-        queryForFirst.setTime(timeToSearch);
+        queryForFirst.setDate(c.getTime());
         queryForFirst.setUseExpress(query.isUseExpress());
         queryForFirst.setUseAirline(query.isUseAirline());
 	    
@@ -181,12 +173,9 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
         }
         
 		// 日付・時刻
-		if (query.getTime() != null) {
-	        if (query.getDate() == null || query.getDate().length() == 0) {
-	            throw new IllegalArgumentException("時刻を指定する際には日付の指定も必要です。");
-	        }
-            sb.append("&date=").append(query.getDate());
-		    sb.append("&time=").append(query.getTime().getTimeAsString());
+		if (query.getDate() != null) {
+            sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
+		    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
 		}
 		
 		// 有料特急

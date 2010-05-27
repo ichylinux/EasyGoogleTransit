@@ -21,11 +21,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import jp.co.hybitz.googletransit.Platform;
-import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 
@@ -45,8 +43,7 @@ public class MobileHtmlDump20100517 extends MobileSearcher20100517 {
         TransitQuery query = new TransitQuery();
         query.setFrom("品川");
         query.setTo("甲州街道");
-        query.setDate(new SimpleDateFormat("yyyyMMdd").format(c.getTime()));
-        query.setTime(new Time(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE)));
+        query.setDate(c.getTime());
         query.setTimeType(TimeType.DEPARTURE);
 
         InputStream in = new MobileHtmlDump20100517(Platform.GENERIC).openConnection(query).getInputStream();

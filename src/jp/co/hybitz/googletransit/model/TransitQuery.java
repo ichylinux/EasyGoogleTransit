@@ -18,8 +18,11 @@
 package jp.co.hybitz.googletransit.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
+ * 検索条件
+ * 
  * @author ichy <ichylinux@gmail.com>
  */
 public class TransitQuery implements Serializable {
@@ -27,8 +30,7 @@ public class TransitQuery implements Serializable {
 	private String from;
 	private String to;
     private TimeType timeType;
-	private String date;
-	private Time time;
+	private Date date;
 	private boolean useExpress;
 	private boolean useAirline;
 
@@ -50,17 +52,11 @@ public class TransitQuery implements Serializable {
     public void setTimeType(TimeType timeType) {
         this.timeType = timeType;
     }
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
-    }
-    public Time getTime() {
-        return time;
-    }
-    public void setTime(Time time) {
-        this.time = time;
     }
     public boolean isUseExpress() {
         return useExpress;
