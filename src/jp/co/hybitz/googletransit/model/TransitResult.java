@@ -31,6 +31,7 @@ public class TransitResult implements Serializable {
     private Time time;
     private String from;
     private String to;
+    private String prefecture;
     private List<Transit> transits = new ArrayList<Transit>();
     
     public int getResponseCode() {
@@ -71,6 +72,20 @@ public class TransitResult implements Serializable {
 
     public void setTo(String to) {
         this.to = to;
+    }
+
+    /**
+     * 都道府県を取得します。
+     * 出発地と到着地が同じ都道府県の場合に取得できます。
+     * 
+     * @return 都道府県
+     */
+    public String getPrefecture() {
+        return prefecture;
+    }
+
+    public void setPrefecture(String prefecture) {
+        this.prefecture = prefecture;
     }
 
     public void setTransits(List<Transit> transits) {

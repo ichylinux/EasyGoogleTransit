@@ -20,6 +20,7 @@ package jp.co.hybitz.googletransit.searcher;
 import java.io.IOException;
 import java.io.InputStream;
 
+import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
 import jp.co.hybitz.googletransit.model.TimeType;
@@ -66,6 +67,7 @@ class MobileParser20100517 implements TransitParser {
             }
         }
 
+        result.setPrefecture(TransitUtil.isSamePrefecture(result.getFrom(), result.getTo()));
 		return result;
 	}
 	
@@ -143,7 +145,7 @@ class MobileParser20100517 implements TransitParser {
             result.addTransit(transit);
         }
         transit = new Transit();
-        transit.setTimeAndFare(text);
+        transit.setDurationAndFare(text);
 	}
 	
 	private void handleDeparture(String text) {

@@ -27,14 +27,14 @@ import java.util.List;
  */
 public class Transit implements Serializable {
 
-	private String timeAndFare;
+	private String durationAndFare;
 	private List<TransitDetail> details = new ArrayList<TransitDetail>();
 
-	public String getTimeAndFare() {
-		return timeAndFare;
+	public String getDurationAndFare() {
+		return durationAndFare;
 	}
-	public void setTimeAndFare(String title) {
-		this.timeAndFare = title;
+	public void setDurationAndFare(String title) {
+		this.durationAndFare = title;
 	}
 	
 	public List<TransitDetail> getDetails() {

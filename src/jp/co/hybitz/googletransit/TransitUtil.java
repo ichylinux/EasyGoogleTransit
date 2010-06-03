@@ -34,6 +34,34 @@ import jp.co.hybitz.googletransit.model.TransitResult;
  *
  */
 public class TransitUtil {
+    
+    /**
+     * 出発地と到着地が同じ都道府県かどうかを判定します。
+     * 同じ都道府県だった場合はその都道府県を返します。
+     * 違った場合はnullを返します。
+     * 
+     * @param from
+     * @param to
+     * @return 
+     */
+    public static String isSamePrefecture(String from, String to) {
+        if (from == null || to == null) {
+            return null;
+        }
+
+        String[] fromSplit = from.split("（");
+        String[] toSplit = to.split("（");
+        
+        if (fromSplit.length != 2 || toSplit.length != 2) {
+            return null;
+        }
+        
+        if (fromSplit[1].equals(toSplit[1])) {
+            return fromSplit[1].replaceAll("（", "").replaceAll("）", "");
+        }
+        
+        return null;
+    }
 
     /**
      * 現在からの相対的な日時を取得します。
@@ -43,6 +71,10 @@ public class TransitUtil {
      * @return
      */
     public static Date getRelativeDate(Time time, boolean incrementDate) {
+        if (time == null) {
+            return null;
+        }
+
         Calendar c = Calendar.getInstance();
         Time now = getTime(c.getTime());
         c.set(Calendar.HOUR_OF_DAY, time.getHour());
@@ -83,6 +115,10 @@ public class TransitUtil {
     }
 
     public static Time getTime(Date date) {
+        if (date == null) {
+            return null;
+        }
+
         SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
         return new Time(sdf.format(date));
     }
