@@ -124,6 +124,15 @@ public class TransitUtil {
     }
     
     /**
+     * 現在日時を取得します。
+     * 
+     * @return
+     */
+    public static Time getCurrentTime() {
+        return getTime(new Date());
+    }
+    
+    /**
      * 乗り換え候補から出発時刻だけを抽出します。
      * 
      * @param result

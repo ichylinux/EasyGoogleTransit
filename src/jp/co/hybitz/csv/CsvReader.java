@@ -19,6 +19,7 @@ package jp.co.hybitz.csv;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,6 +52,13 @@ public class CsvReader {
      */
     public CsvReader(File file) throws IOException {
         this(new FileReader(file));
+    }
+
+    /**
+     * コンストラクタ
+     */
+    public CsvReader(File file, String encoding) throws IOException {
+        this(new FileInputStream(file), encoding);
     }
 
     /**

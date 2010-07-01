@@ -23,6 +23,7 @@ import java.io.Serializable;
  * @author ichy <ichylinux@gmail.com>
  */
 public class TransitSearchException extends Exception implements Serializable {
+    private byte[] html;
 
     public TransitSearchException() {
         super();
@@ -40,4 +41,16 @@ public class TransitSearchException extends Exception implements Serializable {
         super(cause);
     }
 
+    public TransitSearchException(String message, byte[] html, Throwable cause) {
+        super(message, cause);
+        this.html = html;
+    }
+    
+    public String getHtml() {
+        if (html != null) {
+            return new String(html);
+        }
+        
+        return null;
+    }
 }

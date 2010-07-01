@@ -17,8 +17,9 @@
  */
 package jp.co.hybitz.googletransit.searcher;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -33,6 +34,7 @@ import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
+import jp.co.hybitz.util.StreamUtils;
 
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -55,14 +57,16 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	        return searchFirst(query);
 	    }
 	    
-		InputStream in = null;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 		try {
 		    TransitResult result;
 		    
 		    HttpURLConnection con = openConnection(query);
 		    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-		        result = createParser().parse(con.getInputStream());
+		        StreamUtils.write(con.getInputStream(), baos);
+		        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+		        result = createParser().parse(bais);
 		    }
 		    else {
 		        result = new TransitResult();
@@ -72,16 +76,13 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
             return result;
 		}
 		catch (IOException e) {
-            throw new TransitSearchException(e.getMessage(), e);
+            throw new TransitSearchException(e.getMessage(), baos.toByteArray(), e);
 		}
 		catch (XmlPullParserException e) {
-            throw new TransitSearchException(e.getMessage(), e);
+            throw new TransitSearchException(e.getMessage(), baos.toByteArray(), e);
 		}
 		catch (Exception e) {
-            throw new TransitSearchException(e.getMessage(), e);
-		}
-		finally {
-			if (in != null) { try {in.close();} catch (IOException e){} }
+            throw new TransitSearchException(e.getMessage(), baos.toByteArray(), e);
 		}
 	}
 	
