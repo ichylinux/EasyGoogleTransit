@@ -27,12 +27,12 @@ import org.xmlpull.v1.XmlPullParserFactory;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100517Test extends TestCase {
+public class MobileParser20100704Test extends TestCase {
 
-    public void testParse20100517() {
+    public void testParse20100704() {
         TransitParser parser = null;
         try {
-            parser = new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
+            parser = new MobileParser20100704(XmlPullParserFactory.newInstance().newPullParser());
         } catch (XmlPullParserException e) {
             e.printStackTrace();
             fail(e.getMessage());
@@ -40,16 +40,14 @@ public class MobileParser20100517Test extends TestCase {
         
         TransitResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/transit_result_20100517.html"));
+            result = parser.parse(getClass().getResourceAsStream("/transit_result_20100704.wml"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
         
-        assertEquals("出発地", "八丁堀駅（東京）", result.getFrom());
-        assertEquals("到着地", "東札幌駅（北海道）", result.getTo());
+        assertEquals("出発地", "朝潮橋駅（大阪）", result.getFrom());
+        assertEquals("到着地", "〒591-8008 堺北花田阪急", result.getTo());
         assertEquals("時刻タイプ", TimeType.DEPARTURE, result.getTimeType());
-        assertEquals("時刻", "0702", result.getTime().getTimeAsString());
-        assertEquals("候補は3件", 3, result.getTransitCount());
-    }    
+    }
 }

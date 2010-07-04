@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.2//EN" "http://www.wapforum.org/DTD/wml12.dtd">
+<wml>
+<head>
+<meta http-equiv="Content-Type"
+	content="text/vnd.wap.wml; charset=UTF-8" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+</head>
+<card title="朝潮橋～堺北花田 - Googleトランジット">
+<onevent type="onenterforward">
+<refresh>
+<setvar value="" />
+<setvar name="saddr" value="" />
+<setvar name="time" value="" />
+<setvar name="ttype" value="" />
+<setvar name="daddr" value="" />
+<setvar name="date" value="" />
+</refresh>
+</onevent>
+<p><img src="http://www.gstatic.com/m/images/logo_small.gif"
+	width="48" height="17" alt="Google" /></p>
+<p></p>
+<p>朝潮橋駅（大阪）～〒591-8008 堺北花田阪急 11:56発</p>
+<p><br />
+39分 - 310円 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png"
+	width="15" height="15" alt="" />大阪市営中央線・生駒行 <br />
+11:59発 朝潮橋 <br />
+12:07着 本町 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png"
+	width="15" height="15" alt="" />大阪市営御堂筋線・なかもず行 <br />
+12:12発 本町 <br />
+12:34着 北花田 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/walk.png"
+	width="15" height="15" alt="" />徒歩 - 〒591-8008 堺北花田阪急 <br />
+<br />
+39分 - 630円 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png"
+	width="15" height="15" alt="" />大阪市営中央線・生駒行 <br />
+11:59発 朝潮橋 <br />
+12:01着 弁天町 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png"
+	width="15" height="15" alt="" />JR大和路快速・加茂行 <br />
+12:09発 弁天町 <br />
+12:16着 天王寺 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png"
+	width="15" height="15" alt="" />大阪市営御堂筋線・なかもず行 <br />
+12:22発 天王寺 <br />
+12:34着 北花田 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/walk.png"
+	width="15" height="15" alt="" />徒歩 - 〒591-8008 堺北花田阪急 <br />
+<br />
+39分 - 310円 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png"
+	width="15" height="15" alt="" />大阪市営中央線・学研奈良登美ケ丘行 <br />
+12:06発 朝潮橋 <br />
+12:15着 本町 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png"
+	width="15" height="15" alt="" />大阪市営御堂筋線・なかもず行 <br />
+12:19発 本町 <br />
+12:41着 北花田 <br />
+<img
+	src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/walk.png"
+	width="15" height="15" alt="" />徒歩 - 〒591-8008 堺北花田阪急 <br />
+</p>
+<p><a
+	href="/m/directions?ttype=dep&amp;dirflg=r&amp;saddr=%E5%A0%BA%E5%8C%97%E8%8A%B1%E7%94%B0&amp;daddr=%E6%9C%9D%E6%BD%AE%E6%A9%8B">逆方向の経路を表示
+</a></p>
+<p></p>
+<p>発 <input name="saddr" size="8" emptyok="true" value="朝潮橋" /> <br />
+着 <input name="daddr" size="8" emptyok="true" value="堺北花田" /> <br />
+<anchor> <go href="/m/directions" method="get">
+<postfield name="dirflg" value="r" />
+<postfield name="saddr" value="$(saddr)" />
+<postfield name="daddr" value="$(daddr)" />
+<postfield name="btnG" value="経路検索" />
+<postfield name="date" value="$(date)" />
+<postfield name="time" value="$(time)" />
+<postfield name="ttype" value="$(ttype)" />
+<postfield name="sa" value="2" />
+</go>経路検索 </anchor> <br />
+<br />
+日時設定 <br />
+日付: <input name="date" size="10" emptyok="true" value="20100704" /> <br />
+時刻: <input name="time" size="10" emptyok="true" value="1156" /> <br />
+<select name="ttype" ivalue="2">
+	<option value="arr">到着時刻</option>
+	<option value="dep">出発時刻</option>
+	<option value="last">終電</option>
+</select> <br />
+<select multiple="true">
+	<option value="1">有料特急を使わない</option>
+</select> <br />
+<select multiple="true">
+	<option value="1">飛行機を使わない</option>
+</select> <br />
+<anchor> <go href="/m/directions" method="get">
+<postfield name="dirflg" value="r" />
+<postfield name="saddr" value="$(saddr)" />
+<postfield name="daddr" value="$(daddr)" />
+<postfield name="date" value="$(date)" />
+<postfield name="time" value="$(time)" />
+<postfield name="ttype" value="$(ttype)" />
+<postfield name="btnG" value="この条件で検索" />
+<postfield name="sa" value="2" />
+</go>この条件で検索 </anchor> <br />
+</p>
+<p><br />
+</p>
+<p><a
+	href="https://www.google.com/accounts/ServiceLogin?service=mobile&amp;passive=true&amp;cd=JP&amp;hl=ja&amp;continue=http%3A%2F%2Fwww.google.co.jp%2Fm%2Fdirections%3Fsaddr%3D%25E6%259C%259D%25E6%25BD%25AE%25E6%25A9%258B%26ttype%3Ddep%26daddr%3D%25E5%25A0%25BA%25E5%258C%2597%25E8%258A%25B1%25E7%2594%25B0%26dirflg%3Dr&amp;ltmpl=m&amp;btmpl=mobile">ログイン
+</a></p>
+<p><a href="/m?ttype=dep&amp;dirflg=r&amp;sa=N">Google </a> <br />
+<a
+	href="/m/survey/feedback?saddr=%E6%9C%9D%E6%BD%AE%E6%A9%8B&amp;ttype=dep&amp;daddr=%E5%A0%BA%E5%8C%97%E8%8A%B1%E7%94%B0&amp;dirflg=r">ご意見箱
+</a> - <a href="/m/help?ttype=dep&amp;dirflg=r&amp;sa=N">ヘルプ </a> <br />
+表示モード: <br />
+モバイル&nbsp;|&nbsp; <a href="/webhp?output=html">PC </a> <br />
+</p>
+<p>&#169;2010 - <a href="http://m.google.com/static/ja/privacy.html">プライバシー
+</a></p>
+</card>
+</wml>

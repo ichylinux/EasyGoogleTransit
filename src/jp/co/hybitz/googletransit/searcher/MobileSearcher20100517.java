@@ -36,6 +36,7 @@ import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 import jp.co.hybitz.util.StreamUtils;
 
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -87,15 +88,18 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	}
 	
 	private TransitParser createParser() throws XmlPullParserException {
+		XmlPullParser xmlParser;
         if (platform == Platform.ANDROID) {
-            return new MobileParser20100517(Xml.newPullParser());
+            xmlParser = Xml.newPullParser();
         }
         else if (platform == Platform.GENERIC) {
-            return new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
+            xmlParser = XmlPullParserFactory.newInstance().newPullParser();
         }
         else {
             throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
         }
+        
+        return new MobileParser20100704(xmlParser);
 	}
 	
 	protected HttpURLConnection openConnection(TransitQuery query) throws IOException {
