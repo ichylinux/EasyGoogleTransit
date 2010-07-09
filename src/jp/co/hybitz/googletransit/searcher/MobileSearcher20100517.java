@@ -74,6 +74,7 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		    }
 		    
             result.setResponseCode(con.getResponseCode());
+            result.setQueryDate(query.getDate());
             return result;
 		}
 		catch (IOException e) {

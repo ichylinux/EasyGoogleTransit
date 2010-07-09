@@ -50,6 +50,7 @@
     <target name="test" depends="test.compile">
       <junit printsummary="yes" haltonfailure="yes" haltonerror="yes" fork="yes" showoutput="true">
         <jvmarg value="-Xmx128m"/>
+      	<jvmarg value="-Dfile.encoding=UTF-8"/>
       
         <formatter type="plain" usefile="false"/>
       

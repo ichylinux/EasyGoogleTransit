@@ -19,6 +19,7 @@ package jp.co.hybitz.googletransit.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ import java.util.List;
 public class TransitResult implements Serializable {
 
     private int responseCode;
+    private Date queryDate;
     private TimeType timeType;
     private Time time;
     private String from;
@@ -40,6 +42,14 @@ public class TransitResult implements Serializable {
 
     public void setResponseCode(int responseCode) {
         this.responseCode = responseCode;
+    }
+
+    public Date getQueryDate() {
+        return queryDate;
+    }
+
+    public void setQueryDate(Date queryDate) {
+        this.queryDate = queryDate;
     }
 
     public TimeType getTimeType() {
