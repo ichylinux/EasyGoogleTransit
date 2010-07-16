@@ -163,27 +163,30 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 		// 到着地
 		sb.append("&daddr=").append(URLEncoder.encode(query.getTo()));
 		
-        // 出発時刻か到着時刻か
+        // 日付・時刻
         if (query.getTimeType() != null) {
-            String ttype = "";
             if (query.getTimeType() == TimeType.DEPARTURE) {
-                ttype = "dep";
+                sb.append("&ttype=dep");
+                if (query.getDate() != null) {
+                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
+                    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
+                }
             }
             else if (query.getTimeType() == TimeType.ARRIVAL) {
-                ttype = "arr";
+                sb.append("&ttype=arr");
+                if (query.getDate() != null) {
+                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
+                    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
+                }
             }
             else if (query.getTimeType() == TimeType.LAST) {
-                ttype = "last";
+                sb.append("&ttype=last");
+                if (query.getDate() != null) {
+                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
+                }
             }
-            sb.append("&ttype=").append(ttype);
         }
         
-		// 日付・時刻
-		if (query.getDate() != null) {
-            sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
-		    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
-		}
-		
 		// 有料特急
 		if (!query.isUseExpress()) {
 		    sb.append("&noexp=1");
