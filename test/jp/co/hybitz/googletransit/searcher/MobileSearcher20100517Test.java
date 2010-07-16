@@ -53,8 +53,8 @@ public class MobileSearcher20100517Test extends TestCase {
             fail(e.getMessage() + "\n" + e.getHtml());
         }
         
-        assertEquals("出発地", "鹿児島駅（鹿児島）", result.getFrom());
-        assertEquals("到着地", "博多駅（福岡）", result.getTo());
+        assertEquals("出発地", "〒892-0812 鹿児島駅（鹿児島）", result.getFrom());
+        assertEquals("到着地", "〒812-0012 博多駅（福岡）", result.getTo());
         assertEquals("時刻タイプ", TimeType.DEPARTURE, result.getTimeType());
         assertEquals("検索日時", now, result.getQueryDate());
     }

@@ -19,7 +19,6 @@ package jp.co.hybitz.googletransit.searcher;
 
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitResult;
-import junit.framework.TestCase;
 
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -27,12 +26,17 @@ import org.xmlpull.v1.XmlPullParserFactory;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100517Test extends TestCase {
+public class MobileParser20100517Test extends ParserTestCase {
+    
+    @Override
+    protected TransitParser getParser() throws XmlPullParserException {
+        return new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
+    }    
 
     public void testParse20100517() {
         TransitParser parser = null;
         try {
-            parser = new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
+            parser = getParser();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
             fail(e.getMessage());
@@ -51,5 +55,6 @@ public class MobileParser20100517Test extends TestCase {
         assertEquals("時刻タイプ", TimeType.DEPARTURE, result.getTimeType());
         assertEquals("時刻", "0702", result.getTime().getTimeAsString());
         assertEquals("候補は3件", 3, result.getTransitCount());
-    }    
+    }
+
 }

@@ -100,7 +100,7 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
             throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
         }
         
-        return new MobileParser20100704(xmlParser);
+        return new MobileParser20100716(xmlParser);
 	}
 	
 	protected HttpURLConnection openConnection(TransitQuery query) throws IOException {
