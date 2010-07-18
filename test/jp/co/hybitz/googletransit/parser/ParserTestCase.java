@@ -15,11 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.searcher;
+package jp.co.hybitz.googletransit.parser;
+
+import jp.co.hybitz.googletransit.TransitParser;
+import junit.framework.TestCase;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface GoogleConst {
-    public static final String GOOGLE_TRANSIT_MOBILE_URL = "http://www.google.co.jp/m/directions";
+public abstract class ParserTestCase extends TestCase {
+
+    protected abstract TransitParser getParser() throws XmlPullParserException;
 }

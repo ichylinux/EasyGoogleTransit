@@ -26,7 +26,9 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import jp.co.hybitz.googletransit.GoogleConst;
 import jp.co.hybitz.googletransit.Platform;
+import jp.co.hybitz.googletransit.TransitParser;
 import jp.co.hybitz.googletransit.TransitSearchException;
 import jp.co.hybitz.googletransit.TransitSearcher;
 import jp.co.hybitz.googletransit.TransitUtil;
@@ -34,6 +36,7 @@ import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
+import jp.co.hybitz.googletransit.parser.MobileParser20100718;
 import jp.co.hybitz.util.StreamUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -100,7 +103,7 @@ public class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
             throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
         }
         
-        return new MobileParser20100716(xmlParser);
+        return new MobileParser20100718(xmlParser);
 	}
 	
 	protected HttpURLConnection openConnection(TransitQuery query) throws IOException {

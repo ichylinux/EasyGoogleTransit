@@ -15,8 +15,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.searcher;
+package jp.co.hybitz.googletransit.parser;
 
+import jp.co.hybitz.googletransit.TransitParser;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
@@ -26,14 +27,14 @@ import org.xmlpull.v1.XmlPullParserFactory;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100704Test extends MobileParser20100517Test {
+public class MobileParser20100718Test extends MobileParser20100716Test {
 
     @Override
     protected TransitParser getParser() throws XmlPullParserException {
-        return new MobileParser20100704(XmlPullParserFactory.newInstance().newPullParser());
+        return new MobileParser20100718(XmlPullParserFactory.newInstance().newPullParser());
     }    
 
-    public void testParse20100704() {
+    public void testParse20100718() {
         TransitParser parser = null;
         try {
             parser = getParser();
@@ -44,14 +45,14 @@ public class MobileParser20100704Test extends MobileParser20100517Test {
         
         TransitResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/transit_result_20100704.wml"));
+            result = parser.parse(getClass().getResourceAsStream("/transit_result_20100718.wml"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
         
-        assertEquals("出発地", "朝潮橋駅（大阪）", result.getFrom());
-        assertEquals("到着地", "〒591-8008 堺北花田阪急", result.getTo());
+        assertEquals("出発地", "〒899-6404 鹿児島空港（鹿児島）", result.getFrom());
+        assertEquals("到着地", "出雲空港（島根）", result.getTo());
         assertEquals("時刻タイプ", TimeType.DEPARTURE, result.getTimeType());
     }
 }

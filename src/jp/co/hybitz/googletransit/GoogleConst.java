@@ -15,15 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.searcher;
-
-import java.io.InputStream;
-
-import jp.co.hybitz.googletransit.model.TransitResult;
+package jp.co.hybitz.googletransit;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-interface TransitParser {
-	TransitResult parse(InputStream in) throws Exception;
+public interface GoogleConst {
+    public static final String GOOGLE_TRANSIT_MOBILE_URL = "http://www.google.co.jp/m/directions";
 }

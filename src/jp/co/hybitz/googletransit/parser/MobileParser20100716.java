@@ -15,11 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.searcher;
+package jp.co.hybitz.googletransit.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import jp.co.hybitz.googletransit.TransitParser;
 import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
@@ -34,13 +35,13 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class MobileParser20100704 implements TransitParser {
+class MobileParser20100716 implements TransitParser {
     private XmlPullParser parser;
     private TransitResult result = new TransitResult();
 	private Transit transit;
 	private TransitDetail transitDetail;
 	
-	public MobileParser20100704(XmlPullParser parser) {
+	public MobileParser20100716(XmlPullParser parser) {
 	    this.parser = parser;
 	}
 
@@ -87,7 +88,7 @@ class MobileParser20100704 implements TransitParser {
 	    else if (text.matches(".*～.* 終電")) {
             handleSummary(text, TimeType.LAST);
 	    }
-	    else if (text.matches(".*[0-9]*円.*")) {
+	    else if (text.matches("([0-9]+(分|時間))+ - .*[0-9]*円")) {
 	        handleTimeAndFare(text);
         }
         else if ("逆方向の経路を表示".equals(text)) {

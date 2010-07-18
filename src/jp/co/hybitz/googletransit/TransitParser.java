@@ -15,16 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.searcher;
+package jp.co.hybitz.googletransit;
 
-import junit.framework.TestCase;
+import java.io.InputStream;
 
-import org.xmlpull.v1.XmlPullParserException;
+import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public abstract class ParserTestCase extends TestCase {
-
-    protected abstract TransitParser getParser() throws XmlPullParserException;
+public interface TransitParser {
+	TransitResult parse(InputStream in) throws Exception;
 }

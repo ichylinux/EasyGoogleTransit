@@ -15,11 +15,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.searcher;
+package jp.co.hybitz.googletransit.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import jp.co.hybitz.googletransit.TransitParser;
 import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
