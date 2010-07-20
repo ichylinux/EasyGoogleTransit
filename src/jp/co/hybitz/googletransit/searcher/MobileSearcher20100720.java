@@ -48,11 +48,11 @@ import android.util.Xml;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
+public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
 	
 	private Platform platform;
 	
-	public MobileSearcher20100517(Platform platform) {
+	public MobileSearcher20100720(Platform platform) {
 		this.platform = platform;
 	}
 	
@@ -92,18 +92,20 @@ class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	}
 	
 	private TransitParser createParser() throws XmlPullParserException {
-		XmlPullParser xmlParser;
+		XmlPullParser xmlParser = createXmlPullParser();
+        return new MobileParser20100718(xmlParser);
+	}
+	
+	private XmlPullParser createXmlPullParser() throws XmlPullParserException {
         if (platform == Platform.ANDROID) {
-            xmlParser = Xml.newPullParser();
+            return Xml.newPullParser();
         }
         else if (platform == Platform.GENERIC) {
-            xmlParser = XmlPullParserFactory.newInstance().newPullParser();
+            return XmlPullParserFactory.newInstance().newPullParser();
         }
         else {
             throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
         }
-        
-        return new MobileParser20100718(xmlParser);
 	}
 	
 	protected HttpURLConnection openConnection(TransitQuery query) throws IOException {
@@ -120,6 +122,7 @@ class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	    queryForLast.setFrom(query.getFrom());
 	    queryForLast.setTo(query.getTo());
 	    queryForLast.setTimeType(TimeType.LAST);
+	    queryForLast.setDate(query.getDate());
 	    queryForLast.setUseExpress(query.isUseExpress());
 	    queryForLast.setUseAirline(query.isUseAirline());
 	    
@@ -129,17 +132,23 @@ class MobileSearcher20100517 implements TransitSearcher, GoogleConst {
 	    }
 	    
 	    // ざっくりと、、
-	    // 現在時刻が午前中の場合は当日の始発を検索
-	    // 現在時刻が午後の場合は翌日の始発を検索
-	    // 時刻は最終が出発した1時間後
+	    // 最後の出発時刻が現在時刻より遅い場合は今日の始発を検索
+	    // 現在時刻が最後の出発時刻を過ぎている場合は翌日の始発を検索
+	    // 始発検索はGoogleトランジットにはないので、時刻は最終が出発した1分後で検索する
         Calendar c = Calendar.getInstance();
-	    if (c.get(Calendar.AM_PM) == Calendar.PM) {
-	        c.add(Calendar.DATE, 1);
-	    }
-	    Time timeToSearch = TransitUtil.getFirstDepartureTime(result);
+        c.setTime(query.getDate());
+	    Time timeToSearch = TransitUtil.getLastDepartureTime(result);
         if (timeToSearch != null) {
-            c.set(Calendar.HOUR_OF_DAY, timeToSearch.getHour() + 1);
+            Time now = new Time(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
+
+            c.set(Calendar.HOUR_OF_DAY, timeToSearch.getHour());
             c.set(Calendar.MINUTE, timeToSearch.getMinute());
+
+            if (timeToSearch.before(now)) {
+                c.add(Calendar.DATE, 1);
+            }
+            
+            c.add(Calendar.MINUTE, 1);
         }
 	    
         TransitQuery queryForFirst = new TransitQuery();
