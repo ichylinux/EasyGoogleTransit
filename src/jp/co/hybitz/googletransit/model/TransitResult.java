@@ -35,6 +35,7 @@ public class TransitResult implements Serializable {
     private String to;
     private String prefecture;
     private List<Transit> transits = new ArrayList<Transit>();
+    private Maybe maybe;
     
     public int getResponseCode() {
         return responseCode;
@@ -112,5 +113,13 @@ public class TransitResult implements Serializable {
     
     public int getTransitCount() {
         return transits.size();
+    }
+
+    public Maybe getMaybe() {
+        return maybe;
+    }
+
+    public void setMaybe(Maybe maybe) {
+        this.maybe = maybe;
     }
 }

@@ -36,7 +36,7 @@ import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
-import jp.co.hybitz.googletransit.parser.MobileParser20100718;
+import jp.co.hybitz.googletransit.parser.MobileParser20100722;
 import jp.co.hybitz.util.StreamUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -93,7 +93,7 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
 	
 	private TransitParser createParser() throws XmlPullParserException {
 		XmlPullParser xmlParser = createXmlPullParser();
-        return new MobileParser20100718(xmlParser);
+        return new MobileParser20100722(xmlParser);
 	}
 	
 	private XmlPullParser createXmlPullParser() throws XmlPullParserException {
