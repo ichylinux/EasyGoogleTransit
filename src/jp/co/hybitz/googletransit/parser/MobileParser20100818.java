@@ -36,7 +36,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class MobileParser20100813 implements TransitParser {
+public class MobileParser20100818 implements TransitParser {
     private static final int PARSE_TRANSIT_START = 1;
     private static final int PARSE_TRANSIT_END = 2;
     private static final int PARSE_MAYBE_START = 3;
@@ -48,7 +48,7 @@ class MobileParser20100813 implements TransitParser {
 	private TransitDetail transitDetail;
 	private int parseStatus = PARSE_TRANSIT_START;
 	
-	public MobileParser20100813(XmlPullParser parser) {
+	public MobileParser20100818(XmlPullParser parser) {
 	    this.parser = parser;
 	}
 
@@ -123,7 +123,7 @@ class MobileParser20100813 implements TransitParser {
 	    else if (text.matches(".*～.* 終電")) {
             handleSummary(text, TimeType.LAST);
 	    }
-	    else if (text.matches("([0-9]+日 )?([0-9]+(分|時間|秒))+ - .*[0-9]*円")) {
+	    else if (text.matches("([0-9]+(日|時間|分|秒))+ - .*[0-9]*円")) {
 	        handleTimeAndFare(text);
         }
         else if ("逆方向の経路を表示".equals(text)) {
