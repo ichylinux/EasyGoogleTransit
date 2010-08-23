@@ -13,6 +13,22 @@ public class Category implements Serializable {
         return name != null && name.startsWith("国際線");
     }
     
+    public boolean isDomestic() {
+        return name != null && name.startsWith("国内線");
+    }
+
+    public boolean isAirline() {
+        if (name == null) {
+            return false;
+        }
+        
+        return name.endsWith("出発") || name.endsWith("到着");
+    }
+    
+    public boolean isArrival() {
+        return url != null && url.endsWith("#arv");
+    }
+    
     public String getName() {
         return name;
     }

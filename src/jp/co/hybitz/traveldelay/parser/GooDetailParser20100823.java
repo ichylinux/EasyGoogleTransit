@@ -34,49 +34,64 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class GooDetailParser20100821 implements TravelDelayParser {
+public class GooDetailParser20100823 implements TravelDelayParser {
     private XmlPullParser parser;
     private String encoding;
     private TravelDelayResult result = new TravelDelayResult();
 	private Category category;
 	private OperationCompany company;
 	private TravelDelay delay;
+	private boolean airline;
+	private boolean arrival;
 	
-	public GooDetailParser20100821(XmlPullParser parser) {
+	public GooDetailParser20100823(XmlPullParser parser) {
 	    this.parser = parser;
 	}
 	
-    @Override
 	public void setEncoding(String encoding) {
 	    this.encoding = encoding;
 	}
 
     @Override
     public void setAirline(boolean airline) {
+        this.airline = airline;
     }
 
     @Override
     public void setArrival(boolean arrival) {
+        this.arrival = arrival;
     }
 
     @Override
     public TravelDelayResult parse(InputStream in) throws XmlPullParserException, IOException {
-	    try {
-    	    parser.setInput(in, encoding);
+        try {
+            parser.setInput(in, encoding);
     
-    	    boolean inCompany = false;
-    		int eventType = parser.getEventType();
+            boolean inCompany = false;
+            boolean start = false;
+            boolean inArrival = false;
+            
+            int eventType = parser.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 switch (eventType) {
                 case XmlPullParser.START_TAG :
-                    if ("table".equalsIgnoreCase(parser.getName())) {
+                    if ("h2".equalsIgnoreCase(parser.getName())) {
+                        if ("ch03".equalsIgnoreCase(parser.getAttributeValue(null, "class"))) {
+                            start = true; 
+                        }
+                    }
+                    else if ("table".equalsIgnoreCase(parser.getName())) {
                         if ("t01".equalsIgnoreCase(parser.getAttributeValue(null, "class"))) {
-                            category = new Category();
+                            if (arrival == inArrival) {
+                                category = new Category();
+                            }
                         }
                     }
                     else if ("th".equalsIgnoreCase(parser.getName())) {
                         if (category != null) {
-                            company = new OperationCompany();
+                            if (company == null) {
+                                company = new OperationCompany();
+                            }
                         }
                     }
                     else if ("strong".equalsIgnoreCase(parser.getName())) {
@@ -96,8 +111,12 @@ class GooDetailParser20100821 implements TravelDelayParser {
                     }
                     break;
                 case XmlPullParser.TEXT :
-                    if (category != null && company != null && delay == null) {
-                        if (inCompany) {
+                    if (category == null && start) {
+                        String text = parser.getText().trim();
+                        inArrival = text.endsWith("到着");
+                    }
+                    else if (category != null && company != null && delay == null) {
+                        if (inCompany && ! airline) {
                             String text = parser.getText().trim();
                             if (StringUtils.isNotEmpty(text)) {
                                 company.setName(text);
@@ -107,20 +126,39 @@ class GooDetailParser20100821 implements TravelDelayParser {
                     else if (category != null && company != null && delay != null) {
                         String text = parser.getText().trim();
                         if (StringUtils.isNotEmpty(text)) {
-                            if (delay.getDate() == null) {
-                                delay.setDate(text);
+                            if (airline) {
+                                if (delay.getDate() == null) {
+                                    delay.setDate(text);
+                                }
+                                else if (delay.getAirline() == null) {
+                                    delay.setAirline(text);
+                                }
+                                else if (delay.getPlace() == null) {
+                                    delay.setPlace(text);
+                                }
+                                else if (delay.getCondition() == null) {
+                                    delay.setCondition(text);
+                                }
                             }
-                            else if (delay.getLine() == null) {
-                                delay.setLine(text);
-                            }
-                            else if (delay.getCondition() == null) {
-                                delay.setCondition(text);
+                            else {
+                                if (delay.getDate() == null) {
+                                    delay.setDate(text);
+                                }
+                                else if (delay.getLine() == null) {
+                                    delay.setLine(text);
+                                }
+                                else if (delay.getCondition() == null) {
+                                    delay.setCondition(text);
+                                }
                             }
                         }
                     }
                     break;
                 case XmlPullParser.END_TAG :
-                    if ("table".equalsIgnoreCase(parser.getName())) {
+                    if ("h2".equalsIgnoreCase(parser.getName())) {
+                        start = false;
+                    }
+                    else if ("table".equalsIgnoreCase(parser.getName())) {
                         if (category != null) {
                             result.addCategory(category);
                             category.addOperationCompany(company);
@@ -151,10 +189,9 @@ class GooDetailParser20100821 implements TravelDelayParser {
             }
 
             return result;
-	    }
-	    finally {
-	        try { in.close(); } catch (IOException e) {}
-	    }
-	}
-
+        }
+        finally {
+            try { in.close(); } catch (IOException e) {}
+        }
+    }
 }

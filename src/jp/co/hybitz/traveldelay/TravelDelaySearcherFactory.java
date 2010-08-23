@@ -18,7 +18,7 @@
 package jp.co.hybitz.traveldelay;
 
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.traveldelay.searcher.GooSearcher20100818;
+import jp.co.hybitz.traveldelay.searcher.GooSearcher20100823;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -26,10 +26,10 @@ import jp.co.hybitz.traveldelay.searcher.GooSearcher20100818;
 public class TravelDelaySearcherFactory {
 
     public static TravelDelaySearcher createSearcher() {
-        return new GooSearcher20100818(Platform.GENERIC);
+        return new GooSearcher20100823(Platform.GENERIC);
     }
 
     public static TravelDelaySearcher createSearcher(Platform platform) {
-        return new GooSearcher20100818(platform);
+        return new GooSearcher20100823(platform);
     }
 }

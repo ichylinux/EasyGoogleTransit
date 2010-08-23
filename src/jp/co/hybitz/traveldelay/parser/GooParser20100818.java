@@ -49,6 +49,15 @@ public class GooParser20100818 implements TravelDelayParser {
 	    this.encoding = encoding;
 	}
 
+    @Override
+    public void setAirline(boolean airline) {
+    }
+
+    @Override
+    public void setArrival(boolean arrival) {
+    }
+
+    @Override
 	public TravelDelayResult parse(InputStream in) throws XmlPullParserException, IOException {
 	    try {
     	    parser.setInput(in, encoding);
@@ -94,7 +103,7 @@ public class GooParser20100818 implements TravelDelayParser {
                 case XmlPullParser.TEXT :
                     if (category != null && company == null && delay == null) {
                         if (inCategory) {
-                        category.setName(parser.getText().replaceAll("（詳細）", ""));
+                            category.setName(parser.getText().replaceAll("（詳細）", ""));
                         }
                     }
                     else if (category != null && company != null && delay != null) {

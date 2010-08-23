@@ -27,4 +27,6 @@ import jp.co.hybitz.traveldelay.model.TravelDelayResult;
 public interface TravelDelayParser {
 	TravelDelayResult parse(InputStream in) throws Exception;
 	void setEncoding(String encoding);
+	void setAirline(boolean airline);
+	void setArrival(boolean arrival);
 }

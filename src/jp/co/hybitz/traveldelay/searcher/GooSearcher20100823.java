@@ -42,11 +42,11 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class GooSearcher20100818 implements TravelDelaySearcher, GooConst {
+public class GooSearcher20100823 implements TravelDelaySearcher, GooConst {
 	private static final String ENCODING = "EUC-JP";
 	private Platform platform;
 	
-	public GooSearcher20100818(Platform platform) {
+	public GooSearcher20100823(Platform platform) {
 		this.platform = platform;
 	}
 	
@@ -87,6 +87,8 @@ class GooSearcher20100818 implements TravelDelaySearcher, GooConst {
 		}
 		else {
             ret = new GooDetailParser20100823(xmlParser);
+            ret.setAirline(query.getCategory().isAirline());
+            ret.setArrival(query.getCategory().isArrival());
 		}
 		ret.setEncoding(ENCODING);
 		return ret;
