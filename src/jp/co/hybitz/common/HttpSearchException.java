@@ -15,42 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.common;
 
 import java.io.Serializable;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class TransitSearchException extends Exception implements Serializable {
-    private byte[] html;
+public class HttpSearchException extends Exception implements Serializable {
+    private String html;
 
-    public TransitSearchException() {
+    public HttpSearchException() {
         super();
     }
 
-    public TransitSearchException(String message, Throwable cause) {
+    public HttpSearchException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public TransitSearchException(String message) {
+    public HttpSearchException(String message) {
         super(message);
     }
 
-    public TransitSearchException(Throwable cause) {
+    public HttpSearchException(Throwable cause) {
         super(cause);
     }
 
-    public TransitSearchException(String message, byte[] html, Throwable cause) {
+    public HttpSearchException(String message, String html, Throwable cause) {
         super(message, cause);
         this.html = html;
     }
     
     public String getHtml() {
-        if (html != null) {
-            return new String(html);
-        }
-        
-        return null;
+        return html;
     }
 }

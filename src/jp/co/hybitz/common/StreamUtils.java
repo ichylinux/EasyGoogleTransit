@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.util;
+package jp.co.hybitz.common;
 
 import java.io.IOException;
 import java.io.InputStream;

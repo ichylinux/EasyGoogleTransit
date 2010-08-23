@@ -15,25 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.traveldelay.parser;
 
-import jp.co.hybitz.common.HttpSearchException;
-import jp.co.hybitz.googletransit.model.TransitQuery;
-import jp.co.hybitz.googletransit.model.TransitResult;
+import jp.co.hybitz.traveldelay.TravelDelayParser;
+import junit.framework.TestCase;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface TransitSearcher {
+public abstract class ParserTestCase extends TestCase {
 
-    /**
-     * Googleトランジットを利用して検索します。
-     * <br/>
-     * nullを返すことはありません。
-     * 
-     * @param query
-     * @return
-     * @throws TransitSearchException
-     */
-    public TransitResult search(TransitQuery query) throws HttpSearchException;
+    protected abstract TravelDelayParser getParser() throws XmlPullParserException;
 }

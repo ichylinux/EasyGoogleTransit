@@ -20,8 +20,8 @@ package jp.co.hybitz.googletransit.searcher;
 import java.util.Calendar;
 import java.util.Date;
 
-import jp.co.hybitz.googletransit.Platform;
-import jp.co.hybitz.googletransit.TransitSearchException;
+import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
@@ -48,7 +48,7 @@ public class MobileSearcher20100517Test extends TestCase {
             query.setDate(now);
 
             result = searcher.search(query);
-        } catch (TransitSearchException e) {
+        } catch (HttpSearchException e) {
             e.printStackTrace();
             fail(e.getMessage() + "\n" + e.getHtml());
         }

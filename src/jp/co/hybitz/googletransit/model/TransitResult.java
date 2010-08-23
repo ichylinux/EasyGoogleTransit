@@ -17,15 +17,16 @@
  */
 package jp.co.hybitz.googletransit.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jp.co.hybitz.common.HttpResult;
+
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class TransitResult implements Serializable {
+public class TransitResult implements HttpResult {
 
     private int responseCode;
     private Date queryDate;

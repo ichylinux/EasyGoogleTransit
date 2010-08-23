@@ -15,25 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
-
-import jp.co.hybitz.common.HttpSearchException;
-import jp.co.hybitz.googletransit.model.TransitQuery;
-import jp.co.hybitz.googletransit.model.TransitResult;
+package jp.co.hybitz.common;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface TransitSearcher {
+public class StringUtils {
+    
+    public static boolean isEmpty(String s) {
+        return s == null || s.length() == 0;
+    }
+    
+    public static boolean isNotEmpty(String s) {
+        return ! isEmpty(s);
+    }
 
-    /**
-     * Googleトランジットを利用して検索します。
-     * <br/>
-     * nullを返すことはありません。
-     * 
-     * @param query
-     * @return
-     * @throws TransitSearchException
-     */
-    public TransitResult search(TransitQuery query) throws HttpSearchException;
 }

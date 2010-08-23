@@ -26,10 +26,12 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.common.StreamUtils;
+import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.googletransit.GoogleConst;
-import jp.co.hybitz.googletransit.Platform;
 import jp.co.hybitz.googletransit.TransitParser;
-import jp.co.hybitz.googletransit.TransitSearchException;
 import jp.co.hybitz.googletransit.TransitSearcher;
 import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Time;
@@ -37,13 +39,9 @@ import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 import jp.co.hybitz.googletransit.parser.MobileParser20100818;
-import jp.co.hybitz.util.StreamUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import android.util.Xml;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -56,7 +54,7 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
 		this.platform = platform;
 	}
 	
-	public TransitResult search(TransitQuery query) throws TransitSearchException {
+	public TransitResult search(TransitQuery query) throws HttpSearchException {
 	    if (query.getTimeType() == TimeType.FIRST) {
 	        return searchFirst(query);
 	    }
@@ -80,32 +78,14 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
             result.setQueryDate(query.getDate());
             return result;
 		}
-		catch (IOException e) {
-            throw new TransitSearchException(e.getMessage(), baos.toByteArray(), e);
-		}
-		catch (XmlPullParserException e) {
-            throw new TransitSearchException(e.getMessage(), baos.toByteArray(), e);
-		}
 		catch (Exception e) {
-            throw new TransitSearchException(e.getMessage(), baos.toByteArray(), e);
+            throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray()), e);
 		}
 	}
 	
 	private TransitParser createParser() throws XmlPullParserException {
-		XmlPullParser xmlParser = createXmlPullParser();
+		XmlPullParser xmlParser = XmlPullParserFactory.getParser(platform);
         return new MobileParser20100818(xmlParser);
-	}
-	
-	private XmlPullParser createXmlPullParser() throws XmlPullParserException {
-        if (platform == Platform.ANDROID) {
-            return Xml.newPullParser();
-        }
-        else if (platform == Platform.GENERIC) {
-            return XmlPullParserFactory.newInstance().newPullParser();
-        }
-        else {
-            throw new UnsupportedOperationException("サポートしていないプラットフォームです。");
-        }
 	}
 	
 	protected HttpURLConnection openConnection(TransitQuery query) throws IOException {
@@ -116,7 +96,7 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
         return con;
 	}
 	
-	private TransitResult searchFirst(TransitQuery query) throws TransitSearchException {
+	private TransitResult searchFirst(TransitQuery query) throws HttpSearchException {
         // 始発検索の場合は、まず終電を検索して、始発検索用の出発時刻を算出する
 	    TransitQuery queryForLast = new TransitQuery();
 	    queryForLast.setFrom(query.getFrom());

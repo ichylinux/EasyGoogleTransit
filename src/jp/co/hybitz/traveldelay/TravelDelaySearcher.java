@@ -15,19 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.traveldelay;
 
 import jp.co.hybitz.common.HttpSearchException;
-import jp.co.hybitz.googletransit.model.TransitQuery;
-import jp.co.hybitz.googletransit.model.TransitResult;
+import jp.co.hybitz.traveldelay.model.TravelDelayQuery;
+import jp.co.hybitz.traveldelay.model.TravelDelayResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface TransitSearcher {
+public interface TravelDelaySearcher {
 
     /**
-     * Googleトランジットを利用して検索します。
+     * Goo路線を利用して運行情報を検索します。
      * <br/>
      * nullを返すことはありません。
      * 
@@ -35,5 +35,5 @@ public interface TransitSearcher {
      * @return
      * @throws TransitSearchException
      */
-    public TransitResult search(TransitQuery query) throws HttpSearchException;
+    public TravelDelayResult search(TravelDelayQuery query) throws HttpSearchException;
 }

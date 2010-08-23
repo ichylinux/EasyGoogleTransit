@@ -15,19 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.util;
+package jp.co.hybitz.common;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class StringUtils {
-    
-    public static boolean isEmpty(String s) {
-        return s == null || s.length() == 0;
-    }
-    
-    public static boolean isNotEmpty(String s) {
-        return ! isEmpty(s);
-    }
-
+public enum Platform {
+	ANDROID,
+	GENERIC,
+	LOOSE_HTML,
 }

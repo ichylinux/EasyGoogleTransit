@@ -15,25 +15,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.traveldelay.model;
 
-import jp.co.hybitz.common.HttpSearchException;
-import jp.co.hybitz.googletransit.model.TransitQuery;
-import jp.co.hybitz.googletransit.model.TransitResult;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public interface TransitSearcher {
+import jp.co.hybitz.common.HttpResult;
 
-    /**
-     * Googleトランジットを利用して検索します。
-     * <br/>
-     * nullを返すことはありません。
-     * 
-     * @param query
-     * @return
-     * @throws TransitSearchException
-     */
-    public TransitResult search(TransitQuery query) throws HttpSearchException;
+public class TravelDelayResult implements HttpResult {
+    private int responseCode;
+    private List<Category> categories = new ArrayList<Category>();
+    
+    public int getResponseCode() {
+        return responseCode;
+    }
+
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+    
+    public void addCategory(Category c) {
+        categories.add(c);
+    }
 }

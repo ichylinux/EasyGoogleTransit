@@ -61,7 +61,7 @@
         </classpath>
       
         <batchtest fork="yes">
-          <fileset dir="test" includes="**/*Test.java"/>
+          <fileset dir="test" includes="${test.includes}"/>
         </batchtest>
       </junit>
     </target>

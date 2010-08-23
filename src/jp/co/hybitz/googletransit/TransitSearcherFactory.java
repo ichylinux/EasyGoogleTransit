@@ -17,6 +17,7 @@
  */
 package jp.co.hybitz.googletransit;
 
+import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.googletransit.searcher.MobileSearcher20100720;
 
 /**

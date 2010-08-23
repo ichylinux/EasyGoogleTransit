@@ -123,8 +123,8 @@ public class MobileParser20100818 implements TransitParser {
 	    else if (text.matches(".*～.* 終電")) {
             handleSummary(text, TimeType.LAST);
 	    }
-	    else if (text.matches("([0-9]+(日|時間|分|秒))+ - .*[0-9]*円")) {
-	        handleTimeAndFare(text);
+        else if (text.matches("([0-9]+日 )?([0-9]+(分|時間|秒))+ - .*[0-9]*円")) {
+            handleTimeAndFare(text);
         }
         else if ("逆方向の経路を表示".equals(text)) {
             if (transit != null) {
@@ -195,6 +195,7 @@ public class MobileParser20100818 implements TransitParser {
 	}
 	
 	private void handleDeparture(String text) {
+	    System.out.println(text);
         String[] split = text.split("発 ");
         String[] splitTime = split[0].split(":");
         Time time = new Time(Integer.parseInt(splitTime[0]), Integer.parseInt(splitTime[1]));

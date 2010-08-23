@@ -15,12 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.traveldelay;
+
+import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.traveldelay.searcher.GooSearcher20100818;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public enum Platform {
-	ANDROID,
-	GENERIC,
+public class TravelDelaySearcherFactory {
+
+    public static TravelDelaySearcher createSearcher() {
+        return new GooSearcher20100818(Platform.GENERIC);
+    }
+
+    public static TravelDelaySearcher createSearcher(Platform platform) {
+        return new GooSearcher20100818(platform);
+    }
 }
