@@ -26,9 +26,7 @@ import jp.co.hybitz.common.HttpResult;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class TransitResult implements HttpResult {
-
-    private int responseCode;
+public class TransitResult extends HttpResult {
     private Date queryDate;
     private TimeType timeType;
     private Time time;
@@ -38,14 +36,6 @@ public class TransitResult implements HttpResult {
     private List<Transit> transits = new ArrayList<Transit>();
     private Maybe maybe;
     
-    public int getResponseCode() {
-        return responseCode;
-    }
-
-    public void setResponseCode(int responseCode) {
-        this.responseCode = responseCode;
-    }
-
     public Date getQueryDate() {
         return queryDate;
     }

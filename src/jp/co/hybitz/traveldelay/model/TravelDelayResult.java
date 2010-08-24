@@ -22,18 +22,9 @@ import java.util.List;
 
 import jp.co.hybitz.common.HttpResult;
 
-public class TravelDelayResult implements HttpResult {
-    private int responseCode;
+public class TravelDelayResult extends HttpResult {
     private List<Category> categories = new ArrayList<Category>();
     
-    public int getResponseCode() {
-        return responseCode;
-    }
-
-    public void setResponseCode(int responseCode) {
-        this.responseCode = responseCode;
-    }
-
     public List<Category> getCategories() {
         return categories;
     }

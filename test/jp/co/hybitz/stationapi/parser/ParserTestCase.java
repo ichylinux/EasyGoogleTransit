@@ -15,25 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay;
+package jp.co.hybitz.stationapi.parser;
 
-import jp.co.hybitz.common.HttpSearchException;
-import jp.co.hybitz.traveldelay.model.TravelDelayQuery;
-import jp.co.hybitz.traveldelay.model.TravelDelayResult;
+import jp.co.hybitz.stationapi.StationApiParser;
+import junit.framework.TestCase;
+
+import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface TravelDelaySearcher {
+public abstract class ParserTestCase extends TestCase {
 
-    /**
-     * Goo路線を利用して運行情報を検索します。
-     * <br/>
-     * nullを返すことはありません。
-     * 
-     * @param query
-     * @return
-     * @throws HttpSearchException
-     */
-    public TravelDelayResult search(TravelDelayQuery query) throws HttpSearchException;
+    protected abstract StationApiParser getParser() throws XmlPullParserException;
 }

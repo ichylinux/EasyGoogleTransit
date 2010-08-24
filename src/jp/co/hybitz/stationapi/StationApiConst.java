@@ -15,25 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay;
-
-import jp.co.hybitz.common.HttpSearchException;
-import jp.co.hybitz.traveldelay.model.TravelDelayQuery;
-import jp.co.hybitz.traveldelay.model.TravelDelayResult;
+package jp.co.hybitz.stationapi;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface TravelDelaySearcher {
-
-    /**
-     * Goo路線を利用して運行情報を検索します。
-     * <br/>
-     * nullを返すことはありません。
-     * 
-     * @param query
-     * @return
-     * @throws HttpSearchException
-     */
-    public TravelDelayResult search(TravelDelayQuery query) throws HttpSearchException;
+public interface StationApiConst {
+    public static final String STATION_API_URL = "http://map.simpleapi.net/stationapi";
 }
