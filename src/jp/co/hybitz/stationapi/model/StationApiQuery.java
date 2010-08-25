@@ -2,23 +2,17 @@ package jp.co.hybitz.stationapi.model;
 
 import java.io.Serializable;
 
+import jp.co.hybitz.common.GeoLocation;
+
 public class StationApiQuery implements Serializable {
-    private double longitude;
-    private double latitude;
-    
-    public double getLongitude() {
-        return longitude;
-    }
-    
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-    
-    public double getLatitude() {
-        return latitude;
+    private GeoLocation geoLocation;
+
+    public GeoLocation getGeoLocation() {
+        return geoLocation;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setGeoLocation(GeoLocation geoLocation) {
+        this.geoLocation = geoLocation;
     }
+    
 }

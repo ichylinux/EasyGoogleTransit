@@ -1,0 +1,28 @@
+<rgeocode xmlns="http://finds.jp/ts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"> 
+  <status>200</status> 
+  <result> 
+    <prefecture> 
+      <pcode>34</pcode> 
+      <pname>広島県</pname> 
+    </prefecture> 
+    <municipality> 
+      <mname>福山市</mname> 
+      <mcode>34207</mcode> 
+    </municipality> 
+    <local> 
+      <section>西深津町六丁目</section> 
+      <homenumber>12</homenumber> 
+      <distance>73.2099188866974</distance> 
+      <latitude>34.501163</latitude> 
+      <longitude>133.385614</longitude> 
+    </local> 
+  </result> 
+  <argument> 
+    <latitude>34.5012296</latitude> 
+    <longitude>133.384822</longitude> 
+    <localradius>500</localradius> 
+    <localmax>1</localmax> 
+  </argument> 
+  <meta name="thanks" content="このサービスは 国土交通省 提供 国土数値情報(行政区域) を利用しています" /> 
+  <meta name="thanks" content="このサービスは 国土交通省 提供 街区レベル位置参照情報および大字・町丁目レベル位置参照情報 を利用しています" /> 
+</rgeocode>
