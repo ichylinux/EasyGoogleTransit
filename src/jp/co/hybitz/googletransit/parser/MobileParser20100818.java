@@ -195,7 +195,6 @@ public class MobileParser20100818 implements TransitParser {
 	}
 	
 	private void handleDeparture(String text) {
-	    System.out.println(text);
         String[] split = text.split("発 ");
         String[] splitTime = split[0].split(":");
         Time time = new Time(Integer.parseInt(splitTime[0]), Integer.parseInt(splitTime[1]));
