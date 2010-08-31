@@ -33,6 +33,7 @@ public class TransitQuery implements Serializable {
 	private Date date;
 	private boolean useExpress;
 	private boolean useAirline;
+	private String sort;
 
 	public String getFrom() {
 		return from;
@@ -70,4 +71,11 @@ public class TransitQuery implements Serializable {
     public void setUseAirline(boolean useAirline) {
         this.useAirline = useAirline;
     }
+    public String getSort() {
+        return sort;
+    }
+    public void setSort(String sort) {
+        this.sort = sort;
+    }
+    
 }

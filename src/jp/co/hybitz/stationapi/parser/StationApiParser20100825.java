@@ -21,7 +21,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jp.co.hybitz.stationapi.StationApiParser;
+import jp.co.hybitz.common.Parser;
+import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.stationapi.model.Station;
 import jp.co.hybitz.stationapi.model.StationApiResult;
 
@@ -31,20 +33,21 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class StationApiParser20100825 implements StationApiParser {
-    private XmlPullParser parser;
+public class StationApiParser20100825 implements Parser<StationApiResult> {
+    private Platform platform;
     private StationApiResult result = new StationApiResult();
 	private Station station;
 	private String name;
 	
-	public StationApiParser20100825(XmlPullParser parser) {
-	    this.parser = parser;
+	public StationApiParser20100825(Platform platform) {
+        this.platform = platform;
 	}
 	
     @Override
 	public StationApiResult parse(InputStream in) throws XmlPullParserException, IOException {
 	    try {
-    	    parser.setInput(in, null);
+	        XmlPullParser parser = XmlPullParserFactory.getParser(platform);
+	        parser.setInput(in, null);
     
     		int eventType = parser.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {

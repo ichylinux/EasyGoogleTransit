@@ -20,9 +20,9 @@ package jp.co.hybitz.traveldelay.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.co.hybitz.common.HttpResult;
+import jp.co.hybitz.common.HttpResponse;
 
-public class TravelDelayResult extends HttpResult {
+public class TravelDelayResult extends HttpResponse {
     private List<Category> categories = new ArrayList<Category>();
     
     public List<Category> getCategories() {

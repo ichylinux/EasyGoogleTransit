@@ -17,13 +17,11 @@
  */
 package jp.co.hybitz.stationapi.parser;
 
+import jp.co.hybitz.common.Parser;
+import jp.co.hybitz.common.ParserTestCase;
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.common.XmlPullParserFactory;
-import jp.co.hybitz.stationapi.StationApiParser;
 import jp.co.hybitz.stationapi.model.Station;
 import jp.co.hybitz.stationapi.model.StationApiResult;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -31,22 +29,14 @@ import org.xmlpull.v1.XmlPullParserException;
 public class StationApiParser20100825Test extends ParserTestCase {
 
     @Override
-    protected StationApiParser getParser() throws XmlPullParserException {
-        return new StationApiParser20100825(XmlPullParserFactory.getParser(Platform.LOOSE_HTML));
+    protected Parser<StationApiResult> getParser() {
+        return new StationApiParser20100825(Platform.GENERIC);
     }    
 
     public void testParse20100825() {
-        StationApiParser parser = null;
-        try {
-            parser = getParser();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-        
         StationApiResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/station_api_result_20100825.xml"));
+            result = getParser().parse(getClass().getResourceAsStream("/station_api_result_20100825.xml"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

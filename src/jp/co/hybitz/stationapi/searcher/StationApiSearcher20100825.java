@@ -25,17 +25,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
-import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.stationapi.StationApiConst;
-import jp.co.hybitz.stationapi.StationApiParser;
 import jp.co.hybitz.stationapi.StationApiSearcher;
 import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
 import jp.co.hybitz.stationapi.parser.StationApiParser20100825;
 
-import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 /**
@@ -73,9 +71,8 @@ public class StationApiSearcher20100825 implements StationApiSearcher, StationAp
 		}
 	}
 	
-	private StationApiParser createParser() throws XmlPullParserException {
-		XmlPullParser xmlParser = XmlPullParserFactory.getParser(platform);
-		return new StationApiParser20100825(xmlParser);
+	private Parser<StationApiResult> createParser() throws XmlPullParserException {
+		return new StationApiParser20100825(platform);
 	}
 	
 	protected HttpURLConnection openConnection(StationApiQuery query) throws IOException {

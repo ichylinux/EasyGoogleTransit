@@ -17,26 +17,18 @@
  */
 package jp.co.hybitz.rgeocode.searcher;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
+import jp.co.hybitz.common.HttpResponse;
 import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
-import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.rgeocode.RGeocodeConst;
-import jp.co.hybitz.rgeocode.RGeocodeParser;
 import jp.co.hybitz.rgeocode.RGeocodeSearcher;
 import jp.co.hybitz.rgeocode.model.RGeocodeQuery;
 import jp.co.hybitz.rgeocode.model.RGeocodeResult;
 import jp.co.hybitz.rgeocode.parser.RGeocodeParser20100826;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -49,45 +41,30 @@ public class RGeocodeSearcher20100826 implements RGeocodeSearcher, RGeocodeConst
 	}
 	
 	public RGeocodeResult search(RGeocodeQuery query) throws HttpSearchException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	    HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
-		try {
-		    RGeocodeResult result;
-		    
-		    HttpURLConnection con = openConnection(query);
-		    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                StreamUtils.write(con.getInputStream(), baos);
-                ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		        result = createParser().parse(bais);
-		    }
-		    else {
-		        result = new RGeocodeResult();
-		    }
-		    
-            result.setResponseCode(con.getResponseCode());
+	    try {
+            RGeocodeResult result = response.isOK() ? createParser().parse(response.getInputStream()) : new RGeocodeResult();
+            result.setResponseCode(response.getResponseCode());
+            result.setRawResponse(response.getRawResponse());
             result.setGeoLocation(query.getGeoLocation());
             return result;
-		}
-		catch (Exception e) {
-		    throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray()), e);
-		}
+        }
+        catch (Exception e) {
+            throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
+        }
+    }
+
+	private Parser<RGeocodeResult> createParser() {
+		return new RGeocodeParser20100826(platform);
 	}
 	
-	private RGeocodeParser createParser() throws XmlPullParserException {
-		XmlPullParser xmlParser = XmlPullParserFactory.getParser(platform);
-		return new RGeocodeParser20100826(xmlParser);
-	}
-	
-	protected HttpURLConnection openConnection(RGeocodeQuery query) throws IOException {
+	private String createUrl(RGeocodeQuery query) {
 	    BigDecimal longitude = new BigDecimal(query.getGeoLocation().getLongitude());
 	    longitude = longitude.setScale(4, BigDecimal.ROUND_HALF_UP);
         BigDecimal latitude = new BigDecimal(query.getGeoLocation().getLatitude());
         latitude = latitude.setScale(4, BigDecimal.ROUND_HALF_UP);
 	    
-        URL url = new URL(RGEOCODE_URL + "?lon=" + longitude + "&lat=" + latitude);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.connect();
-        return con;
+        return RGEOCODE_URL + "?lon=" + longitude + "&lat=" + latitude;
 	}
 }

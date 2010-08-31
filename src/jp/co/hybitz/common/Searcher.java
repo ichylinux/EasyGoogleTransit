@@ -15,15 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.common;
 
-import java.io.InputStream;
 
-import jp.co.hybitz.googletransit.model.TransitResult;
-
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public interface TransitParser {
-	TransitResult parse(InputStream in) throws Exception;
+public interface Searcher<QUERY, RESULT> {
+    public RESULT search(QUERY query) throws HttpSearchException;
+    public Parser<RESULT> createParser();
 }

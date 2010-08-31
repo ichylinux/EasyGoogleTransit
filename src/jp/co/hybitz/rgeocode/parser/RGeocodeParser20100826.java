@@ -21,7 +21,9 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jp.co.hybitz.rgeocode.RGeocodeParser;
+import jp.co.hybitz.common.Parser;
+import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.rgeocode.model.RGeocodeResult;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -30,18 +32,19 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class RGeocodeParser20100826 implements RGeocodeParser {
-    private XmlPullParser parser;
+public class RGeocodeParser20100826 implements Parser<RGeocodeResult> {
+    private Platform platform;
     private RGeocodeResult result = new RGeocodeResult();
 	private String name;
 	
-	public RGeocodeParser20100826(XmlPullParser parser) {
-	    this.parser = parser;
+	public RGeocodeParser20100826(Platform platform) {
+        this.platform = platform;
 	}
 	
     @Override
 	public RGeocodeResult parse(InputStream in) throws XmlPullParserException, IOException {
 	    try {
+	        XmlPullParser parser = XmlPullParserFactory.getParser(platform);
     	    parser.setInput(in, null);
     
     		int eventType = parser.getEventType();

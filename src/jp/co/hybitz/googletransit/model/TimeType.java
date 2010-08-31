@@ -25,4 +25,6 @@ public enum TimeType {
     ARRIVAL,
     FIRST,
     LAST,
+    PREVIOUS_DEPARTURE,
+    NEXT_ARRIVAL,
 }

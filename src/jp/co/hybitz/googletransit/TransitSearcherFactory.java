@@ -18,7 +18,7 @@
 package jp.co.hybitz.googletransit;
 
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.googletransit.searcher.MobileSearcher20100720;
+import jp.co.hybitz.googletransit.searcher.MobileSearcher20100827;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -26,10 +26,10 @@ import jp.co.hybitz.googletransit.searcher.MobileSearcher20100720;
 public class TransitSearcherFactory {
 
     public static TransitSearcher createSearcher() {
-        return new MobileSearcher20100720(Platform.GENERIC);
+        return new MobileSearcher20100827(Platform.GENERIC);
     }
 
     public static TransitSearcher createSearcher(Platform platform) {
-        return new MobileSearcher20100720(platform);
+        return new MobileSearcher20100827(platform);
     }
 }

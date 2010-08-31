@@ -20,8 +20,11 @@ package jp.co.hybitz.googletransit.parser;
 import java.io.IOException;
 import java.io.InputStream;
 
-import jp.co.hybitz.googletransit.TransitParser;
+import jp.co.hybitz.common.Parser;
+import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.googletransit.TransitUtil;
+import jp.co.hybitz.googletransit.model.Maybe;
 import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
 import jp.co.hybitz.googletransit.model.TimeType;
@@ -35,26 +38,43 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class MobileParser20100716 implements TransitParser {
-    private XmlPullParser parser;
+public class MobileParser20100827 implements Parser<TransitResult> {
+    private static final int PARSE_TRANSIT_START = 1;
+    private static final int PARSE_TRANSIT_END = 2;
+    private static final int PARSE_MAYBE_START = 3;
+    private static final int PARSE_MAYBE_END = 4;
+    
+    private Platform platform;
     private TransitResult result = new TransitResult();
 	private Transit transit;
 	private TransitDetail transitDetail;
+	private int parseStatus = PARSE_TRANSIT_START;
 	
-	public MobileParser20100716(XmlPullParser parser) {
-	    this.parser = parser;
+	public MobileParser20100827(Platform platform) {
+        this.platform = platform;
 	}
 
 	public TransitResult parse(InputStream in) throws XmlPullParserException, IOException {
-		parser.setInput(in, null);
 
-        boolean stopParsing = false;
-        int eventType = parser.getEventType();
+        XmlPullParser parser = XmlPullParserFactory.getParser(platform);
+        parser.setInput(in, null);
+
         while (true) {
+
+            int eventType = parser.getEventType();
+            boolean stopParsing = false;
+
             switch (eventType) {
             case XmlPullParser.TEXT :
                 String text = parser.getText().trim();
-                stopParsing = handleText(text);
+                
+                if (parseStatus == PARSE_TRANSIT_START) {
+                    stopParsing = handleText(text);
+                }
+                else {
+                    stopParsing = handleMaybe(text);
+                }
+
                 break;
             }
             
@@ -70,6 +90,26 @@ class MobileParser20100716 implements TransitParser {
 
         result.setPrefecture(TransitUtil.isSamePrefecture(result.getFrom(), result.getTo()));
 		return result;
+	}
+	
+	private boolean handleMaybe(String text) {
+        if ("もしかして:".equals(text)) {
+            parseStatus = PARSE_MAYBE_START;
+        }
+        else if ("表示モード:".equals(text)) {
+            return true;
+        }
+        else if (parseStatus == PARSE_MAYBE_START) {
+            if (text.matches(".*～.*")) {
+                String[] split = text.split("～");
+                Maybe m = new Maybe(split[0], split[1]);
+                result.setMaybe(m);
+                parseStatus = PARSE_MAYBE_END;
+                return true;
+            }
+        }
+        
+        return false;
 	}
 	
 	/**
@@ -88,8 +128,8 @@ class MobileParser20100716 implements TransitParser {
 	    else if (text.matches(".*～.* 終電")) {
             handleSummary(text, TimeType.LAST);
 	    }
-	    else if (text.matches("([0-9]+(分|時間))+ - .*[0-9]*円")) {
-	        handleTimeAndFare(text);
+        else if (text.matches("([0-9]+日 )?([0-9]+(分|時間|秒))+ - .*[0-9]*円")) {
+            handleTimeAndFare(text);
         }
         else if ("逆方向の経路を表示".equals(text)) {
             if (transit != null) {
@@ -101,8 +141,9 @@ class MobileParser20100716 implements TransitParser {
                 result.addTransit(transit);
             }
             transit = null;
-            return true;
-        } else if (text.length() > 0) {
+            parseStatus = PARSE_TRANSIT_END;
+        }
+	    else if (text.length() > 0) {
             if (text.matches("[0-9]{1,2}:[0-9]{2}発 .*")) {
                 handleDeparture(text);            }
             else if (text.matches("[0-9]{1,2}:[0-9]{2}着 .*")) {

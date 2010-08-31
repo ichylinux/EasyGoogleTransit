@@ -15,33 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay.searcher;
+package jp.co.hybitz.googletransit.parser;
 
-import jp.co.hybitz.common.HttpSearchException;
-import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.traveldelay.model.Category;
-import jp.co.hybitz.traveldelay.model.TravelDelayQuery;
-import jp.co.hybitz.traveldelay.model.TravelDelayResult;
-import junit.framework.TestCase;
+import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooSearcher20100818Test extends TestCase {
+public class MobileParser20100829Test extends MobileParser20100823Test {
 
-    public void testSearch() {
-        GooSearcher20100818 searcher = new GooSearcher20100818(Platform.LOOSE_HTML);
-
-        TravelDelayResult result = null;
+    public void testParse20100829() {
+        TransitResult result = null;
         try {
-            result = searcher.search(new TravelDelayQuery());
-        } catch (HttpSearchException e) {
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100829.wml"));
+        } catch (Exception e) {
             e.printStackTrace();
-            fail(e.getMessage());// + "\n" + e.getHtml());
+            fail(e.getMessage());
         }
         
-        for (Category c : result.getCategories()) {
-            System.out.println(c.getName());
-        }
+        assertEquals("出発地", "新越谷駅（埼玉）", result.getFrom());
+        assertEquals("到着地", "北海道", result.getTo());
     }
 }

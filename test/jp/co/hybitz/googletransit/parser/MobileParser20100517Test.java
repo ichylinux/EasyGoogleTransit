@@ -17,12 +17,11 @@
  */
 package jp.co.hybitz.googletransit.parser;
 
-import jp.co.hybitz.googletransit.TransitParser;
+import jp.co.hybitz.common.Parser;
+import jp.co.hybitz.common.ParserTestCase;
+import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitResult;
-
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -30,22 +29,14 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class MobileParser20100517Test extends ParserTestCase {
     
     @Override
-    protected TransitParser getParser() throws XmlPullParserException {
-        return new MobileParser20100517(XmlPullParserFactory.newInstance().newPullParser());
+    protected Parser<TransitResult> getParser() {
+        return new MobileParser20100827(Platform.GENERIC);
     }    
 
     public void testParse20100517() {
-        TransitParser parser = null;
-        try {
-            parser = getParser();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-        
         TransitResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/transit_result_20100517.html"));
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100517.html"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

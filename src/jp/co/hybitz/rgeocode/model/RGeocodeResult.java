@@ -1,9 +1,9 @@
 package jp.co.hybitz.rgeocode.model;
 
 import jp.co.hybitz.common.GeoLocation;
-import jp.co.hybitz.common.HttpResult;
+import jp.co.hybitz.common.HttpResponse;
 
-public class RGeocodeResult extends HttpResult {
+public class RGeocodeResult extends HttpResponse {
     private GeoLocation geoLocation;
     private int status;
     private String prefecture;

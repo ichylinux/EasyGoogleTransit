@@ -197,6 +197,29 @@ public class TransitUtil {
     }
     
     /**
+     * 乗り換え候補の中から最初に到着する到着時刻を取得します。
+     * 
+     * @param result
+     * @return
+     */
+    public static Time getFirstArrivalTime(TransitResult result) {
+        Time timeToSearch = null;
+        for (Iterator<Transit> it = result.getTransits().iterator(); it.hasNext();) {
+            Transit t = it.next();
+            TransitDetail td = t.getLastPublicTransportation();
+            if (td == null) {
+                continue;
+            }
+
+            Time time = td.getArrival().getTime();
+            if (timeToSearch == null || timeToSearch.after(time)) {
+                timeToSearch = time;
+            }
+        }
+        return timeToSearch;
+    }
+
+    /**
      * 乗り換え候補の中から最後に出発する出発時刻を取得します。
      * 
      * @param result

@@ -17,34 +17,17 @@
  */
 package jp.co.hybitz.googletransit.parser;
 
-import jp.co.hybitz.googletransit.TransitParser;
 import jp.co.hybitz.googletransit.model.TransitResult;
-
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
 public class MobileParser20100813Test extends MobileParser20100722Test {
 
-    @Override
-    protected TransitParser getParser() throws XmlPullParserException {
-        return new MobileParser20100813(XmlPullParserFactory.newInstance().newPullParser());
-    }    
-
     public void testParse20100813() {
-        TransitParser parser = null;
-        try {
-            parser = getParser();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-        
         TransitResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/transit_result_20100813.wml"));
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100813.wml"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

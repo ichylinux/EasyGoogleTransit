@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.co.hybitz.common.GeoLocation;
-import jp.co.hybitz.common.HttpResult;
+import jp.co.hybitz.common.HttpResponse;
 import jp.co.hybitz.rgeocode.model.RGeocodeResult;
 
-public class StationApiResult extends HttpResult {
+public class StationApiResult extends HttpResponse {
     private GeoLocation geoLocation;
     private RGeocodeResult rGeocodeResult;
     private List<Station> stations = new ArrayList<Station>();

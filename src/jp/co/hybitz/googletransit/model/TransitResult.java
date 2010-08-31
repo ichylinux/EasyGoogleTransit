@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import jp.co.hybitz.common.HttpResult;
+import jp.co.hybitz.common.HttpResponse;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class TransitResult extends HttpResult {
+public class TransitResult extends HttpResponse {
     private Date queryDate;
     private TimeType timeType;
     private Time time;

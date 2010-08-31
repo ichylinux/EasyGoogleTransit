@@ -17,12 +17,10 @@
  */
 package jp.co.hybitz.rgeocode.parser;
 
+import jp.co.hybitz.common.Parser;
+import jp.co.hybitz.common.ParserTestCase;
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.common.XmlPullParserFactory;
-import jp.co.hybitz.rgeocode.RGeocodeParser;
 import jp.co.hybitz.rgeocode.model.RGeocodeResult;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -30,22 +28,14 @@ import org.xmlpull.v1.XmlPullParserException;
 public class RGeocodeParser20100826Test extends ParserTestCase {
 
     @Override
-    protected RGeocodeParser getParser() throws XmlPullParserException {
-        return new RGeocodeParser20100826(XmlPullParserFactory.getParser(Platform.LOOSE_HTML));
+    protected Parser<RGeocodeResult> getParser() {
+        return new RGeocodeParser20100826(Platform.GENERIC);
     }    
 
     public void testParse20100826() {
-        RGeocodeParser parser = null;
-        try {
-            parser = getParser();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-        
         RGeocodeResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/rgeocode_result_20100826.xml"));
+            result = getParser().parse(getClass().getResourceAsStream("/rgeocode_result_20100826.xml"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

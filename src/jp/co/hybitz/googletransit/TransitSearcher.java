@@ -17,23 +17,12 @@
  */
 package jp.co.hybitz.googletransit;
 
-import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Searcher;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface TransitSearcher {
-
-    /**
-     * Googleトランジットを利用して検索します。
-     * <br/>
-     * nullを返すことはありません。
-     * 
-     * @param query
-     * @return
-     * @throws TransitSearchException
-     */
-    public TransitResult search(TransitQuery query) throws HttpSearchException;
+public interface TransitSearcher extends Searcher<TransitQuery, TransitResult> {
 }

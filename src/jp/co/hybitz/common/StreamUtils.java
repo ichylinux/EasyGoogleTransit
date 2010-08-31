@@ -17,9 +17,12 @@
  */
 package jp.co.hybitz.common;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -52,5 +55,32 @@ public class StreamUtils {
                 }
             }
         }
+    }
+    
+    public static HttpResponse getHttpResponse(String url) throws HttpSearchException {
+        HttpResponse ret = new HttpResponse();
+
+        try {
+            HttpURLConnection con = openConnection(url);
+            ret.setResponseCode(con.getResponseCode());
+            
+            if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                StreamUtils.write(con.getInputStream(), baos);
+                ret.setRawResponse(baos.toByteArray());
+            }
+        }
+        catch (IOException e) {
+            throw new HttpSearchException(e.getMessage(), e);
+        }
+
+        return ret;
+    }
+    
+    public static HttpURLConnection openConnection(String url) throws IOException {
+        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+        con.setRequestMethod("GET");
+        con.connect();
+        return con;
     }
 }

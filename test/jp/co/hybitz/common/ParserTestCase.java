@@ -15,17 +15,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.rgeocode.parser;
+package jp.co.hybitz.common;
 
-import jp.co.hybitz.rgeocode.RGeocodeParser;
+import jp.co.hybitz.common.Parser;
 import junit.framework.TestCase;
-
-import org.xmlpull.v1.XmlPullParserException;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-abstract class ParserTestCase extends TestCase {
+public abstract class ParserTestCase extends TestCase {
 
-    protected abstract RGeocodeParser getParser() throws XmlPullParserException;
+    protected abstract Parser<?> getParser();
 }

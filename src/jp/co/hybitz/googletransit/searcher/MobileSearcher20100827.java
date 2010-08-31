@@ -17,83 +17,75 @@
  */
 package jp.co.hybitz.googletransit.searcher;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import jp.co.hybitz.common.HttpResponse;
 import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
-import jp.co.hybitz.common.XmlPullParserFactory;
+import jp.co.hybitz.common.StringUtils;
 import jp.co.hybitz.googletransit.GoogleConst;
-import jp.co.hybitz.googletransit.TransitParser;
 import jp.co.hybitz.googletransit.TransitSearcher;
 import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
-import jp.co.hybitz.googletransit.parser.MobileParser20100818;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
+import jp.co.hybitz.googletransit.parser.MobileParser20100827;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
+public class MobileSearcher20100827 implements TransitSearcher, GoogleConst {
 	
 	private Platform platform;
 	
-	public MobileSearcher20100720(Platform platform) {
+	public MobileSearcher20100827(Platform platform) {
 		this.platform = platform;
 	}
 	
+	/**
+	 * @see jp.co.hybitz.common.Searcher#search(java.lang.Object)
+	 */
 	public TransitResult search(TransitQuery query) throws HttpSearchException {
 	    if (query.getTimeType() == TimeType.FIRST) {
 	        return searchFirst(query);
 	    }
+	    else if (query.getTimeType() == TimeType.PREVIOUS_DEPARTURE) {
+	        return searchPreviousDeparture(query);
+	    }
+	    else if (query.getTimeType() == TimeType.NEXT_ARRIVAL) {
+	        return searchNextArraival(query);
+	    }
+	    else {
+	        return searchImpl(query);
+	    }
 	    
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	}
+	
+    /**
+     * @see jp.co.hybitz.common.Searcher#createParser()
+     */
+    public Parser<TransitResult> createParser() {
+        return new MobileParser20100827(platform);
+    }
+    
+    private TransitResult searchImpl(TransitQuery query) throws HttpSearchException {
+        HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
-		try {
-		    TransitResult result;
-		    
-		    HttpURLConnection con = openConnection(query);
-		    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-		        StreamUtils.write(con.getInputStream(), baos);
-		        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		        result = createParser().parse(bais);
-		    }
-		    else {
-		        result = new TransitResult();
-		    }
-		    
-            result.setResponseCode(con.getResponseCode());
+        try {
+            TransitResult result = response.isOK() ? createParser().parse(response.getInputStream()) : new TransitResult();
+            result.setResponseCode(response.getResponseCode());
+            result.setRawResponse(response.getRawResponse());
             result.setQueryDate(query.getDate());
             return result;
-		}
-		catch (Exception e) {
-            throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray()), e);
-		}
-	}
-	
-	private TransitParser createParser() throws XmlPullParserException {
-		XmlPullParser xmlParser = XmlPullParserFactory.getParser(platform);
-        return new MobileParser20100818(xmlParser);
-	}
-	
-	protected HttpURLConnection openConnection(TransitQuery query) throws IOException {
-        URL url = new URL(GOOGLE_TRANSIT_MOBILE_URL + createQueryString(query));
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.connect();
-        return con;
+        }
+        catch (Exception e) {
+            throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
+        }
 	}
 	
 	private TransitResult searchFirst(TransitQuery query) throws HttpSearchException {
@@ -107,7 +99,7 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
 	    queryForLast.setUseAirline(query.isUseAirline());
 	    
 	    TransitResult result = search(queryForLast);
-	    if (result.getResponseCode() != HttpURLConnection.HTTP_OK) {
+	    if (!result.isOK()) {
 	        return result;
 	    }
 	    
@@ -138,7 +130,7 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
         queryForFirst.setDate(c.getTime());
         queryForFirst.setUseExpress(query.isUseExpress());
         queryForFirst.setUseAirline(query.isUseAirline());
-	    
+
         TransitResult ret = search(queryForFirst);
         ret.setTimeType(TimeType.FIRST);
         ret.setTime(null);
@@ -146,8 +138,90 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
         return ret;
 	}
 	
-	private String createQueryString(TransitQuery query) {
-		StringBuilder sb = new StringBuilder();
+    private TransitResult searchPreviousDeparture(TransitQuery query) throws HttpSearchException {
+        // まずは直前に到着するルートを検索して最後に出発する時刻を取得する
+        TransitQuery queryForArrival = new TransitQuery();
+        queryForArrival.setFrom(query.getFrom());
+        queryForArrival.setTo(query.getTo());
+        queryForArrival.setTimeType(TimeType.ARRIVAL);
+        queryForArrival.setDate(query.getDate());
+        queryForArrival.setUseExpress(query.isUseExpress());
+        queryForArrival.setUseAirline(query.isUseAirline());
+        
+        TransitResult result = search(queryForArrival);
+        if (!result.isOK()) {
+            return result;
+        }
+        
+        // 最後に出発する時刻を利用して検索
+        Calendar c = Calendar.getInstance();
+        c.setTime(query.getDate());
+        Time timeToSearch = TransitUtil.getLastDepartureTime(result);
+        if (timeToSearch != null) {
+            Time now = new Time(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
+
+            c.set(Calendar.HOUR_OF_DAY, timeToSearch.getHour());
+            c.set(Calendar.MINUTE, timeToSearch.getMinute());
+
+            if (timeToSearch.after(now)) {
+                c.add(Calendar.DATE, -1);
+            }
+        }
+        
+        TransitQuery queryForDepartrue = new TransitQuery();
+        queryForDepartrue.setFrom(query.getFrom());
+        queryForDepartrue.setTo(query.getTo());
+        queryForDepartrue.setTimeType(TimeType.DEPARTURE);
+        queryForDepartrue.setDate(c.getTime());
+        queryForDepartrue.setUseExpress(query.isUseExpress());
+        queryForDepartrue.setUseAirline(query.isUseAirline());
+        
+        return search(queryForDepartrue);
+    }
+
+    private TransitResult searchNextArraival(TransitQuery query) throws HttpSearchException {
+        // まずは直後に出発するルートを検索して最初に到着する時刻を取得する
+        TransitQuery queryForDeparture = new TransitQuery();
+        queryForDeparture.setFrom(query.getFrom());
+        queryForDeparture.setTo(query.getTo());
+        queryForDeparture.setTimeType(TimeType.DEPARTURE);
+        queryForDeparture.setDate(query.getDate());
+        queryForDeparture.setUseExpress(query.isUseExpress());
+        queryForDeparture.setUseAirline(query.isUseAirline());
+        
+        TransitResult result = search(queryForDeparture);
+        if (!result.isOK()) {
+            return result;
+        }
+        
+        // 最初に到着する時刻を利用して検索
+        Calendar c = Calendar.getInstance();
+        c.setTime(query.getDate());
+        Time timeToSearch = TransitUtil.getFirstArrivalTime(result);
+        if (timeToSearch != null) {
+            Time now = new Time(c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
+
+            c.set(Calendar.HOUR_OF_DAY, timeToSearch.getHour());
+            c.set(Calendar.MINUTE, timeToSearch.getMinute());
+
+            if (timeToSearch.before(now)) {
+                c.add(Calendar.DATE, 1);
+            }
+        }
+        
+        TransitQuery queryForArrival = new TransitQuery();
+        queryForArrival.setFrom(query.getFrom());
+        queryForArrival.setTo(query.getTo());
+        queryForArrival.setTimeType(TimeType.ARRIVAL);
+        queryForArrival.setDate(c.getTime());
+        queryForArrival.setUseExpress(query.isUseExpress());
+        queryForArrival.setUseAirline(query.isUseAirline());
+        
+        return search(queryForArrival);
+    }
+
+    private String createUrl(TransitQuery query) {
+		StringBuilder sb = new StringBuilder(GOOGLE_TRANSIT_MOBILE_URL);
 		
 		// 出発地
 		sb.append("?saddr=").append(URLEncoder.encode(query.getFrom()));
@@ -187,6 +261,11 @@ public class MobileSearcher20100720 implements TransitSearcher, GoogleConst {
 		// 飛行機
 		if (!query.isUseAirline()) {
 		    sb.append("&noal=1");
+		}
+		
+		// 表示順
+		if (StringUtils.isNotEmpty(query.getSort())) {
+		    sb.append("&sort=" + query.getSort());
 		}
 		
 		sb.append("&ie=UTF8&f=d&dirmode=transit&num=3&dirflg=r");
