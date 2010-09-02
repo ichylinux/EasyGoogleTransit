@@ -21,6 +21,7 @@ import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.ParserTestCase;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.googletransit.model.TimeType;
+import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
@@ -29,14 +30,14 @@ import jp.co.hybitz.googletransit.model.TransitResult;
 public class MobileParser20100517Test extends ParserTestCase {
     
     @Override
-    protected Parser<TransitResult> getParser() {
+    protected Parser<TransitQuery, TransitResult> getParser() {
         return new MobileParser20100827(Platform.GENERIC);
     }    
 
     public void testParse20100517() {
         TransitResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100517.html"));
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100517.html"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

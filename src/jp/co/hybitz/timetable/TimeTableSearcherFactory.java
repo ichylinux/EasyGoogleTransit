@@ -15,11 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.stationapi;
+package jp.co.hybitz.timetable;
+
+import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.common.Searcher;
+import jp.co.hybitz.timetable.model.TimeTableQuery;
+import jp.co.hybitz.timetable.model.TimeTableResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface StationApiConst {
-    public static final String STATION_API_URL = "http://map.simpleapi.net/stationapi";
+public class TimeTableSearcherFactory {
+
+    public static Searcher<TimeTableQuery, TimeTableResult> createSearcher() {
+        return new TimeTableSearcher20100831(Platform.LOOSE_HTML);
+    }
+
+    public static Searcher<TimeTableQuery, TimeTableResult> createSearcher(Platform platform) {
+        return new TimeTableSearcher20100831(platform);
+    }
 }

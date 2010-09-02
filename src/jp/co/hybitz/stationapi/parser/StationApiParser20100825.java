@@ -25,6 +25,7 @@ import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.stationapi.model.Station;
+import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -33,7 +34,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class StationApiParser20100825 implements Parser<StationApiResult> {
+public class StationApiParser20100825 implements Parser<StationApiQuery, StationApiResult> {
     private Platform platform;
     private StationApiResult result = new StationApiResult();
 	private Station station;
@@ -44,10 +45,10 @@ public class StationApiParser20100825 implements Parser<StationApiResult> {
 	}
 	
     @Override
-	public StationApiResult parse(InputStream in) throws XmlPullParserException, IOException {
+	public StationApiResult parse(InputStream is, StationApiQuery in) throws XmlPullParserException, IOException {
 	    try {
 	        XmlPullParser parser = XmlPullParserFactory.getParser(platform);
-	        parser.setInput(in, null);
+	        parser.setInput(is, null);
     
     		int eventType = parser.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -121,7 +122,7 @@ public class StationApiParser20100825 implements Parser<StationApiResult> {
             return result;
 	    }
 	    finally {
-	        try { in.close(); } catch (IOException e) {}
+	        try { is.close(); } catch (IOException e) {}
 	    }
 	}
 }

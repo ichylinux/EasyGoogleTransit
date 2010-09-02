@@ -25,4 +25,5 @@ import jp.co.hybitz.googletransit.model.TransitResult;
  * @author ichy <ichylinux@gmail.com>
  */
 public interface TransitSearcher extends Searcher<TransitQuery, TransitResult> {
+    public static final String GOOGLE_TRANSIT_MOBILE_URL = "http://www.google.co.jp/m/directions";
 }

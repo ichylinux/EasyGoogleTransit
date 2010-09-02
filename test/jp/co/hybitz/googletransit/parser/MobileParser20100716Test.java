@@ -28,7 +28,7 @@ public class MobileParser20100716Test extends MobileParser20100704Test {
     public void testParse20100716_01() {
         TransitResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100716_01.wml"));
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100716_01.wml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
@@ -42,7 +42,7 @@ public class MobileParser20100716Test extends MobileParser20100704Test {
     public void testParse20100716_02() {
         TransitResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100716_02.wml"));
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100716_02.wml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

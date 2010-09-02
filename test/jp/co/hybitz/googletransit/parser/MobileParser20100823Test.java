@@ -27,7 +27,7 @@ public class MobileParser20100823Test extends MobileParser20100818Test {
     public void testParse20100823_01() {
         TransitResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100823_01.wml"));
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100823_01.wml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

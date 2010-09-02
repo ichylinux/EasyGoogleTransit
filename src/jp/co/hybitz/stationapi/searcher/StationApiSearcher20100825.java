@@ -17,29 +17,22 @@
  */
 package jp.co.hybitz.stationapi.searcher;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
+import jp.co.hybitz.common.HttpResponse;
 import jp.co.hybitz.common.HttpSearchException;
 import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
-import jp.co.hybitz.stationapi.StationApiConst;
 import jp.co.hybitz.stationapi.StationApiSearcher;
 import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
 import jp.co.hybitz.stationapi.parser.StationApiParser20100825;
 
-import org.xmlpull.v1.XmlPullParserException;
-
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class StationApiSearcher20100825 implements StationApiSearcher, StationApiConst {
+public class StationApiSearcher20100825 implements StationApiSearcher {
 	private Platform platform;
 	
 	public StationApiSearcher20100825(Platform platform) {
@@ -47,44 +40,29 @@ public class StationApiSearcher20100825 implements StationApiSearcher, StationAp
 	}
 	
 	public StationApiResult search(StationApiQuery query) throws HttpSearchException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
-		try {
-		    StationApiResult result;
-		    
-		    HttpURLConnection con = openConnection(query);
-		    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                StreamUtils.write(con.getInputStream(), baos);
-                ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		        result = createParser().parse(bais);
-		    }
-		    else {
-		        result = new StationApiResult();
-		    }
-		    
-            result.setResponseCode(con.getResponseCode());
+        try {
+            StationApiResult result = response.isOK() ? createParser(query).parse(response.getInputStream(), query) : new StationApiResult();
+            result.setResponseCode(response.getResponseCode());
             result.setGeoLocation(query.getGeoLocation());
             return result;
-		}
-		catch (Exception e) {
-		    throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray()), e);
-		}
+        }
+        catch (Exception e) {
+            throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
+        }
 	}
 	
-	private Parser<StationApiResult> createParser() throws XmlPullParserException {
+	public Parser<StationApiQuery, StationApiResult> createParser(StationApiQuery query) {
 		return new StationApiParser20100825(platform);
 	}
 	
-	protected HttpURLConnection openConnection(StationApiQuery query) throws IOException {
+	public String createUrl(StationApiQuery query) {
 	    BigDecimal longitude = new BigDecimal(query.getGeoLocation().getLongitude());
 	    longitude = longitude.setScale(4, BigDecimal.ROUND_HALF_UP);
         BigDecimal latitude = new BigDecimal(query.getGeoLocation().getLatitude());
         latitude = latitude.setScale(4, BigDecimal.ROUND_HALF_UP);
 	    
-        URL url = new URL(STATION_API_URL + "?longitude=" + longitude + "&latitude=" + latitude);
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.connect();
-        return con;
+        return STATION_API_URL + "?longitude=" + longitude + "&latitude=" + latitude;
 	}
 }

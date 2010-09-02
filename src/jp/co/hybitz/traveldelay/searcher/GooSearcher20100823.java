@@ -28,7 +28,6 @@ import jp.co.hybitz.common.HttpSearchException;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
 import jp.co.hybitz.common.XmlPullParserFactory;
-import jp.co.hybitz.traveldelay.GooConst;
 import jp.co.hybitz.traveldelay.TravelDelayParser;
 import jp.co.hybitz.traveldelay.TravelDelaySearcher;
 import jp.co.hybitz.traveldelay.model.TravelDelayQuery;
@@ -42,7 +41,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooSearcher20100823 implements TravelDelaySearcher, GooConst {
+public class GooSearcher20100823 implements TravelDelaySearcher {
 	private static final String ENCODING = "EUC-JP";
 	private Platform platform;
 	

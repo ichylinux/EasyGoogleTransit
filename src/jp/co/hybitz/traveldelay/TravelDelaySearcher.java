@@ -25,6 +25,8 @@ import jp.co.hybitz.traveldelay.model.TravelDelayResult;
  * @author ichy <ichylinux@gmail.com>
  */
 public interface TravelDelaySearcher {
+    public static final String GOO_TRAVEL_URL = "http://transit.goo.ne.jp/";
+    public static final String GOO_TRAVEL_DELAY_URL = GOO_TRAVEL_URL + "unkou/index.html";
 
     /**
      * Goo路線を利用して運行情報を検索します。

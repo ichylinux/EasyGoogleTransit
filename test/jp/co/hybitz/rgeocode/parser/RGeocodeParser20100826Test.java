@@ -20,6 +20,7 @@ package jp.co.hybitz.rgeocode.parser;
 import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.ParserTestCase;
 import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.rgeocode.model.RGeocodeQuery;
 import jp.co.hybitz.rgeocode.model.RGeocodeResult;
 
 /**
@@ -28,14 +29,14 @@ import jp.co.hybitz.rgeocode.model.RGeocodeResult;
 public class RGeocodeParser20100826Test extends ParserTestCase {
 
     @Override
-    protected Parser<RGeocodeResult> getParser() {
+    protected Parser<RGeocodeQuery, RGeocodeResult> getParser() {
         return new RGeocodeParser20100826(Platform.GENERIC);
     }    
 
     public void testParse20100826() {
         RGeocodeResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/rgeocode_result_20100826.xml"));
+            result = getParser().parse(getClass().getResourceAsStream("/rgeocode_result_20100826.xml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

@@ -21,7 +21,7 @@ public class SimpleXmlPullParser implements XmlPullParser {
 
     private int action = DO_TEXT;
     private InputStreamReader reader;
-    private int eventType;
+    private int eventType = START_DOCUMENT;
     private StringBuilder name = new StringBuilder();
     private StringBuilder attrKey = new StringBuilder();
     private StringBuilder attrValue = new StringBuilder();

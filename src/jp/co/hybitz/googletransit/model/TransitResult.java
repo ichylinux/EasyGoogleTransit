@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 import jp.co.hybitz.common.HttpResponse;
+import jp.co.hybitz.common.model.Time;
 
 /**
  * @author ichy <ichylinux@gmail.com>

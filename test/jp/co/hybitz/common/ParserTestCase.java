@@ -25,5 +25,5 @@ import junit.framework.TestCase;
  */
 public abstract class ParserTestCase extends TestCase {
 
-    protected abstract Parser<?> getParser();
+    protected abstract Parser<?, ?> getParser();
 }

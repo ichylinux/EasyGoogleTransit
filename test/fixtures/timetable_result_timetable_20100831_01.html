@@ -1,0 +1,715 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html lang="ja"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta http-equiv="Content-Style-Type" content="text/css" /> 
+<meta http-equiv="Content-Script-Type" content="text/javascript" /> 
+<meta name="viewport" content="width=320; initial-scale=0.5;"> 
+<title>札幌市営南北線 さっぽろ駅の時刻表 - Yahoo!路線情報</title> 
+<meta name="description" content="Yahoo!路線情報：全国の鉄道や航空路線を対象とした乗り換え案内サービスです。路線の運行情報も全国エリアでご提供中！"> 
+<meta name="keywords" content="鉄道、航空路線,乗り換え案内,路線の運行情報,札幌市営南北線,さっぽろ"> 
+<link rel="stylesheet" href="http://i.yimg.jp/images/transit/station/css/master-yahoo.css" type="text/css" media="all"> 
+<link rel="stylesheet" href="http://i.yimg.jp/images/css/printexec.css" type="text/css" media="print"> 
+<link rel="stylesheet" href="http://i.yimg.jp/images/transit/station/css/master-m041.css?v=2" type="text/css" media="all"> 
+ 
+</head> 
+<body class="yj950-2"> 
+ 
+<!--wrapper start--> 
+ 
+<div id="wrapper"> 
+<!--header start--> 
+<div id="header"> 
+<span class="yj-guid"><a name="pagetop" id="pagetop"></a><img src="http://i.yimg.jp/images/clear.gif" width="1" height="1" alt="このページの先頭です"></span> 
+<span class="yj-skip"><a href="#contents-start"><img src="http://i.yimg.jp/images/clear.gif" alt="このページの本文へ" width="1" height="1" ></a></span> 
+ 
+<!--pos-UHD8 start--> 
+<!-- prefix --> 
+<div id="uhd"> 
+<!-- /prefix --> 
+<style type="text/css">
+#uhdMain, #uhdMain *{padding:0px;margin:0px;font-size:12pt;font-weight:normal;font-style:normal;clear:none;float:none;text-align:left;line-height:100%;text-indent:0px;letter-spacing:0px;word-spacing:0px;text-transform:none;vertical-align:baseline;border:0 solid;}
+</style>
+<style type="text/css">
+html:\66irst-child #uhdMain #uhdSb form #uhdSBox{position:absolute !important;top:6px !important;left:43px !important;width:140px !important;height:21px !important;padding:4px 0 0 2px !important;background:url(http://ai.yimg.jp/yui/jp/uhd/olympic/1.0.2/img/uhdChnk.png) -43px -35px no-repeat !important;/*\*//*/width:137px !important;height:16px !important;/**/}
+</style>
+<div id="uhdMain" style="height:34px;width:100%;position:relative;"><div id="uhdTxt" style="height:24px;margin-right:266px;background-repeat:repeat-x;background-position:0px -4px;background-image:url(http://ai.yimg.jp/yui/jp/uhd/olympic/1.0.2/img/uhdChnk.png)">
+<dl style="margin:0px;">
+<dt style="position:absolute;top:9px;left:10px;width:3px;height:5px;background-repeat:no-repeat;background-position:0px -138px;text-indent:-9999px;background-image:url(http://ai.yimg.jp/yui/jp/uhd/olympic/1.0.2/img/uhdChnk.png)">お知らせ：</dt>
+<dd style="margin:0px;font-size:12px;padding:6px 0 0 20px;line-height:100%;"><a href="http://ard.yahoo.co.jp/SIG=15ahos6ag/M=300510612.301306190.302797907.300924686/D=jp_transit/S=2079586083:UHD8/Y=jp/EXP=1283310638/L=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR/B=o9zkAHxTyA4-/J=1283303438010420/A=301214284/SIG=11knkvri3/R=0/*http://special.security.yahoo.co.jp/index.html" style="font-size:12px;font-family:MS PGothic;line-height:100%;">インターネットを安全に使う対策を</a>
+</dd>
+</dl>
+</div>
+<div id="uhdSb" style="position:absolute;top:0;right:0;width:266px;height:34px;background-repeat:no-repeat;background-position:0 -29px;background-image:url(http://ai.yimg.jp/yui/jp/uhd/olympic/1.0.2/img/uhdChnk.png)">
+<form action="http://search.yahoo.co.jp/search" name="p" target="uhd" style="padding:0px;margin:0px;">
+<p>
+<label for="uhdSBox" title="Yahoo! JAPAN" style="position:absolute;top:9px;left:10px;width:28px;height:15px;text-indent:-9999px;">Yahoo! JAPAN</label>
+<input id="uhdSBox" type="text" name="p" value="" style="padding:0px;padding-right:1px;padding-left:1px;margin:0px;border:0 solid;position:absolute;top:10px;left:45px;width:134px;height:15px;font-size:12px;line-height:14px;outline:none;">
+<button id="uhdSBt" type="submit" title="ウェブ検索" style="border:0 solid;position:absolute;top:6px;right:10px;width:73px;height:21px;background-repeat:no-repeat;background-position:-183px -35px;text-indent:-9999px;font-size:1px;background-image:url(http://ai.yimg.jp/yui/jp/uhd/olympic/1.0.2/img/uhdChnk.png)">ウェブ検索</button>
+<input type=hidden name="ei" value="UTF-8">
+<input type=hidden name="fr" value="ush-jp_transit">
+</p>
+</form>
+</div></div><script language=javascript> 
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['o9zkAHxTyA4-']='&U=13ks5p14k%2fN%3do9zkAHxTyA4-%2fC%3d300510612.301306190.302797907.300924686%2fD%3dUHD8%2fB%3d301214284';
+</script><noscript><div style="position:absolute;"><img width=1 height=1 alt="" src="http://b6.yahoo.co.jp/b?P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=143r3ld8u%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3djp%2fF%3d1576447014%2fQ%3d-1%2fS%3d1%2fJ%3d16C9537C&U=13ks5p14k%2fN%3do9zkAHxTyA4-%2fC%3d300510612.301306190.302797907.300924686%2fD%3dUHD8%2fB%3d301214284"></div></noscript><!-- suffix --> 
+</div> 
+<!-- /suffix --> 
+ 
+<!--pos-UHD8 end--> 
+ 
+<div id="masthead"> 
+<div class="yjmth"> 
+ 
+<div class="yjmthproplogoarea"> 
+<a href="http://map.yahoo.co.jp/"><img src="http://i.yimg.jp/images/mh/map.gif" alt="Yahoo!地図" title="Yahoo!地図" height="40" width="192"></a></div> 
+<div class="yjmthloginarea"> 
+<strong><a href="https://login.yahoo.co.jp/config/login?.src=mp&amp;.done=http%3A%2F%2Ftransit.map.yahoo.co.jp%3A80%2Fstation%2Ftime%3Fpref%3D1%26amp%3Bcompany%3D%25E6%259C%25AD%25E5%25B9%258C%25E5%25B8%2582%25E4%25BA%25A4%25E9%2580%259A%25E5%25B1%2580%26amp%3Bline%3D%25E5%258D%2597%25E5%258C%2597%25E7%25B7%259A%26amp%3Bprefname%3D%25E5%258C%2597%25E6%25B5%25B7%25E9%2581%2593%26amp%3Bst%3D%25E3%2581%2595%25E3%2581%25A3%25E3%2581%25BD%25E3%2582%258D">ログイン</a></strong><br>IDでもっと便利に[ <a href="http://rd.yahoo.co.jp/*https://account.edit.yahoo.co.jp/registration?.src=transit&.done=http%3A%2F%2Ftransit.map.yahoo.co.jp">新規取得</a> ]
+</div> 
+<div class="yjmthcmnlnkarea"> 
+<a href="http://www.yahoo.co.jp/">Yahoo! JAPAN</a>&nbsp;-&nbsp;<a href="http://help.yahoo.co.jp/help/jp/transit/">ヘルプ</a></div> 
+</div> 
+</div><!--/#masthead end--> 
+ 
+ 
+<!--pos-EMG start--> 
+<!-- SpaceID=2079586083 loc=EMG noad --> 
+ 
+<!--pos-EMG end--> 
+ 
+</div> 
+<!--/#header end--> 
+<!--/header end--> 
+ 
+<hr class="separation"> 
+ 
+<!--contents start--> 
+ 
+<div id="contents"> 
+ 
+<div id="contents-header"> 
+ 
+<div id="gnavi"> 
+<ul class="mnavi"> 
+<li class="map"><a href="http://map.yahoo.co.jp/"><span>地図</span></a></li> 
+<li class="waiwai"><a href="http://waiwai.map.yahoo.co.jp/"><span>ワイワイマップ</span></a></li> 
+<li class="transit active"><a href="http://transit.map.yahoo.co.jp/"><span>路線</span></a></li> 
+<!--/.mnavi--></ul> 
+<ul class="snavi"> 
+<li class="first"><img src="http://i.yimg.jp/images/clear.gif" alt="" class="mrkrdtr" /><a href="/diaedit/edit">運行情報用路線登録</a></li> 
+<li><img src="http://i.yimg.jp/images/clear.gif" alt="" class="mrkrdtr" /><a href="/stedit/myst">駅の登録</a></li> 
+<!--/.snavi--></ul> 
+<!--/#gnavi--></div> 
+<!--/#main-title end--> 
+ 
+<div id="cat-pass"> 
+<p> 
+<span class="yj-guid">現在位置：</span> 
+<a href="/">トップ</a> &gt; <a href="/station/list">都道府県の選択</a> &gt; <a href="/station/list?pref=1&prefname=北海道">北海道</a> &gt; <a href="/station/station?pref=1&prefname=北海道&company=札幌市交通局&line=南北線">札幌市交通局南北線</a> &gt; <strong>さっぽろ駅</strong></p> 
+</div> 
+<!--/#cat-pass end--> 
+</div><!--/#contents-header end--> 
+ 
+<div id="contents-body"> 
+ 
+<div id="title-topbg"><hr></div> 
+ 
+<div id="m-title"> 
+<h2>さっぽろ駅</h2> 
+<ul> 
+ 
+<li class="search-for"> 
+<dl> 
+<dt>目的地にして探索</dt> 
+<dd> 
+<p><a href="/?to=%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D"><strong>さっぽろ</strong><span class="hidden">を目的地にして探索する</span></a></p> 
+</dd></dl> 
+</li> 
+ 
+<li class="add-regsta"> 
+<dl> 
+<dt>登録駅を追加</dt> 
+<dd> 
+<p><a href="/stedit/edit?station=%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D&done=http%3A%2F%2Ftransit.map.yahoo.co.jp%2Fstation%2Ftime%2F20210%2F%3Fgid%3D1%26kind%3D1%26pref%3D1%26company%3D%25E6%259C%25AD%25E5%25B9%258C%25E5%25B8%2582%25E4%25BA%25A4%25E9%2580%259A%25E5%25B1%2580%26line%3D%25E5%258D%2597%25E5%258C%2597%25E7%25B7%259A%26prefname%3D%25E5%258C%2597%25E6%25B5%25B7%25E9%2581%2593"><strong>さっぽろ</strong><span class="hidden">を登録駅に追加する</span></a></p> 
+</dd> 
+</dl> 
+</li> 
+ 
+</ul> 
+</div> 
+<!--/#m-title end--> 
+ 
+<span class="yj-guid"><a name="contents-start" id="contents-start"></a><img src="http://i.yimg.jp/images/clear.gif" alt="ここから本文です" width="1" height="1"></span> 
+ 
+<!--main start--> 
+<div id="main"> 
+ 
+<div id="station-nav"> 
+<ul class="tab"> 
+<li class="tab01"><h3><a href="http://transit.map.yahoo.co.jp/station/top/20210/?gid=1&kind=1&pref=1&company=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80&line=%E5%8D%97%E5%8C%97%E7%B7%9A&prefname=%E5%8C%97%E6%B5%B7%E9%81%93">駅情報</a></h3></li> 
+<li class="tab02-on"><h3>時刻表</h3></li> 
+<li class="tab03"><h3><a href="http://transit.map.yahoo.co.jp/station/exit/20210/?gid=1&kind=1&pref=1&company=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80&line=%E5%8D%97%E5%8C%97%E7%B7%9A&prefname=%E5%8C%97%E6%B5%B7%E9%81%93">出口案内</a></h3></li> 
+</ul><!-- /.tab --> 
+</div><!-- ./station-nav --> 
+ 
+<div id="line-name"> 
+<h4 style="border-left-color:#9ad05c;"> 
+札幌市営南北線&nbsp;
+<a href="http://transit.map.yahoo.co.jp/station/rail?pref=1&company=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80&line=%E5%8D%97%E5%8C%97%E7%B7%9A&prefname=%E5%8C%97%E6%B5%B7%E9%81%93&st=%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D"><img src="http://i.yimg.jp/images/transit/station/images/btn_linechange.png" alt="路線を変更する" width="109" height="24"></a> 
+</h4> 
+<p> 
+<a href="http://transit.map.yahoo.co.jp/station/print?st=%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D&pref=1&company=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80&line=%E5%8D%97%E5%8C%97%E7%B7%9A&prefname=%E5%8C%97%E6%B5%B7%E9%81%93"><img src="http://i.yimg.jp/images/transit/station/images/btn_toprint.png" alt="印刷用ページへ" width="119" height="24"></a> 
+<a href="http://mtf.yahoo.co.jp/mailto?prop=mobile&locale=jp&url=http%3A%2F%2Ftrans.mobile.yahoo.co.jp%2Fp%2Ftransit%2Ftimetable%2Ftime%3Fst%3D%2582%25B3%2582%25C1%2582%25DB%2582%25EB%26kind%3D1%26group%3DTrue%26gid%3D1&title=Yahoo%21%CF%A9%C0%FE%BE%F0%CA%F3+-+%BB%A5%CB%DA%BB%D4%B1%C4%C6%EE%CB%CC%C0%FE+%A4%B5%A4%C3%A4%DD%A4%ED%A4%CE%BB%FE%B9%EF%C9%BD&h1=http%3A%2F%2Ftransit.map.yahoo.co.jp%2Fstation%2Ftime%2F20210%2F%3Fgid%3D1%26kind%3D1%26pref%3D1%26company%3D%25E6%259C%25AD%25E5%25B9%258C%25E5%25B8%2582%25E4%25BA%25A4%25E9%2580%259A%25E5%25B1%2580%26line%3D%25E5%258D%2597%25E5%258C%2597%25E7%25B7%259A%26prefname%3D%25E5%258C%2597%25E6%25B5%25B7%25E9%2581%2593&h5=0"><img src="http://i.yimg.jp/images/transit/station/images/btn_sendmail.png" alt="ケータイに送る" width="116" height="24"></a> 
+</p> 
+ 
+</div><!-- /#line-name --> 
+ 
+<div id="timetable"> 
+<ul class="tab"> 
+<li class="tab-on"><h5>麻生方面</h5></li> 
+<li><h5><a href="http://transit.map.yahoo.co.jp/station/time/20210/?pref=1&amp;company=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80&amp;line=%E5%8D%97%E5%8C%97%E7%B7%9A&amp;prefname=%E5%8C%97%E6%B5%B7%E9%81%93&gid=2&kind=1">自衛隊前・真駒内方面</a></h5></li> 
+</ul><!-- /.tab --> 
+ 
+<p class="notes"><a href="#notes">※印とマークの意味</a></p> 
+ 
+<table summary="札幌市営南北線 麻生の時刻表です。" cellspacing="0" border="0"> 
+<caption>札幌市営南北線 麻生の時刻表</caption> 
+ 
+<col class="col1"> 
+<col class="col2"> 
+ 
+<thead> 
+<tr> 
+<th scope="col" class="col1">時</th> 
+<th scope="col" class="col2"> 
+<ul class="tab"> 
+<li class="tab01-on">平日</li> 
+<li class="tab02"><a href="http://transit.map.yahoo.co.jp/station/time/20210/?pref=1&amp;company=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80&amp;line=%E5%8D%97%E5%8C%97%E7%B7%9A&amp;prefname=%E5%8C%97%E6%B5%B7%E9%81%93&gid=1&kind=2">土曜</a></li> 
+<li class="tab03"><a href="http://transit.map.yahoo.co.jp/station/time/20210/?pref=1&amp;company=%E6%9C%AD%E5%B9%8C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80&amp;line=%E5%8D%97%E5%8C%97%E7%B7%9A&amp;prefname=%E5%8C%97%E6%B5%B7%E9%81%93&gid=1&kind=4">日曜・祝日</a></li> 
+</ul></th> 
+</tr> 
+</thead> 
+ 
+<tfoot> 
+<tr> 
+<td colspan="2" class="legend"> 
+ 
+<dl id="notes"><dt>行き先・経由</dt><dd><dl><dt>無印：</dt><dd>麻生</dd></dl> 
+</dd></dl> 
+</td> 
+</tr> 
+</tfoot> 
+ 
+<tbody> 
+<tr> 
+<td class="col1">6</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>17</dt></dl> 
+<dl style="no-dd"><dt>27</dt></dl> 
+<dl style="no-dd"><dt>38</dt></dl> 
+<dl style="no-dd"><dt>48</dt></dl> 
+<dl style="no-dd"><dt>55</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">7</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>2</dt></dl> 
+<dl style="no-dd"><dt>9</dt></dl> 
+<dl style="no-dd"><dt>16</dt></dl> 
+<dl style="no-dd"><dt>22</dt></dl> 
+<dl style="no-dd"><dt>26</dt></dl> 
+<dl style="no-dd"><dt>30</dt></dl> 
+<dl style="no-dd"><dt>34</dt></dl> 
+<dl style="no-dd"><dt>38</dt></dl> 
+<dl style="no-dd"><dt>42</dt></dl> 
+<dl style="no-dd"><dt>46</dt></dl> 
+<dl style="no-dd"><dt>50</dt></dl> 
+<dl style="no-dd"><dt>54</dt></dl> 
+<dl style="no-dd"><dt>58</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">8</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>2</dt></dl> 
+<dl style="no-dd"><dt>6</dt></dl> 
+<dl style="no-dd"><dt>10</dt></dl> 
+<dl style="no-dd"><dt>14</dt></dl> 
+<dl style="no-dd"><dt>18</dt></dl> 
+<dl style="no-dd"><dt>22</dt></dl> 
+<dl style="no-dd"><dt>26</dt></dl> 
+<dl style="no-dd"><dt>30</dt></dl> 
+<dl style="no-dd"><dt>34</dt></dl> 
+<dl style="no-dd"><dt>38</dt></dl> 
+<dl style="no-dd"><dt>42</dt></dl> 
+<dl style="no-dd"><dt>46</dt></dl> 
+<dl style="no-dd"><dt>50</dt></dl> 
+<dl style="no-dd"><dt>54</dt></dl> 
+<dl style="no-dd"><dt>58</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">9</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>2</dt></dl> 
+<dl style="no-dd"><dt>9</dt></dl> 
+<dl style="no-dd"><dt>17</dt></dl> 
+<dl style="no-dd"><dt>23</dt></dl> 
+<dl style="no-dd"><dt>29</dt></dl> 
+<dl style="no-dd"><dt>36</dt></dl> 
+<dl style="no-dd"><dt>42</dt></dl> 
+<dl style="no-dd"><dt>49</dt></dl> 
+<dl style="no-dd"><dt>56</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">10</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>2</dt></dl> 
+<dl style="no-dd"><dt>8</dt></dl> 
+<dl style="no-dd"><dt>15</dt></dl> 
+<dl style="no-dd"><dt>21</dt></dl> 
+<dl style="no-dd"><dt>28</dt></dl> 
+<dl style="no-dd"><dt>34</dt></dl> 
+<dl style="no-dd"><dt>40</dt></dl> 
+<dl style="no-dd"><dt>47</dt></dl> 
+<dl style="no-dd"><dt>53</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">11</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>0</dt></dl> 
+<dl style="no-dd"><dt>6</dt></dl> 
+<dl style="no-dd"><dt>12</dt></dl> 
+<dl style="no-dd"><dt>19</dt></dl> 
+<dl style="no-dd"><dt>25</dt></dl> 
+<dl style="no-dd"><dt>32</dt></dl> 
+<dl style="no-dd"><dt>38</dt></dl> 
+<dl style="no-dd"><dt>44</dt></dl> 
+<dl style="no-dd"><dt>51</dt></dl> 
+<dl style="no-dd"><dt>57</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">12</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>4</dt></dl> 
+<dl style="no-dd"><dt>10</dt></dl> 
+<dl style="no-dd"><dt>16</dt></dl> 
+<dl style="no-dd"><dt>23</dt></dl> 
+<dl style="no-dd"><dt>29</dt></dl> 
+<dl style="no-dd"><dt>36</dt></dl> 
+<dl style="no-dd"><dt>42</dt></dl> 
+<dl style="no-dd"><dt>48</dt></dl> 
+<dl style="no-dd"><dt>55</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">13</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>1</dt></dl> 
+<dl style="no-dd"><dt>8</dt></dl> 
+<dl style="no-dd"><dt>14</dt></dl> 
+<dl style="no-dd"><dt>20</dt></dl> 
+<dl style="no-dd"><dt>27</dt></dl> 
+<dl style="no-dd"><dt>33</dt></dl> 
+<dl style="no-dd"><dt>40</dt></dl> 
+<dl style="no-dd"><dt>46</dt></dl> 
+<dl style="no-dd"><dt>52</dt></dl> 
+<dl style="no-dd"><dt>59</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">14</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>5</dt></dl> 
+<dl style="no-dd"><dt>12</dt></dl> 
+<dl style="no-dd"><dt>18</dt></dl> 
+<dl style="no-dd"><dt>24</dt></dl> 
+<dl style="no-dd"><dt>31</dt></dl> 
+<dl style="no-dd"><dt>37</dt></dl> 
+<dl style="no-dd"><dt>44</dt></dl> 
+<dl style="no-dd"><dt>50</dt></dl> 
+<dl style="no-dd"><dt>56</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">15</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>3</dt></dl> 
+<dl style="no-dd"><dt>9</dt></dl> 
+<dl style="no-dd"><dt>15</dt></dl> 
+<dl style="no-dd"><dt>22</dt></dl> 
+<dl style="no-dd"><dt>28</dt></dl> 
+<dl style="no-dd"><dt>34</dt></dl> 
+<dl style="no-dd"><dt>41</dt></dl> 
+<dl style="no-dd"><dt>47</dt></dl> 
+<dl style="no-dd"><dt>53</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">16</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>0</dt></dl> 
+<dl style="no-dd"><dt>6</dt></dl> 
+<dl style="no-dd"><dt>13</dt></dl> 
+<dl style="no-dd"><dt>19</dt></dl> 
+<dl style="no-dd"><dt>25</dt></dl> 
+<dl style="no-dd"><dt>32</dt></dl> 
+<dl style="no-dd"><dt>38</dt></dl> 
+<dl style="no-dd"><dt>42</dt></dl> 
+<dl style="no-dd"><dt>48</dt></dl> 
+<dl style="no-dd"><dt>53</dt></dl> 
+<dl style="no-dd"><dt>59</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">17</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>4</dt></dl> 
+<dl style="no-dd"><dt>10</dt></dl> 
+<dl style="no-dd"><dt>14</dt></dl> 
+<dl style="no-dd"><dt>19</dt></dl> 
+<dl style="no-dd"><dt>24</dt></dl> 
+<dl style="no-dd"><dt>30</dt></dl> 
+<dl style="no-dd"><dt>35</dt></dl> 
+<dl style="no-dd"><dt>40</dt></dl> 
+<dl style="no-dd"><dt>46</dt></dl> 
+<dl style="no-dd"><dt>51</dt></dl> 
+<dl style="no-dd"><dt>56</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">18</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>2</dt></dl> 
+<dl style="no-dd"><dt>7</dt></dl> 
+<dl style="no-dd"><dt>12</dt></dl> 
+<dl style="no-dd"><dt>18</dt></dl> 
+<dl style="no-dd"><dt>23</dt></dl> 
+<dl style="no-dd"><dt>28</dt></dl> 
+<dl style="no-dd"><dt>34</dt></dl> 
+<dl style="no-dd"><dt>39</dt></dl> 
+<dl style="no-dd"><dt>44</dt></dl> 
+<dl style="no-dd"><dt>50</dt></dl> 
+<dl style="no-dd"><dt>55</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">19</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>0</dt></dl> 
+<dl style="no-dd"><dt>6</dt></dl> 
+<dl style="no-dd"><dt>11</dt></dl> 
+<dl style="no-dd"><dt>16</dt></dl> 
+<dl style="no-dd"><dt>22</dt></dl> 
+<dl style="no-dd"><dt>27</dt></dl> 
+<dl style="no-dd"><dt>33</dt></dl> 
+<dl style="no-dd"><dt>39</dt></dl> 
+<dl style="no-dd"><dt>45</dt></dl> 
+<dl style="no-dd"><dt>53</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">20</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>1</dt></dl> 
+<dl style="no-dd"><dt>9</dt></dl> 
+<dl style="no-dd"><dt>17</dt></dl> 
+<dl style="no-dd"><dt>25</dt></dl> 
+<dl style="no-dd"><dt>33</dt></dl> 
+<dl style="no-dd"><dt>41</dt></dl> 
+<dl style="no-dd"><dt>49</dt></dl> 
+<dl style="no-dd"><dt>56</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">21</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>4</dt></dl> 
+<dl style="no-dd"><dt>12</dt></dl> 
+<dl style="no-dd"><dt>19</dt></dl> 
+<dl style="no-dd"><dt>27</dt></dl> 
+<dl style="no-dd"><dt>35</dt></dl> 
+<dl style="no-dd"><dt>43</dt></dl> 
+<dl style="no-dd"><dt>51</dt></dl> 
+<dl style="no-dd"><dt>59</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">22</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>6</dt></dl> 
+<dl style="no-dd"><dt>14</dt></dl> 
+<dl style="no-dd"><dt>22</dt></dl> 
+<dl style="no-dd"><dt>30</dt></dl> 
+<dl style="no-dd"><dt>38</dt></dl> 
+<dl style="no-dd"><dt>46</dt></dl> 
+<dl style="no-dd"><dt>54</dt></dl> 
+</td> 
+</tr> 
+<tr class="even"> 
+<td class="col1">23</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>3</dt></dl> 
+<dl style="no-dd"><dt>13</dt></dl> 
+<dl style="no-dd"><dt>22</dt></dl> 
+<dl style="no-dd"><dt>32</dt></dl> 
+<dl style="no-dd"><dt>42</dt></dl> 
+<dl style="no-dd"><dt>51</dt></dl> 
+</td> 
+</tr> 
+<tr> 
+<td class="col1">24</td> 
+<td class="col2"> 
+<dl style="no-dd"><dt>1</dt></dl> 
+<dl style="no-dd"><dt>9</dt></dl> 
+<dl style="no-dd"><dt>17</dt></dl> 
+</td> 
+</tr> 
+ 
+</tbody> 
+ 
+</table> 
+ 
+</div> 
+ 
+<!--/#timetable--> 
+ 
+<div id="attention"> 
+<dl> 
+<dt><a href="http://help.yahoo.co.jp/help/jp/transit/transit-63.html" target="transit_help">時刻表に関するご注意</a></dt> 
+<dd><ul> 
+<li>JR時刻表は平成22年09月01日現在のものです。</li> 
+<li>私鉄時刻表は平成22年09月06日現在のものです。</li> 
+</ul> 
+</dd> 
+</dl> 
+</div> 
+ 
+<!--pos-SQB start--> 
+<!-- prefix --> 
+<div id="pos-sqb"> 
+<!-- /prefix --> 
+<div style="margin:5px 0 10px;">
+<p style="margin:0;padding:.3em;text-align:center;font-size:12px;">PR</p>
+<div style="margin:0 auto;padding:0;text-align:center;">
+<a href="http://ard.yahoo.co.jp/SIG=159u37em0/M=300504746.301296829.302802274.304672415/D=jp_transit/S=2079586083:SQB/Y=jp/EXP=1283310638/L=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR/B=pdzkAHxTyA4-/J=1283303438010420/A=301222076/SIG=129qrslc9/R=0/*http://ac.ebis.ne.jp/tr_set.php?argument=PK9kaR4Y&ai=a4c72605a2e1a3" target="_top"><img src="http://ai.yimg.jp/bdv/30/877747/20100830/hbtognua8avjnebkvxo6-a.jpg" width="490" height="160" border="0"></a>
+</div>
+</div><script language=javascript> 
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['pdzkAHxTyA4-']='&U=13jum7bh0%2fN%3dpdzkAHxTyA4-%2fC%3d300504746.301296829.302802274.304672415%2fD%3dSQB%2fB%3d301222076';
+</script><noscript><div style="position:absolute;"><img width=1 height=1 alt="" src="http://b6.yahoo.co.jp/b?P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=142982v83%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3djp%2fF%3d699491059%2fQ%3d-1%2fS%3d1%2fJ%3d16C9537C&U=13jum7bh0%2fN%3dpdzkAHxTyA4-%2fC%3d300504746.301296829.302802274.304672415%2fD%3dSQB%2fB%3d301222076"></div></noscript><!-- suffix --> 
+</div> 
+<!-- /suffix --> 
+ 
+<!--pos-SQB end--> 
+<!--/#pos-sqb end--> 
+ 
+</div><!--/#main end--> 
+<!--/main end--> 
+ 
+ 
+<!--sub start--> 
+<div id="sub"> 
+<hr class="separation"> 
+ 
+<!--pos-LREC start--> 
+<!-- prefix --> 
+<div id="pos-lrec"><dl><dt>PR</dt><dd> 
+<!-- /prefix --> 
+<script language="JavaScript">
+var YFAtr_id = "301222339&jtime=1283303438";
+var YFAcheckImgSize = "17.08#233";
+var YFAtarget;
+try{eval('YFAtarget="_top"');}catch(e){YFAtarget="_top";};
+var YFAlink = "http://ard.yahoo.co.jp/SIG=15avr0h9l/M=300511697.301308017.302802389.301291789/D=jp_transit/S=2079586083:LREC/Y=jp/EXP=1283310638/L=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR/B=ptzkAHxTyA4-/J=1283303438010420/A=301222339/SIG=1135on3a7/R=0/*http://chinamall.yahoo.co.jp/";
+var YFAaltlink = "http://ard.yahoo.co.jp/SIG=15avr0h9l/M=300511697.301308017.302802389.301291789/D=jp_transit/S=2079586083:LREC/Y=jp/EXP=1283310638/L=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR/B=ptzkAHxTyA4-/J=1283303438010420/A=301222339/SIG=113cugj6m/R=1/*http://chinamall.yahoo.co.jp/";
+if(YFAlink.indexOf("ace%")!=-1&&window.location.href.indexOf("http")!=-1) {YFAlink="";YFAtarget="";}
+if(YFAlink!=""){YFAlink=escape(YFAlink);YFAtarget=escape(YFAtarget);}
+var YFAdate = new Date();
+var YFAimgParam = YFAdate.getFullYear()+ '.' + YFAdate.getMonth() + '.' + YFAdate.getDate() + '.' + YFAdate.getHours() + '.' + YFAdate.getMinutes() + '.' + YFAdate.getSeconds()+ '.' + YFAdate.getMilliseconds();
+var YFAvflash = "http://ah.yimg.jp/bdv/1001317/884617/20100830/xdjvaseugkzu5fryfy6h-c.swf";
+var YFAmflash = "http://ah.yimg.jp/bdv/1001317/884617/20100830/xdjvaseugkzu5fryfy6h-b.swf";
+var YFAaltimg = "http://ah.yimg.jp/bdv/1001317/884617/20100830/xdjvaseugkzu5fryfy6h-a.jpg";
+var YFAwidth = 300;
+var YFAheight = 250;
+</script>
+<script language="JavaScript" src="http://ai.yimg.jp/bdv/yahoo/javascript/yfa_visual4_v8.js">
+</script>
+<noscript>
+<a href="http://ard.yahoo.co.jp/SIG=15avr0h9l/M=300511697.301308017.302802389.301291789/D=jp_transit/S=2079586083:LREC/Y=jp/EXP=1283310638/L=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR/B=ptzkAHxTyA4-/J=1283303438010420/A=301222339/SIG=113ioqsco/R=2/*http://chinamall.yahoo.co.jp/" target="_top">
+<img src="http://ah.yimg.jp/bdv/1001317/884617/20100830/xdjvaseugkzu5fryfy6h-a.jpg" width="300" height="250" border="0">
+</a>
+</noscript><script language=javascript> 
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['ptzkAHxTyA4-']='&U=13k6d9p8l%2fN%3dptzkAHxTyA4-%2fC%3d300511697.301308017.302802389.301291789%2fD%3dLREC%2fB%3d301222339';
+</script><noscript><div style="position:absolute;"><img width=1 height=1 alt="" src="http://b6.yahoo.co.jp/b?P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=143skhjdv%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3djp%2fF%3d1110978526%2fQ%3d-1%2fS%3d1%2fJ%3d16C9537C&U=13k6d9p8l%2fN%3dptzkAHxTyA4-%2fC%3d300511697.301308017.302802389.301291789%2fD%3dLREC%2fB%3d301222339"></div></noscript><!-- suffix --> 
+</dd></dl></div> 
+<!-- /suffix --> 
+ 
+<!--pos-LREC end--> 
+ 
+<div id="mobile2"> 
+<dl> 
+<dt>ケータイでもYahoo!路線情報</dt> 
+<dd class="clm-l"><a href="http://transit.map.yahoo.co.jp/mobile/promo/"><img src="http://qrgen.mobile.yahoo.co.jp/s?p=mtf&u=http%3A%2F%2Ftrans.mobile.yahoo.co.jp%2Fp%2Ftransit%2Ftimetable%2Ftime%3Fst%3D%2582%25B3%2582%25C1%2582%25DB%2582%25EB%26kind%3D1%26group%3DTrue%26gid%3D1" width="74" height="74" alt="バーコード モバイル版Yahoo!路線情報にアクセス！"></a></dd> 
+<dd class="clm-r">バーコードリーダー機能搭載の携帯電話で左のバーコードを読み取ると、モバイル版の時刻表にアクセスできます。 </dd> 
+</dl> 
+</div><!--/#mobile2 end--> 
+ 
+<div id="weather"> 
+<dl> 
+<dt>石狩地方（札幌）の天気</dt> 
+<dd> 
+  <dl> 
+  <dt>今日</dt> 
+  <dd>9月1日（水）</dd> 
+  <dd> 
+    <a href="http://rd.yahoo.co.jp/transit/station/weather/*http://weather.yahoo.co.jp/weather/jp/1b/1400.html#week"><img src="http://i.yimg.jp/images/weather/general/forcast/clouds_sun_af.gif" alt="曇後晴" border="0"></a> 
+  </dd> 
+  <dd>曇後晴</dd> 
+  <dd>40％</dd> 
+  </dl> 
+  <dl> 
+  <dt>明日</dt> 
+  <dd>9月2日（木）</dd> 
+  <dd> 
+    <a href="http://rd.yahoo.co.jp/transit/station/weather/*http://weather.yahoo.co.jp/weather/jp/1b/1400.html#week"><img src="http://i.yimg.jp/images/weather/general/forcast/sun_clouds_st.gif" alt="晴時々曇" border="0"></a> 
+  </dd> 
+  <dd>晴時々曇</dd> 
+  <dd>0％</dd> 
+  </dl> 
+  <dl> 
+  <dt>明後日</dt> 
+  <dd>9月3日（金）</dd> 
+  <dd> 
+    <a href="http://rd.yahoo.co.jp/transit/station/weather/*http://weather.yahoo.co.jp/weather/jp/1b/1400.html#week"><img src="http://i.yimg.jp/images/weather/general/forcast/clouds_rain_af.gif" alt="曇後雨" border="0"></a> 
+  </dd> 
+  <dd>曇後雨</dd> 
+  <dd>80％</dd> 
+  </dl> 
+</dd> 
+</dl> 
+<p><img height="16" width="16" title="Yahoo!天気情報" alt="Yahoo!天気情報" src="http://i.yimg.jp/images/sicons/weather16.gif"/><a href="http://rd.yahoo.co.jp/transit/station/weather/*http://weather.yahoo.co.jp/weather/jp/1b/1400.html#week">週間の天気を見る</a></p> 
+</div> 
+<!--/#weather end--> 
+ 
+<div id="useful2"> 
+  <dl> 
+    <dt>さっぽろ駅のお役立ちリンク</dt> 
+    <dd> 
+      <ul class="clm-l"> 
+        <li class="gourmet" title="Yahoo!グルメ"><a href="http://rd.yahoo.co.jp/transit/station/gourmet/*http://gourmet.yahoo.co.jp/restaurant/shoplist.html?md=9&lat=43.3.49.39&lon=141.21.15.69&spn=%A4%B5%A4%C3%A4%DD%A4%ED&krs=3">飲食店</a></li> 
+        <li class="maps" title="Yahoo!地図"><a href="http://rd.yahoo.co.jp/transit/station/maps/*http://map.yahoo.co.jp/pl?z=16&datum=tky&lat=43.06371944&lon=141.35435833">地図</a></li> 
+        <li class="travel" title="Yahoo!トラベル"><a href="http://rd.yahoo.co.jp/transit/station/travel/*http://domestic.hotel.travel.yahoo.co.jp/bin/eki_slist?d=2&date=&ekicode=20210">宿泊施設</a></li> 
+        <li class="health" title="Yahoo!ヘルスケア"><a href="http://rd.yahoo.co.jp/transit/station/health/*http://health.yahoo.co.jp/hospital/list.html?stationCode=20210&kenCode=01">病院情報</a></li> 
+        <li class="maps" title="Yahoo!地図"><a href="http://rd.yahoo.co.jp/transit/station/maps/*http://map.yahoo.co.jp/pl?z=16&datum=tky&lat=43.06371944&lon=141.35435833&dist=1&fa=as&type=text&ei=utf-8&p=%E3%82%BF%E3%82%AF%E3%82%B7%E3%83%BC">タクシー</a></li> 
+      </ul> 
+      <ul class="clm-r"> 
+        <li class="coupon" title="Yahoo!クーポン"><a href="http://rd.yahoo.co.jp/transit/station/coupon/*http://coupons.yahoo.co.jp/search_location/?lat=43.06371944&lon=141.35435833&dist=1000&place=%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D">クーポン</a></li> 
+        <li class="yrikunabi" title="Yahoo!リクナビ"><a href="http://rd.yahoo.co.jp/transit/station/froma/*http://rikunabi.yahoo.co.jp/arbeit/map/?lat=43.06371944&lon=141.35435833">アルバイト</a></li> 
+        <li class="knowledge" title="Yahoo!知恵袋"><a href="http://rd.yahoo.co.jp/transit/station/chiebukuro/list/*http://search.chiebukuro.yahoo.co.jp/search/search.php?p=%E3%81%95%E3%81%A3%E3%81%BD%E3%82%8D%E9%A7%85&flg=3">知恵袋</a></li> 
+        <li class="beauty" title="Yahoo!ビューティ"><a href="http://rd.yahoo.co.jp/transit/station/beauty/*http://salon.yahoo.co.jp/salon/search/?pr=01&st=0120210">サロン情報</a></li> 
+        <li class="maps" title="Yahoo!地図"><a href="http://rd.yahoo.co.jp/transit/station/maps/*http://map.yahoo.co.jp/pl?z=16&datum=tky&lat=43.06371944&lon=141.35435833&dist=1&fa=as&type=text&ei=utf-8&p=%E9%A7%90%E8%BC%AA%E5%A0%B4">駐輪場</a></li> 
+      </ul> 
+    </dd> 
+  </dl> 
+</div> 
+<!--/#useful2--> 
+ 
+<div id="useful3"> 
+  <dl> 
+    <dt>札幌市中央区のお役立ちリンク</dt> 
+    <dd> 
+      <ul class="clm-l"> 
+        <li class="getlocal" title="Yahoo!地域情報"><a href="http://rd.yahoo.co.jp/transit/station/local/*http://local.yahoo.co.jp/top/01101/">地域情報</a></li> 
+        <li class="news" title="Yahoo!ニュース"><a href="http://rd.yahoo.co.jp/transit/station/news/*http://headlines.yahoo.co.jp/hl?c=hok">北海道のニュース</a></li> 
+      </ul> 
+      <ul class="clm-r"> 
+        <li class="chirashi" title="Yahoo!チラシ"><a href="http://rd.yahoo.co.jp/transit/station/chirashi/*http://chirashi.yahoo.co.jp/list/arealist.html?flg=3&si=3&sk=01101">チラシ情報</a></li> 
+        <li class="realestate" title="Yahoo!不動産"><a href="http://rd.yahoo.co.jp/transit/station/realestate/*http://new.realestate.yahoo.co.jp/mansion/01/area/search/01/01101/">新築マンション</a></li> 
+      </ul> 
+    </dd> 
+  </dl> 
+</div> 
+<!--/#useful3--> 
+ 
+<!--pos-YSQM start--> 
+<!-- SpaceID=2079586083 loc=YSQM noad --> 
+<script language=javascript> 
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['p9zkAHxTyA4-']='&U=12854d5ss%2fN%3dp9zkAHxTyA4-%2fC%3d-1%2fD%3dYSQM%2fB%3d-1';
+</script><noscript><div style="position:absolute;"><img width=1 height=1 alt="" src="http://b6.yahoo.co.jp/b?P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=14343kelk%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3djp%2fF%3d1931625579%2fQ%3d-1%2fS%3d1%2fJ%3d16C9537C&U=12854d5ss%2fN%3dp9zkAHxTyA4-%2fC%3d-1%2fD%3dYSQM%2fB%3d-1"></div></noscript> 
+<!--pos-YSQM end--> 
+ 
+<!--pos-EUP start--> 
+<!-- SpaceID=2079586083 loc=EUP noad --> 
+<script language=javascript> 
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['qNzkAHxTyA4-']='&U=12719skgi%2fN%3dqNzkAHxTyA4-%2fC%3d-1%2fD%3dEUP%2fB%3d-1';
+</script><noscript><div style="position:absolute;"><img width=1 height=1 alt="" src="http://b6.yahoo.co.jp/b?P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=142aqaco8%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3djp%2fF%3d768465041%2fQ%3d-1%2fS%3d1%2fJ%3d16C9537C&U=12719skgi%2fN%3dqNzkAHxTyA4-%2fC%3d-1%2fD%3dEUP%2fB%3d-1"></div></noscript> 
+<!--pos-EUP end--> 
+ 
+</div><!--/#sub end--> 
+ 
+<!--/sub end--> 
+ 
+ 
+</div><!--/#contents-body end--> 
+ 
+<div id="contents-footer"> 
+<span class="yj-guid"><img src="http://i.yimg.jp/images/clear.gif" width="1" height="1" alt="本文はここまでです"></span> 
+<span class="yj-skip"> 
+<a href="#pagetop"><img src="http://i.yimg.jp/images/clear.gif" alt="このページの先頭へ" width="1" height="1"></a></span> 
+</div><!--/#contents-footer end--> 
+</div><!--/#contents end--> 
+<!--/contents end--> 
+ 
+ 
+<hr class="separation"> 
+ 
+<!--footer start--> 
+<div id="footer"> 
+<!--pos-S8 start--> 
+<!-- prefix --> 
+<div id="pos-s"> 
+<!-- /prefix --> 
+<style type="text/css">#uftMain, #uftMain *{float:none;clear:none;margin:0px;padding:0px;border:0 solid;font-size:12pt;font-weight:normal;font-style:normal;line-height:100%;text-indent:0px;letter-spacing:0px;word-spacing:0px;text-transform:none;vertical-align:baseline;}</style>
+<div id="uftMain" style="width:100%;text-align:center;height:27px;padding:3px 0 0 0;"><div style="position:relative;width:386px;height:21px;margin:0 auto;background-image:url(http://ai.yimg.jp/yui/jp/uft/1.0.0/img/utfChnk.png);background-repeat:no-repeat;text-align:left;">
+<form action="http://search.yahoo.co.jp/search" name="p" target="uhd"><p><label for="uftSBox" title="Yahoo! JAPAN" style="position:absolute;top:6px;left:0px;width:28px;height:15px;text-indent:-9999px;">Yahoo! JAPAN</label><input id="uftSBox" name="p" value="" type="text" style="position:absolute;top:4px;left:35px;width:274px;height:15px;padding-right:1px;padding-left:1px;border:0 solid;font-size:12px;line-height:14px;outline:none;"><button type="submit" title="ウェブ検索" style="position:absolute;top:0;left:313px;width:73px;height:21px;border:0 solid;background-position:-313px 0;background-image:url(http://ai.yimg.jp/yui/jp/uft/1.0.0/img/utfChnk.png);font-size:1px;text-indent:-9999px;cursor:pointer;cursor:hand;">ウェブ検索</button><input type=hidden name="ei" value="UTF-8"><input type="hidden" name="fr" value="usf"></p></form></div></div>
+<!-- http://ard.yahoo.co.jp/SIG=1584fl5i6/M=300341785.301176092.302677767.302953375/D=jp_transit/S=2079586083:S8/Y=jp/EXP=1283310638/L=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR/B=qdzkAHxTyA4-/J=1283303438010420/A=301025799/SIG=10toctuil/R=0/?http://www.yahoo.co.jp/ --><script language=javascript> 
+if(window.yzq_d==null)window.yzq_d=new Object();
+window.yzq_d['qdzkAHxTyA4-']='&U=13iktp4p7%2fN%3dqdzkAHxTyA4-%2fC%3d300341785.301176092.302677767.302953375%2fD%3dS8%2fB%3d301025799';
+</script><noscript><div style="position:absolute;"><img width=1 height=1 alt="" src="http://b6.yahoo.co.jp/b?P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=14240thaj%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d2.1%2fW%3dH%2fY%3djp%2fF%3d758251852%2fQ%3d-1%2fS%3d1%2fJ%3d16C9537C&U=13iktp4p7%2fN%3dqdzkAHxTyA4-%2fC%3d300341785.301176092.302677767.302953375%2fD%3dS8%2fB%3d301025799"></div></noscript><!-- suffix --> 
+</div> 
+<!-- /suffix --> 
+ 
+<!--pos-S8 end--> 
+<address><a href="http://docs.yahoo.co.jp/docs/info/terms/chapter1.html#cf2nd">プライバシーポリシー</a> - <a href="http://docs.yahoo.co.jp/docs/info/terms/">利用規約</a> - <a href="http://help.yahoo.co.jp/help/jp/transit/">ヘルプ・お問い合わせ</a> - <a href="http://help.yahoo.co.jp/help/jp/transit/transit-28.html">免責事項</a> - <a href="http://ms.yahoo.co.jp/bin/yadv-info/feedback">ご意見・ご要望</a><br> 
+Copyright (C) 2010 VAL LABORATORY Corporation. All Rights Reserved.<br> 
+弘承 平成13年77号 ＪＲデータの内容は、株式会社交通新聞社発行の「JR時刻表」平成22年9月号に基づいています。<br /> 
+この時刻データを無断転載・複写や電磁媒体等に加工することを禁じます。<br /> 
+Copyright (C) 2010 Yahoo Japan Corporation. All Rights Reserved.
+</address> 
+ 
+ 
+</div><!--/#footer end--> 
+<!--/footer end--> 
+ 
+</div><!--/#wrapper end--> 
+<!--/wrapper end--> 
+ 
+</body> 
+</html> 
+<script language=javascript> 
+if(window.yzq_p==null)document.write("<scr"+"ipt language=javascript src=http://ai.yimg.jp/bdv/yahoo/javascript/csc/20060824/lib2obf_b6.js></scr"+"ipt>");
+</script><script language=javascript> 
+if(window.yzq_p)yzq_p('P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=13s3e2oam%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d1.1%2fW%3dJ%2fY%3djp%2fF%3d51014563%2fS%3d1%2fJ%3d16C9537C');
+if(window.yzq_s)yzq_s();
+</script><noscript><div style="position:absolute;"><img width=1 height=1 alt="" src="http://b6.yahoo.co.jp/b?P=lSRD3nxTy_DO7okfSRPRcw_V22WnIkx9qA0AC4uR&T=143ijn8k9%2fX%3d1283303438%2fE%3d2079586083%2fR%3djp_transit%2fK%3d5%2fV%3d3.1%2fW%3dJ%2fY%3djp%2fF%3d4062389538%2fQ%3d-1%2fS%3d1%2fJ%3d16C9537C"></div></noscript> 
+<!-- fe23.transit.ogk.yahoo.co.jp compressed/chunked Wed Sep  1 10:10:37 JST 2010 --> 

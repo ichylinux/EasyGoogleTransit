@@ -17,23 +17,13 @@
  */
 package jp.co.hybitz.stationapi;
 
-import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Searcher;
 import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public interface StationApiSearcher {
-
-    /**
-     * SimpleApi最寄り駅Webサービスを利用して最寄駅を検索します。
-     * <br/>
-     * nullを返すことはありません。
-     * 
-     * @param query
-     * @return
-     * @throws HttpSearchException
-     */
-    public StationApiResult search(StationApiQuery query) throws HttpSearchException;
+public interface StationApiSearcher extends Searcher<StationApiQuery, StationApiResult> {
+    public static final String STATION_API_URL = "http://map.simpleapi.net/stationapi";
 }

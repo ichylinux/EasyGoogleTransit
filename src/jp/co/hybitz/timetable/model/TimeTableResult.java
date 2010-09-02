@@ -15,12 +15,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay;
+package jp.co.hybitz.timetable.model;
 
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public interface GooConst {
-    public static final String GOO_TRAVEL_URL = "http://transit.goo.ne.jp/";
-    public static final String GOO_TRAVEL_DELAY_URL = GOO_TRAVEL_URL + "unkou/index.html";
+import java.util.ArrayList;
+import java.util.List;
+
+import jp.co.hybitz.common.HttpResponse;
+
+public class TimeTableResult extends HttpResponse {
+    private List<Area> areas = new ArrayList<Area>();
+    
+    public void addArea(Area area) {
+        areas.add(area);
+    }
+    
+    public List<Area> getAreas() {
+        return areas;
+    }
 }

@@ -44,7 +44,7 @@ public class RGeocodeSearcher20100826 implements RGeocodeSearcher, RGeocodeConst
 	    HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
 	    try {
-            RGeocodeResult result = response.isOK() ? createParser().parse(response.getInputStream()) : new RGeocodeResult();
+            RGeocodeResult result = response.isOK() ? createParser().parse(response.getInputStream(), null) : new RGeocodeResult();
             result.setResponseCode(response.getResponseCode());
             result.setRawResponse(response.getRawResponse());
             result.setGeoLocation(query.getGeoLocation());
@@ -55,7 +55,7 @@ public class RGeocodeSearcher20100826 implements RGeocodeSearcher, RGeocodeConst
         }
     }
 
-	private Parser<RGeocodeResult> createParser() {
+	private Parser<RGeocodeQuery, RGeocodeResult> createParser() {
 		return new RGeocodeParser20100826(platform);
 	}
 	

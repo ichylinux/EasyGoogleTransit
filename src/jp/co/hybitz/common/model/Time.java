@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.model;
+package jp.co.hybitz.common.model;
 
 import java.io.Serializable;
 

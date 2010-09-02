@@ -27,10 +27,9 @@ import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
 import jp.co.hybitz.common.StringUtils;
-import jp.co.hybitz.googletransit.GoogleConst;
+import jp.co.hybitz.common.model.Time;
 import jp.co.hybitz.googletransit.TransitSearcher;
 import jp.co.hybitz.googletransit.TransitUtil;
-import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
@@ -39,7 +38,7 @@ import jp.co.hybitz.googletransit.parser.MobileParser20100827;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileSearcher20100827 implements TransitSearcher, GoogleConst {
+public class MobileSearcher20100827 implements TransitSearcher {
 	
 	private Platform platform;
 	
@@ -69,7 +68,7 @@ public class MobileSearcher20100827 implements TransitSearcher, GoogleConst {
     /**
      * @see jp.co.hybitz.common.Searcher#createParser()
      */
-    public Parser<TransitResult> createParser() {
+    public Parser<TransitQuery, TransitResult> createParser(TransitQuery query) {
         return new MobileParser20100827(platform);
     }
     
@@ -77,7 +76,7 @@ public class MobileSearcher20100827 implements TransitSearcher, GoogleConst {
         HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
         try {
-            TransitResult result = response.isOK() ? createParser().parse(response.getInputStream()) : new TransitResult();
+            TransitResult result = response.isOK() ? createParser(query).parse(response.getInputStream(), query) : new TransitResult();
             result.setResponseCode(response.getResponseCode());
             result.setRawResponse(response.getRawResponse());
             result.setQueryDate(query.getDate());
@@ -220,7 +219,7 @@ public class MobileSearcher20100827 implements TransitSearcher, GoogleConst {
         return search(queryForArrival);
     }
 
-    private String createUrl(TransitQuery query) {
+    public String createUrl(TransitQuery query) {
 		StringBuilder sb = new StringBuilder(GOOGLE_TRANSIT_MOBILE_URL);
 		
 		// 出発地

@@ -15,29 +15,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.model;
+package jp.co.hybitz.timetable.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import jp.co.hybitz.common.model.Time;
+public class Prefecture implements Serializable {
+    private String name;
+    private String url;
+    private List<Line> lines = new ArrayList<Line>();
 
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public class TimeAndPlace implements Serializable {
+    public String getName() {
+        return name;
+    }
 
-    private Time time;
-    private String place;
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public TimeAndPlace(Time time, String place) {
-        this.time = time;
-        this.place = place;
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
     
-    public Time getTime() {
-        return time;
+    public List<Line> getLines() {
+        return lines;
     }
-    public String getPlace() {
-        return place;
+    
+    public void addLine(Line line) {
+        lines.add(line);
+    }
+    
+    public void setLines(List<Line> lines) {
+        this.lines = lines;
     }
 }

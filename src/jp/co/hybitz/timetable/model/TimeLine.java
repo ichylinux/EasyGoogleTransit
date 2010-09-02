@@ -15,11 +15,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit;
+package jp.co.hybitz.timetable.model;
 
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public interface GoogleConst {
-    public static final String GOOGLE_TRANSIT_MOBILE_URL = "http://www.google.co.jp/m/directions";
+import java.util.ArrayList;
+import java.util.List;
+
+public class TimeLine {
+    private int hour;
+    private List<TransitTime> times = new ArrayList<TransitTime>();
+    
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+    }
+
+    public List<TransitTime> getTimes() {
+        return times;
+    }
+    
+    public void addTime(TransitTime time) {
+        times.add(time);
+    }
 }

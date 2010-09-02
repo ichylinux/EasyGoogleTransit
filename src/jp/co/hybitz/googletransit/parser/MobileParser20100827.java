@@ -23,13 +23,14 @@ import java.io.InputStream;
 import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.XmlPullParserFactory;
+import jp.co.hybitz.common.model.Time;
 import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Maybe;
-import jp.co.hybitz.googletransit.model.Time;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.Transit;
 import jp.co.hybitz.googletransit.model.TransitDetail;
+import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -38,7 +39,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100827 implements Parser<TransitResult> {
+public class MobileParser20100827 implements Parser<TransitQuery, TransitResult> {
     private static final int PARSE_TRANSIT_START = 1;
     private static final int PARSE_TRANSIT_END = 2;
     private static final int PARSE_MAYBE_START = 3;
@@ -54,42 +55,47 @@ public class MobileParser20100827 implements Parser<TransitResult> {
         this.platform = platform;
 	}
 
-	public TransitResult parse(InputStream in) throws XmlPullParserException, IOException {
+	public TransitResult parse(InputStream is, TransitQuery in) throws XmlPullParserException, IOException {
 
-        XmlPullParser parser = XmlPullParserFactory.getParser(platform);
-        parser.setInput(in, null);
-
-        while (true) {
-
-            int eventType = parser.getEventType();
-            boolean stopParsing = false;
-
-            switch (eventType) {
-            case XmlPullParser.TEXT :
-                String text = parser.getText().trim();
+	    try {
+            XmlPullParser parser = XmlPullParserFactory.getParser(platform);
+            parser.setInput(is, null);
+    
+            while (true) {
+    
+                int eventType = parser.getEventType();
+                boolean stopParsing = false;
+    
+                switch (eventType) {
+                case XmlPullParser.TEXT :
+                    String text = parser.getText().trim();
+                    
+                    if (parseStatus == PARSE_TRANSIT_START) {
+                        stopParsing = handleText(text);
+                    }
+                    else {
+                        stopParsing = handleMaybe(text);
+                    }
+    
+                    break;
+                }
                 
-                if (parseStatus == PARSE_TRANSIT_START) {
-                    stopParsing = handleText(text);
+                if (stopParsing) {
+                    break;
                 }
-                else {
-                    stopParsing = handleMaybe(text);
+                
+                eventType = parser.next();
+                if (eventType == XmlPullParser.END_DOCUMENT) {
+                    break;
                 }
-
-                break;
             }
-            
-            if (stopParsing) {
-                break;
-            }
-            
-            eventType = parser.next();
-            if (eventType == XmlPullParser.END_DOCUMENT) {
-                break;
-            }
-        }
-
-        result.setPrefecture(TransitUtil.isSamePrefecture(result.getFrom(), result.getTo()));
-		return result;
+    
+            result.setPrefecture(TransitUtil.isSamePrefecture(result.getFrom(), result.getTo()));
+    		return result;
+	    }
+	    finally {
+	        if (is != null) { try { is.close(); } catch (IOException e) {}}
+	    }
 	}
 	
 	private boolean handleMaybe(String text) {

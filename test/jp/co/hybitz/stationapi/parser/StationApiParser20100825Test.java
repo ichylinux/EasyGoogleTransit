@@ -21,6 +21,7 @@ import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.ParserTestCase;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.stationapi.model.Station;
+import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
 
 /**
@@ -29,14 +30,14 @@ import jp.co.hybitz.stationapi.model.StationApiResult;
 public class StationApiParser20100825Test extends ParserTestCase {
 
     @Override
-    protected Parser<StationApiResult> getParser() {
+    protected Parser<StationApiQuery, StationApiResult> getParser() {
         return new StationApiParser20100825(Platform.GENERIC);
     }    
 
     public void testParse20100825() {
         StationApiResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/station_api_result_20100825.xml"));
+            result = getParser().parse(getClass().getResourceAsStream("/station_api_result_20100825.xml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());

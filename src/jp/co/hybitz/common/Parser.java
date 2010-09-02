@@ -19,6 +19,6 @@ package jp.co.hybitz.common;
 
 import java.io.InputStream;
 
-public interface Parser<T> {
-    T parse(InputStream in) throws Exception;
+public interface Parser<IN, OUT> {
+    OUT parse(InputStream is, IN in) throws Exception;
 }
