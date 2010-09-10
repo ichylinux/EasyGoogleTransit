@@ -17,18 +17,23 @@
  */
 package jp.co.hybitz.googletransit;
 
-import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class TransitSearcherFactory {
+public class MobileParser20100813Test extends MobileParser20100722Test {
 
-    public static TransitSearcher createSearcher() {
-        return new MobileSearcher20100827(Platform.GENERIC);
-    }
-
-    public static TransitSearcher createSearcher(Platform platform) {
-        return new MobileSearcher20100827(platform);
+    public void testParse20100813() {
+        TransitResult result = null;
+        try {
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100813.wml"), null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail(e.getMessage());
+        }
+        
+        assertEquals("出発地", "新宿駅（東京）（東京メトロ）", result.getFrom());
+        assertEquals("到着地", "〒160-0022 新宿三丁目駅（東京）", result.getTo());
     }
 }

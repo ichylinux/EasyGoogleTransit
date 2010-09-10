@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.googletransit;
 
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitResult;
@@ -23,19 +23,19 @@ import jp.co.hybitz.googletransit.model.TransitResult;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100704Test extends MobileParser20100517Test {
+public class MobileParser20100718Test extends MobileParser20100716Test {
 
-    public void testParse20100704() {
+    public void testParse20100718() {
         TransitResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100704.wml"), null);
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100718.wml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
         
-        assertEquals("出発地", "朝潮橋駅（大阪）", result.getFrom());
-        assertEquals("到着地", "〒591-8008 堺北花田阪急", result.getTo());
+        assertEquals("出発地", "〒899-6404 鹿児島空港（鹿児島）", result.getFrom());
+        assertEquals("到着地", "出雲空港（島根）", result.getTo());
         assertEquals("時刻タイプ", TimeType.DEPARTURE, result.getTimeType());
     }
 }

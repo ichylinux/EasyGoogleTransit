@@ -15,24 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.jorudanlive;
 
-import jp.co.hybitz.googletransit.model.TransitResult;
+import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.common.Searcher;
+import jp.co.hybitz.jorudanlive.model.JorudanLiveQuery;
+import jp.co.hybitz.jorudanlive.model.JorudanLiveResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100722Test extends MobileParser20100716Test {
+public class JorudanLiveSearcherFactory {
 
-    public void testParse20100722() {
-        TransitResult result = null;
-        try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100722.wml"), null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-        
-        assertEquals("もしかして", "八丁堀駅（広島）　～　名古屋", result.getMaybe().toString());
+    public static Searcher<JorudanLiveQuery, JorudanLiveResult> createSearcher() {
+        return new JorudanLiveSearcher20100910(Platform.GENERIC);
+    }
+    
+    public static Searcher<JorudanLiveQuery, JorudanLiveResult> createSearcher(Platform platform) {
+        return new JorudanLiveSearcher20100910(platform);
     }
 }

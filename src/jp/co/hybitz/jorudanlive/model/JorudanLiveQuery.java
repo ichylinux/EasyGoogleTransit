@@ -15,25 +15,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.jorudanlive.model;
 
-import jp.co.hybitz.googletransit.model.TransitResult;
+import java.io.Serializable;
 
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public class MobileParser20100823Test extends MobileParser20100818Test {
+public class JorudanLiveQuery implements Serializable {
+    private boolean includeOld;
 
-    public void testParse20100823_01() {
-        TransitResult result = null;
-        try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100823_01.wml"), null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-        
-        assertEquals("出発地", "神田駅（長崎）", result.getFrom());
-        assertEquals("到着地", "小作駅（東京）", result.getTo());
+    public boolean isIncludeOld() {
+        return includeOld;
     }
+
+    public void setIncludeOld(boolean includeOld) {
+        this.includeOld = includeOld;
+    }
+    
 }

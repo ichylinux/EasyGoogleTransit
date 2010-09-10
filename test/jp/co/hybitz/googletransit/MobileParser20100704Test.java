@@ -15,39 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.googletransit;
 
-import jp.co.hybitz.common.Parser;
-import jp.co.hybitz.common.ParserTestCase;
-import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.googletransit.model.TimeType;
-import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100517Test extends ParserTestCase {
-    
-    @Override
-    protected Parser<TransitQuery, TransitResult> getParser() {
-        return new MobileParser20100827(Platform.GENERIC);
-    }    
+public class MobileParser20100704Test extends MobileParser20100517Test {
 
-    public void testParse20100517() {
+    public void testParse20100704() {
         TransitResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100517.html"), null);
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100704.wml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
         
-        assertEquals("出発地", "八丁堀駅（東京）", result.getFrom());
-        assertEquals("到着地", "東札幌駅（北海道）", result.getTo());
+        assertEquals("出発地", "朝潮橋駅（大阪）", result.getFrom());
+        assertEquals("到着地", "〒591-8008 堺北花田阪急", result.getTo());
         assertEquals("時刻タイプ", TimeType.DEPARTURE, result.getTimeType());
-        assertEquals("時刻", "0702", result.getTime().getTimeAsString());
-        assertEquals("候補は3件", 3, result.getTransitCount());
     }
-
 }

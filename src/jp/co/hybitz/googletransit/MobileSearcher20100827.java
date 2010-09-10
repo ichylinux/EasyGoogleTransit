@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.searcher;
+package jp.co.hybitz.googletransit;
 
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -28,12 +28,9 @@ import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
 import jp.co.hybitz.common.StringUtils;
 import jp.co.hybitz.common.model.Time;
-import jp.co.hybitz.googletransit.TransitSearcher;
-import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.TimeType;
 import jp.co.hybitz.googletransit.model.TransitQuery;
 import jp.co.hybitz.googletransit.model.TransitResult;
-import jp.co.hybitz.googletransit.parser.MobileParser20100827;
 
 /**
  * @author ichy <ichylinux@gmail.com>

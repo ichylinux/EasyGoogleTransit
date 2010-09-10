@@ -15,16 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.googletransit;
 
 import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100813Test extends MobileParser20100722Test {
+public class MobileParser20100818Test extends MobileParser20100813Test {
 
-    public void testParse20100813() {
+    public void testParse20100818() {
         TransitResult result = null;
         try {
             result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100813.wml"), null);

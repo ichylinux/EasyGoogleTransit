@@ -15,25 +15,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.jorudanlive.model;
 
-import jp.co.hybitz.googletransit.model.TransitResult;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public class MobileParser20100829Test extends MobileParser20100823Test {
+import jp.co.hybitz.common.HttpResponse;
 
-    public void testParse20100829() {
-        TransitResult result = null;
-        try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100829.wml"), null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-        
-        assertEquals("出発地", "新越谷駅（埼玉）", result.getFrom());
-        assertEquals("到着地", "北海道", result.getTo());
+public class JorudanLiveResult extends HttpResponse {
+    private String lastUpdate;
+    private List<LiveInfo> liveInfoList = new ArrayList<LiveInfo>();
+
+    public String getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+    
+    public void addLiveInfo(LiveInfo liveInfo) {
+        liveInfoList.add(liveInfo);
+    }
+    
+    public List<LiveInfo> getLiveInfoList() {
+        return liveInfoList;
     }
 }

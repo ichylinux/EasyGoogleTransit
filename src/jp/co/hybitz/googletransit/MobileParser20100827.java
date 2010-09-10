@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.googletransit;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,6 @@ import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.XmlPullParserFactory;
 import jp.co.hybitz.common.model.Time;
-import jp.co.hybitz.googletransit.TransitUtil;
 import jp.co.hybitz.googletransit.model.Maybe;
 import jp.co.hybitz.googletransit.model.TimeAndPlace;
 import jp.co.hybitz.googletransit.model.TimeType;

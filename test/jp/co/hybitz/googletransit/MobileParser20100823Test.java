@@ -15,25 +15,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.googletransit.parser;
+package jp.co.hybitz.googletransit;
 
 import jp.co.hybitz.googletransit.model.TransitResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileParser20100818Test extends MobileParser20100813Test {
+public class MobileParser20100823Test extends MobileParser20100818Test {
 
-    public void testParse20100818() {
+    public void testParse20100823_01() {
         TransitResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100813.wml"), null);
+            result = getParser().parse(getClass().getResourceAsStream("/transit_result_20100823_01.wml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
         
-        assertEquals("出発地", "新宿駅（東京）（東京メトロ）", result.getFrom());
-        assertEquals("到着地", "〒160-0022 新宿三丁目駅（東京）", result.getTo());
+        assertEquals("出発地", "神田駅（長崎）", result.getFrom());
+        assertEquals("到着地", "小作駅（東京）", result.getTo());
     }
 }
