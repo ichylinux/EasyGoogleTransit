@@ -43,7 +43,7 @@ public class JorudanLiveParser20100910Test extends ParserTestCase {
         }
         
         assertEquals("2010/09/10（金） 12:18 現在", result.getLastUpdate());
-        assertEquals(45, result.getLiveInfoList().size());
+        assertEquals(100, result.getLiveInfoList().size());
         assertEquals("10:23", result.getLiveInfoList().get(4).getTime());
         assertEquals("マリンライナー［岡山－高松］", result.getLiveInfoList().get(4).getLine());
         assertEquals("遅れ(10分未満)", result.getLiveInfoList().get(4).getSummary());

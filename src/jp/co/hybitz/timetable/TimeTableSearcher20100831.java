@@ -17,6 +17,8 @@
  */
 package jp.co.hybitz.timetable;
 
+import java.util.Arrays;
+
 import jp.co.hybitz.common.HttpResponse;
 import jp.co.hybitz.common.HttpSearchException;
 import jp.co.hybitz.common.Parser;
@@ -154,8 +156,8 @@ public class TimeTableSearcher20100831 implements Searcher<TimeTableQuery, TimeT
                     }
                 }
                 
-                // 山手線と大阪環状線はなぜか内回りしか表示されていないので、外回りも取得するように対応
-                if ("山手線".equals(line.getName()) || "大阪環状線".equals(line.getName())) {
+                // 環状線はなぜか1方向しか表示されていないので、逆方向も取得
+                if (isCircualrLine(line)) {
                     try {
                         int gid = Integer.parseInt(timeTable.getMyGid());
                         String nextGid = String.valueOf(gid+1); 
@@ -191,6 +193,16 @@ public class TimeTableSearcher20100831 implements Searcher<TimeTableQuery, TimeT
         }
         
         return result;
+    }
+    
+    private boolean isCircualrLine(Line line) {
+        String[] lines = new String[]{
+                "山手線",
+                "大阪環状線",
+                "名城線",
+        };
+        
+        return Arrays.asList(lines).contains(line.getName());
     }
     
     private TimeTable getResultTimeTable(TimeTableResult result) {
