@@ -28,6 +28,19 @@ public class TimeTable implements Serializable {
         SUNDAY,
     };
     
+    public static String getTypeString(Type type) {
+        switch (type) {
+        case WEEKDAY :
+            return "平日";
+        case SATURDAY :
+            return "土曜";
+        case SUNDAY :
+            return "日曜・祝日";
+        default :
+            return null;
+        }
+    }
+
     private String myGid;
     private List<String> gidList = new ArrayList<String>();
     private String direction;
@@ -47,16 +60,7 @@ public class TimeTable implements Serializable {
     }
 
     public String getTypeString() {
-        switch (type) {
-        case WEEKDAY :
-            return "平日";
-        case SATURDAY :
-            return "土曜";
-        case SUNDAY :
-            return "日曜・祝日";
-        default :
-            return null;
-        }
+        return getTypeString(getType());
     }
 
     public void setType(Type type) {
