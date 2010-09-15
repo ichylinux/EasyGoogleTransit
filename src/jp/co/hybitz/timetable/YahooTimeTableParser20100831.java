@@ -39,6 +39,7 @@ public class YahooTimeTableParser20100831 extends AbstractParser<TimeTableQuery,
     private Integer hour;
     private Integer minute;
     private String transitClass;
+    private String boundFor;
     private String myGid;
     private boolean inTimeTable;
     private boolean inDirection;
@@ -53,6 +54,7 @@ public class YahooTimeTableParser20100831 extends AbstractParser<TimeTableQuery,
     private boolean inTime;
     private boolean inMinute;
     private boolean inTransitClass;
+    private boolean inBoundFor;
     private boolean inStationNavi;
 
     public YahooTimeTableParser20100831(Platform platform) {
@@ -134,6 +136,9 @@ public class YahooTimeTableParser20100831 extends AbstractParser<TimeTableQuery,
         else if (inTr && matchClass("dd", "trn-cls")) {
             inTransitClass = true;
         }
+        else if (inTr && matchClass("dd", "sta-for")) {
+            inBoundFor = true;
+        }
         else if (is("h5")) {
             inH5 = true;
         }
@@ -184,6 +189,9 @@ public class YahooTimeTableParser20100831 extends AbstractParser<TimeTableQuery,
         }
         else if (inTransitClass) {
             transitClass = text;
+        }
+        else if (inBoundFor) {
+            boundFor = text;
         }
     }
 
@@ -239,9 +247,10 @@ public class YahooTimeTableParser20100831 extends AbstractParser<TimeTableQuery,
         else if (is("dl")) {
             if (inTime) {
                 if (timeLine != null) {
-                    TransitTime t = new TransitTime(hour, minute, transitClass);
+                    TransitTime t = new TransitTime(hour, minute, transitClass, boundFor);
                     timeLine.addTime(t);
                     transitClass = null;
+                    boundFor = null;
                     minute = null;
                 }
                 inTime = false;
@@ -251,7 +260,12 @@ public class YahooTimeTableParser20100831 extends AbstractParser<TimeTableQuery,
             inMinute = false;
         }
         else if (is("dd")) {
-            inTransitClass = false;
+            if (inTransitClass) {
+                inTransitClass = false;
+            }
+            else if (inBoundFor) {
+                inBoundFor = false;
+            }
         }
         
         return false;

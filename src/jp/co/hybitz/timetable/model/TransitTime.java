@@ -27,9 +27,10 @@ public class TransitTime extends Time {
         super(hour, minute);
     }
 
-    public TransitTime(int hour, int minute, String transitClass) {
+    public TransitTime(int hour, int minute, String transitClass, String boundFor) {
         super(hour, minute);
         this.transitClass = transitClass;
+        this.boundFor = boundFor;
     }
 
     public TransitTime(String HH, String mm) {
