@@ -18,6 +18,9 @@
 package jp.co.hybitz.stationapi;
 
 import jp.co.hybitz.common.Platform;
+import jp.co.hybitz.common.Searcher;
+import jp.co.hybitz.stationapi.model.StationApiQuery;
+import jp.co.hybitz.stationapi.model.StationApiResult;
 import jp.co.hybitz.stationapi.searcher.StationApiSearcher20100825;
 
 /**
@@ -25,7 +28,7 @@ import jp.co.hybitz.stationapi.searcher.StationApiSearcher20100825;
  */
 public class StationApiSearcherFactory {
 
-    public static StationApiSearcher createSearcher() {
-        return new StationApiSearcher20100825(Platform.LOOSE_HTML);
+    public static Searcher<StationApiQuery, StationApiResult> createSearcher() {
+        return new StationApiSearcher20100825(Platform.HTML);
     }
 }

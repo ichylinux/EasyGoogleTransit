@@ -19,12 +19,10 @@ package jp.co.hybitz.stationapi.searcher;
 
 import java.math.BigDecimal;
 
+import jp.co.hybitz.common.AbstractSearcher;
 import jp.co.hybitz.common.HttpResponse;
-import jp.co.hybitz.common.HttpSearchException;
 import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.common.StreamUtils;
-import jp.co.hybitz.stationapi.StationApiSearcher;
 import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
 import jp.co.hybitz.stationapi.parser.StationApiParser20100825;
@@ -32,31 +30,34 @@ import jp.co.hybitz.stationapi.parser.StationApiParser20100825;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class StationApiSearcher20100825 implements StationApiSearcher {
+public class StationApiSearcher20100825 extends AbstractSearcher<StationApiQuery, StationApiResult> {
+    private static final String STATION_API_URL = "http://map.simpleapi.net/stationapi";
 	private Platform platform;
 	
 	public StationApiSearcher20100825(Platform platform) {
 		this.platform = platform;
 	}
 	
-	public StationApiResult search(StationApiQuery query) throws HttpSearchException {
-        HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
+    protected StationApiResult parse(StationApiQuery query, HttpResponse response) throws Exception {
+        StationApiResult result;
+        if (response.isOK()) {
+            result = createParser(query).parse(response.getInputStream(), query);
+        }
+        else {
+            result = new StationApiResult();
+        }
 
-        try {
-            StationApiResult result = response.isOK() ? createParser(query).parse(response.getInputStream(), query) : new StationApiResult();
-            result.setResponseCode(response.getResponseCode());
-            result.setGeoLocation(query.getGeoLocation());
-            return result;
-        }
-        catch (Exception e) {
-            throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
-        }
-	}
-	
+        result.setResponseCode(response.getResponseCode());
+        result.setGeoLocation(query.getGeoLocation());
+        return result;
+    }
+
+    @Override
 	public Parser<StationApiQuery, StationApiResult> createParser(StationApiQuery query) {
 		return new StationApiParser20100825(platform);
 	}
 	
+    @Override
 	public String createUrl(StationApiQuery query) {
 	    BigDecimal longitude = new BigDecimal(query.getGeoLocation().getLongitude());
 	    longitude = longitude.setScale(4, BigDecimal.ROUND_HALF_UP);

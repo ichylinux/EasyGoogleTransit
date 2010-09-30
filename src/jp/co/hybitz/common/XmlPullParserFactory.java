@@ -14,7 +14,7 @@ public class XmlPullParserFactory {
         else if (platform == Platform.GENERIC) {
             return org.xmlpull.v1.XmlPullParserFactory.newInstance().newPullParser();
         }
-        else if (platform == Platform.LOOSE_HTML) {
+        else if (platform == Platform.HTML) {
             return new SimpleXmlPullParser();
         }
         else {

@@ -26,7 +26,7 @@ import jp.co.hybitz.timetable.model.TimeTableResult;
 
 import org.xmlpull.v1.XmlPullParser;
 
-public class YahooAreaParser20100831 extends AbstractParser<TimeTableQuery, TimeTableResult> {
+class YahooAreaParser20100831 extends AbstractParser<TimeTableQuery, TimeTableResult> {
     private TimeTableResult result;
     private Area area;
     private Prefecture prefecture;

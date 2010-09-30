@@ -26,6 +26,6 @@ import jp.co.hybitz.rgeocode.searcher.RGeocodeSearcher20100826;
 public class RGeocodeSearcherFactory {
 
     public static RGeocodeSearcher createSearcher() {
-        return new RGeocodeSearcher20100826(Platform.LOOSE_HTML);
+        return new RGeocodeSearcher20100826(Platform.HTML);
     }
 }

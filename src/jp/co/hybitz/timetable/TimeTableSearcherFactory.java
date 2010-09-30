@@ -28,10 +28,10 @@ import jp.co.hybitz.timetable.model.TimeTableResult;
 public class TimeTableSearcherFactory {
 
     public static Searcher<TimeTableQuery, TimeTableResult> createSearcher() {
-        return new TimeTableSearcher20100831(Platform.LOOSE_HTML);
+        return new TimeTableSearcher20100919(Platform.HTML);
     }
 
     public static Searcher<TimeTableQuery, TimeTableResult> createSearcher(Platform platform) {
-        return new TimeTableSearcher20100831(platform);
+        return new TimeTableSearcher20100919(platform);
     }
 }

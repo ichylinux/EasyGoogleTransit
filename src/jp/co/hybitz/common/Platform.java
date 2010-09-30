@@ -23,5 +23,5 @@ package jp.co.hybitz.common;
 public enum Platform {
 	ANDROID,
 	GENERIC,
-	LOOSE_HTML,
+	HTML,
 }

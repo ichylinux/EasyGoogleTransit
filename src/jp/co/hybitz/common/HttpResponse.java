@@ -25,6 +25,7 @@ import java.net.HttpURLConnection;
 public class HttpResponse implements Serializable {
     private int responseCode;
     private byte[] rawResponse = new byte[0];
+    private String url;
     
     public int getResponseCode() {
         return responseCode;
@@ -48,6 +49,14 @@ public class HttpResponse implements Serializable {
     
     public InputStream getInputStream() {
         return new ByteArrayInputStream(getRawResponse());
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
     
 }

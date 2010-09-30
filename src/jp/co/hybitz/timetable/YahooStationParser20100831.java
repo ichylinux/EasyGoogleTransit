@@ -25,7 +25,7 @@ import jp.co.hybitz.timetable.model.TimeTableResult;
 
 import org.xmlpull.v1.XmlPullParser;
 
-public class YahooStationParser20100831 extends AbstractParser<TimeTableQuery, TimeTableResult> {
+class YahooStationParser20100831 extends AbstractParser<TimeTableQuery, TimeTableResult> {
     private TimeTableResult result;
     private Station station;
     private boolean inStation;
@@ -60,7 +60,7 @@ public class YahooStationParser20100831 extends AbstractParser<TimeTableQuery, T
         else if (inUl && is("li")) {
             inLi = true;
         }
-        else if (inLi && is("a")) {
+        else if (inLi && isA()) {
             station = new Station();
             station.setUrl(parser.getAttributeValue(null, "href"));
         }
@@ -82,7 +82,7 @@ public class YahooStationParser20100831 extends AbstractParser<TimeTableQuery, T
         else if (is("li")) {
             inLi = false;
         }
-        else if (inLi && is("a")) {
+        else if (inLi && isA()) {
             result.getAreas().get(0).getPrefectures().get(0).getLines().get(0).addStation(station);
             station = null;
         }

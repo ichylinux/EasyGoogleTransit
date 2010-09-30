@@ -25,7 +25,7 @@ import jp.co.hybitz.timetable.model.TimeTableResult;
 
 import org.xmlpull.v1.XmlPullParser;
 
-public class YahooLineParser20100831 extends AbstractParser<TimeTableQuery, TimeTableResult> {
+class YahooLineParser20100831 extends AbstractParser<TimeTableQuery, TimeTableResult> {
     private TimeTableResult result;
     private String company;
     private Line line;
@@ -60,7 +60,7 @@ public class YahooLineParser20100831 extends AbstractParser<TimeTableQuery, Time
         else if (inRail && is("dd")) {
             inDd = true;
         }
-        else if (inDd && is("a")) {
+        else if (inDd && isA()) {
             line = new Line();
             line.setCompany(company);
             line.setUrl(parser.getAttributeValue(null, "href"));
@@ -83,7 +83,7 @@ public class YahooLineParser20100831 extends AbstractParser<TimeTableQuery, Time
         else if (is("dd")) {
             inDd = false;
         }
-        else if (inDd && is("a")) {
+        else if (inDd && isA()) {
             result.getAreas().get(0).getPrefectures().get(0).addLine(line);
             line = null;
         }

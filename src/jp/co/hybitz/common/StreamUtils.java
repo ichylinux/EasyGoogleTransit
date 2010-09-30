@@ -63,6 +63,7 @@ public class StreamUtils {
         try {
             HttpURLConnection con = openConnection(url);
             ret.setResponseCode(con.getResponseCode());
+            ret.setUrl(con.getURL().toString());
             
             if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();

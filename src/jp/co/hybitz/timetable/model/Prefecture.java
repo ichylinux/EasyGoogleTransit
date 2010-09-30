@@ -19,6 +19,7 @@ package jp.co.hybitz.timetable.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Prefecture implements Serializable {
@@ -52,5 +53,15 @@ public class Prefecture implements Serializable {
     
     public void setLines(List<Line> lines) {
         this.lines = lines;
+    }
+    
+    public Line getLine(String company, String name) {
+        for (Iterator<Line> it = lines.iterator(); it.hasNext();) {
+            Line l = it.next();
+            if (l.getCompany().equals(company) && l.getName().equals(name)) {
+                return l;
+            }
+        }
+        return null;
     }
 }

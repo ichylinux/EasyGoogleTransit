@@ -45,8 +45,8 @@ public class StationApiParser20100825 implements Parser<StationApiQuery, Station
 	}
 	
     @Override
-	public StationApiResult parse(InputStream is, StationApiQuery in) throws XmlPullParserException, IOException {
-	    try {
+	public StationApiResult parse(InputStream is, StationApiQuery query) throws XmlPullParserException, IOException {
+        try {
 	        XmlPullParser parser = XmlPullParserFactory.getParser(platform);
 	        parser.setInput(is, null);
     

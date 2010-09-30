@@ -58,4 +58,8 @@ public class JorudanLiveSearcher20100910 implements Searcher<JorudanLiveQuery, J
             throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
         }
     }
+    
+    @Override
+    public void cancel() {
+    }
 }

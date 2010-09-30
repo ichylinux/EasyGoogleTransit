@@ -43,9 +43,18 @@ public class TimeTable implements Serializable {
 
     private String myGid;
     private List<String> gidList = new ArrayList<String>();
+    private String lineName;
     private String direction;
     private Type type;
     private List<TimeLine> timeLines = new ArrayList<TimeLine>();
+
+    public String getLineName() {
+        return lineName;
+    }
+
+    public void setLineName(String lineName) {
+        this.lineName = lineName;
+    }
 
     public String getDirection() {
         return direction;

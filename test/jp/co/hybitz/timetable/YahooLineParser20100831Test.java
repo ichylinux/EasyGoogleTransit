@@ -33,7 +33,7 @@ public class YahooLineParser20100831Test extends ParserTestCase {
 
     @Override
     protected Parser<TimeTableQuery, TimeTableResult> getParser() {
-        return new YahooLineParser20100831(Platform.LOOSE_HTML);
+        return new YahooLineParser20100831(Platform.HTML);
     }    
 
     public void testParse20100825() {

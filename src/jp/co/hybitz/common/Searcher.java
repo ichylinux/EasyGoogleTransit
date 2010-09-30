@@ -18,7 +18,8 @@
 package jp.co.hybitz.common;
 
 public interface Searcher<QUERY, RESULT> {
-    public RESULT search(QUERY query) throws HttpSearchException;
-    public Parser<QUERY, RESULT> createParser(QUERY query);
-    public String createUrl(QUERY query);
+    RESULT search(QUERY query) throws HttpSearchException;
+    Parser<QUERY, RESULT> createParser(QUERY query);
+    String createUrl(QUERY query);
+    void cancel(); 
 }

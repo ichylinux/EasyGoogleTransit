@@ -2,6 +2,7 @@ package jp.co.hybitz.timetable.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Line implements Serializable {
@@ -44,5 +45,16 @@ public class Line implements Serializable {
     
     public void setStations(List<Station> stations) {
         this.stations = stations;
+    }
+    
+    public Station getStation(String name) {
+        for (Iterator<Station> it = stations.iterator(); it.hasNext();) {
+            Station s = it.next();
+            if (s.getName().equals(name)) {
+                return s;
+            }
+        }
+        
+        return null;
     }
 }

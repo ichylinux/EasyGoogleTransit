@@ -36,7 +36,7 @@ public class YahooTimeTableParser20100831Test extends ParserTestCase {
 
     @Override
     protected Parser<TimeTableQuery, TimeTableResult> getParser() {
-        return new YahooTimeTableParser20100831(Platform.LOOSE_HTML);
+        return new YahooTimeTableParser20100919(Platform.HTML);
     }    
 
     public void testParse20100831_01() {

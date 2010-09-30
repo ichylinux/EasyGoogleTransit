@@ -19,6 +19,7 @@ package jp.co.hybitz.timetable.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Station implements Serializable {
@@ -44,6 +45,17 @@ public class Station implements Serializable {
     
     public List<TimeTable> getTimeTables() {
         return timeTables;
+    }
+    
+    public TimeTable getTimeTable(String direction, TimeTable.Type type) {
+        for (Iterator<TimeTable> it = timeTables.iterator(); it.hasNext();) {
+            TimeTable tt = it.next();
+            if (tt.getDirection().equals(direction) && tt.getType() == type) {
+                return tt;
+            }
+        }
+        
+        return null;
     }
     
     public void addTimeTable(TimeTable timeTable) {

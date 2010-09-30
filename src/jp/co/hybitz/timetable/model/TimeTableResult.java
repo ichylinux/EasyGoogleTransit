@@ -18,6 +18,7 @@
 package jp.co.hybitz.timetable.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import jp.co.hybitz.common.HttpResponse;
@@ -31,5 +32,15 @@ public class TimeTableResult extends HttpResponse {
     
     public List<Area> getAreas() {
         return areas;
+    }
+
+    public Area getArea(String name) {
+        for (Iterator<Area> it = areas.iterator(); it.hasNext();) {
+            Area a = it.next();
+            if (a.getName().equals(name)) {
+                return a;
+            }
+        }
+        return null;
     }
 }

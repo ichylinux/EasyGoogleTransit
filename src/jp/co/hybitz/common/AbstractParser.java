@@ -26,12 +26,18 @@ import org.xmlpull.v1.XmlPullParserException;
 
 public abstract class AbstractParser<IN, OUT> implements Parser<IN, OUT> {
     private Platform platform;
+    private String encoding;
     private XmlPullParser parser;
 
     public AbstractParser(Platform platform) {
         this.platform = platform;
     }
     
+    public AbstractParser(Platform platform, String encoding) {
+        this.platform = platform;
+        this.encoding = encoding;
+    }
+
     protected abstract void startDocument(IN in);
     protected abstract boolean startTag(String name, XmlPullParser parser);
     protected abstract void text(String text, XmlPullParser parser);
@@ -42,7 +48,7 @@ public abstract class AbstractParser<IN, OUT> implements Parser<IN, OUT> {
     public OUT parse(InputStream is, IN in) throws XmlPullParserException, IOException {
         try {
             parser = XmlPullParserFactory.getParser(platform);
-            parser.setInput(is, null);
+            parser.setInput(is, encoding);
     
             boolean finished = false;
             int eventType = parser.getEventType();
@@ -118,4 +124,40 @@ public abstract class AbstractParser<IN, OUT> implements Parser<IN, OUT> {
         return name.equalsIgnoreCase(parser.getName());
     }
 
+    protected boolean isA() {
+        return "a".equalsIgnoreCase(parser.getName());
+    }
+    
+    protected boolean isForm() {
+        return "form".equalsIgnoreCase(parser.getName());
+    }
+    
+    protected boolean isForm(String action) {
+        if (isForm()) {
+            return action.equalsIgnoreCase(parser.getAttributeValue(null, "action"));
+        }
+        
+        return false;
+    }
+    
+    protected boolean isSelect() {
+        return "select".equalsIgnoreCase(parser.getName());
+    }
+    
+    protected boolean isSelect(String name) {
+        if (isSelect()) {
+            return name.equalsIgnoreCase(parser.getAttributeValue(null, "name"));
+        }
+        
+        return false;
+    }
+    
+    protected boolean isOption() {
+        return "option".equalsIgnoreCase(parser.getName());
+    }
+    
+    protected String getAttribute(String name) {
+        return parser.getAttributeValue(null, name);
+    }
+    
 }
