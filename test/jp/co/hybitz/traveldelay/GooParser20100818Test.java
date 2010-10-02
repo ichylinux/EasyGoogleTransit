@@ -15,9 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay.parser;
+package jp.co.hybitz.traveldelay;
 
 import jp.co.hybitz.common.SimpleXmlPullParser;
+import jp.co.hybitz.traveldelay.GooParser20100818;
 import jp.co.hybitz.traveldelay.TravelDelayParser;
 import jp.co.hybitz.traveldelay.model.Category;
 import jp.co.hybitz.traveldelay.model.OperationCompany;

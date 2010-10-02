@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.stationapi.searcher;
+package jp.co.hybitz.stationapi;
 
 import java.math.BigDecimal;
 
@@ -25,7 +25,6 @@ import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
-import jp.co.hybitz.stationapi.parser.StationApiParser20100825;
 
 /**
  * @author ichy <ichylinux@gmail.com>

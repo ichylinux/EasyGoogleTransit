@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay.searcher;
+package jp.co.hybitz.traveldelay;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -28,12 +28,8 @@ import jp.co.hybitz.common.HttpSearchException;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
 import jp.co.hybitz.common.XmlPullParserFactory;
-import jp.co.hybitz.traveldelay.TravelDelayParser;
-import jp.co.hybitz.traveldelay.TravelDelaySearcher;
 import jp.co.hybitz.traveldelay.model.TravelDelayQuery;
 import jp.co.hybitz.traveldelay.model.TravelDelayResult;
-import jp.co.hybitz.traveldelay.parser.GooDetailParser20100823;
-import jp.co.hybitz.traveldelay.parser.GooParser20100818;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;

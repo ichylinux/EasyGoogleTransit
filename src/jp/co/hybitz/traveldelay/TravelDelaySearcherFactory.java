@@ -18,7 +18,6 @@
 package jp.co.hybitz.traveldelay;
 
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.traveldelay.searcher.GooSearcher20100823;
 
 /**
  * @author ichy <ichylinux@gmail.com>

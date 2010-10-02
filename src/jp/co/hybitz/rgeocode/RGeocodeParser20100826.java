@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.rgeocode.parser;
+package jp.co.hybitz.rgeocode;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -33,7 +33,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class RGeocodeParser20100826 implements Parser<RGeocodeQuery, RGeocodeResult> {
+class RGeocodeParser20100826 implements Parser<RGeocodeQuery, RGeocodeResult> {
     private Platform platform;
     private RGeocodeResult result = new RGeocodeResult();
 	private String name;

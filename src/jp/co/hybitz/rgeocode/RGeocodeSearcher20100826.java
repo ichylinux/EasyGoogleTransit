@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.rgeocode.searcher;
+package jp.co.hybitz.rgeocode;
 
 import java.math.BigDecimal;
 
@@ -24,17 +24,21 @@ import jp.co.hybitz.common.HttpSearchException;
 import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
-import jp.co.hybitz.rgeocode.RGeocodeConst;
-import jp.co.hybitz.rgeocode.RGeocodeSearcher;
 import jp.co.hybitz.rgeocode.model.RGeocodeQuery;
 import jp.co.hybitz.rgeocode.model.RGeocodeResult;
-import jp.co.hybitz.rgeocode.parser.RGeocodeParser20100826;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class RGeocodeSearcher20100826 implements RGeocodeSearcher, RGeocodeConst {
-	private Platform platform;
+public class RGeocodeSearcher20100826 implements RGeocodeSearcher {
+    private static final String RGEOCODE_URL = "http://www.finds.jp/ws/rgeocode.php";
+    private static final int RGEOCODE_STATUS_SUCCESS = 200;
+    private static final int RGEOCODE_STATUS_SUCCESS_NO_LOCAL = 201;
+    private static final int RGEOCODE_STATUS_SUCCESS_NO_AZA = 202;
+    private static final int RGEOCODE_STATUS_INVALID_PARAMETERS = 400;
+    private static final int RGEOCODE_STATUS_SERVER_ERROR = 500;
+
+    private Platform platform;
 	
 	public RGeocodeSearcher20100826(Platform platform) {
 		this.platform = platform;

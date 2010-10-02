@@ -15,14 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay.parser;
+package jp.co.hybitz.traveldelay;
 
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
 import jp.co.hybitz.common.StringUtils;
-import jp.co.hybitz.traveldelay.TravelDelayParser;
 import jp.co.hybitz.traveldelay.model.Category;
 import jp.co.hybitz.traveldelay.model.OperationCompany;
 import jp.co.hybitz.traveldelay.model.TravelDelay;
@@ -34,7 +33,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooDetailParser20100823 implements TravelDelayParser {
+class GooDetailParser20100823 implements TravelDelayParser {
     private XmlPullParser parser;
     private String encoding;
     private TravelDelayResult result = new TravelDelayResult();

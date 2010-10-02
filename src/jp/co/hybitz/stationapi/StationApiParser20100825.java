@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.stationapi.parser;
+package jp.co.hybitz.stationapi;
 
 import java.io.EOFException;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class StationApiParser20100825 implements Parser<StationApiQuery, StationApiResult> {
+class StationApiParser20100825 implements Parser<StationApiQuery, StationApiResult> {
     private Platform platform;
     private StationApiResult result = new StationApiResult();
 	private Station station;

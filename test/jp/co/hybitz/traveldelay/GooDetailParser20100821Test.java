@@ -15,9 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.traveldelay.parser;
+package jp.co.hybitz.traveldelay;
 
 import jp.co.hybitz.common.SimpleXmlPullParser;
+import jp.co.hybitz.traveldelay.GooDetailParser20100823;
 import jp.co.hybitz.traveldelay.TravelDelayParser;
 import jp.co.hybitz.traveldelay.model.Category;
 import jp.co.hybitz.traveldelay.model.OperationCompany;
@@ -33,7 +34,7 @@ public class GooDetailParser20100821Test extends ParserTestCase {
 
     @Override
     protected TravelDelayParser getParser() throws XmlPullParserException {
-        return new GooDetailParser20100821(new SimpleXmlPullParser());
+        return new GooDetailParser20100823(new SimpleXmlPullParser());
     }    
 
     public void testParse20100821_01() {

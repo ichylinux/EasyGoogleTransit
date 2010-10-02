@@ -15,13 +15,17 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.rgeocode;
+package jp.co.hybitz.traveldelay;
 
-public interface RGeocodeConst {
-    public static final String RGEOCODE_URL = "http://www.finds.jp/ws/rgeocode.php";
-    public static final int RGEOCODE_STATUS_SUCCESS = 200;
-    public static final int RGEOCODE_STATUS_SUCCESS_NO_LOCAL = 201;
-    public static final int RGEOCODE_STATUS_SUCCESS_NO_AZA = 202;
-    public static final int RGEOCODE_STATUS_INVALID_PARAMETERS = 400;
-    public static final int RGEOCODE_STATUS_SERVER_ERROR = 500;
+import jp.co.hybitz.traveldelay.TravelDelayParser;
+import junit.framework.TestCase;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+/**
+ * @author ichy <ichylinux@gmail.com>
+ */
+public abstract class ParserTestCase extends TestCase {
+
+    protected abstract TravelDelayParser getParser() throws XmlPullParserException;
 }

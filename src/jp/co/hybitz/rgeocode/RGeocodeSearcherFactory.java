@@ -18,7 +18,6 @@
 package jp.co.hybitz.rgeocode;
 
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.rgeocode.searcher.RGeocodeSearcher20100826;
 
 /**
  * @author ichy <ichylinux@gmail.com>

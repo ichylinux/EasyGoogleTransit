@@ -21,7 +21,6 @@ import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.Searcher;
 import jp.co.hybitz.stationapi.model.StationApiQuery;
 import jp.co.hybitz.stationapi.model.StationApiResult;
-import jp.co.hybitz.stationapi.searcher.StationApiSearcher20100825;
 
 /**
  * @author ichy <ichylinux@gmail.com>

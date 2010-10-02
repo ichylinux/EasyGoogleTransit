@@ -15,38 +15,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.stationapi.parser;
+package jp.co.hybitz.rgeocode;
 
 import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.ParserTestCase;
 import jp.co.hybitz.common.Platform;
-import jp.co.hybitz.stationapi.model.Station;
-import jp.co.hybitz.stationapi.model.StationApiQuery;
-import jp.co.hybitz.stationapi.model.StationApiResult;
+import jp.co.hybitz.rgeocode.RGeocodeParser20100826;
+import jp.co.hybitz.rgeocode.model.RGeocodeQuery;
+import jp.co.hybitz.rgeocode.model.RGeocodeResult;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class StationApiParser20100825Test extends ParserTestCase {
+public class RGeocodeParser20100826Test extends ParserTestCase {
 
     @Override
-    protected Parser<StationApiQuery, StationApiResult> getParser() {
-        return new StationApiParser20100825(Platform.GENERIC);
+    protected Parser<RGeocodeQuery, RGeocodeResult> getParser() {
+        return new RGeocodeParser20100826(Platform.GENERIC);
     }    
 
-    public void testParse20100825() {
-        StationApiResult result = null;
+    public void testParse20100826() {
+        RGeocodeResult result = null;
         try {
-            result = getParser().parse(getClass().getResourceAsStream("/station_api_result_20100825.xml"), null);
+            result = getParser().parse(getClass().getResourceAsStream("/rgeocode_result_20100826.xml"), null);
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
         
-        assertEquals(4, result.getStations().size());
-
-        Station s = result.getStations().get(0);
-        assertEquals("高幡不動駅", s.getName());
-        assertEquals(1030, s.getDistance());
+        assertEquals(200, result.getStatus());
+        assertEquals("広島県", result.getPrefecture());
+        assertEquals("福山市", result.getMunicipality());
+        assertEquals("西深津町六丁目", result.getLocal());
+        assertEquals("広島県福山市西深津町六丁目", result.toString());
     }
 }
