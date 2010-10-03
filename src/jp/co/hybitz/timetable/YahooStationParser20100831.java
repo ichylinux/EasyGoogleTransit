@@ -91,10 +91,12 @@ class YahooStationParser20100831 extends AbstractParser<TimeTableQuery, TimeTabl
     }
 
     @Override
-    protected void text(String text, XmlPullParser parser) {
+    protected boolean text(String text, XmlPullParser parser) {
         if (station != null) {
             station.setName(text);
         }
+        
+        return false;
     }
 
 }

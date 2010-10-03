@@ -25,10 +25,10 @@ import jp.co.hybitz.transit.model.TransitResult;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooTransitSearcherFactory {
+public class GooStationSearcherFactory {
 
     public static Searcher<TransitQuery, TransitResult> createSearcher() {
-        return new GooMobileSearcher20100930(Platform.HTML);
+        return new GooMobileStationSearcher20100930(Platform.HTML);
     }
 
 }

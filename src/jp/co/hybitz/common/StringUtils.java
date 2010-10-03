@@ -17,6 +17,10 @@
  */
 package jp.co.hybitz.common;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 /**
  * @author ichy <ichylinux@gmail.com>
  */
@@ -30,4 +34,21 @@ public class StringUtils {
         return ! isEmpty(s);
     }
 
+    public static String urlEncode(String s, String enc) {
+        try {
+            return URLEncoder.encode(s, enc);
+        }
+        catch (UnsupportedEncodingException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
+    }
+    
+    public static String urlDecode(String s, String enc) {
+        try {
+            return URLDecoder.decode(s, enc);
+        }
+        catch (UnsupportedEncodingException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
+    }
 }

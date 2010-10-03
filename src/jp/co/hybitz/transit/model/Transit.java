@@ -27,17 +27,27 @@ import java.util.List;
  */
 public class Transit implements Serializable {
 
-	private String durationAndFare;
+	private String duration;
+	private String fare;
 	private List<TransitDetail> details = new ArrayList<TransitDetail>();
 
-	public String getDurationAndFare() {
-		return durationAndFare;
-	}
-	public void setDurationAndFare(String title) {
-		this.durationAndFare = title;
+	public String getDuration() {
+		return duration;
 	}
 	
-	public List<TransitDetail> getDetails() {
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+	
+	public String getFare() {
+        return fare;
+    }
+    
+	public void setFare(String fare) {
+        this.fare = fare;
+    }
+    
+    public List<TransitDetail> getDetails() {
 		return details;
 	}
 	
@@ -80,12 +90,18 @@ public class Transit implements Serializable {
 				continue;
 			}
 			
-			// 最初の交通機関の乗車は乗り換え回数には含めない
+			// 最初の交通機関の乗車は乗換回数には含めない
 			if (isFirst) {
 			    isFirst = false;
-			} else {
-			    ret ++;
+			    continue;
 			}
+			
+			// 到着情報がない場合は、通過だと思われるので乗換回数には含めない
+			if (detail.getArrival() == null) {
+			    continue;
+			}
+			
+            ret ++;
 		}
 		
 		return ret;

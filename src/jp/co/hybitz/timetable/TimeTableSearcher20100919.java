@@ -44,7 +44,7 @@ class TimeTableSearcher20100919 implements Searcher<TimeTableQuery, TimeTableRes
     }
     
     @Override
-    public Parser<TimeTableQuery, TimeTableResult> createParser(TimeTableQuery query) {
+    public Parser<TimeTableQuery, TimeTableResult> createParser(TimeTableQuery query, HttpResponse response) {
         if (isAreaSearch(query)) {
             return new YahooAreaParser20100831(platform);
         }
@@ -146,7 +146,7 @@ class TimeTableSearcher20100919 implements Searcher<TimeTableQuery, TimeTableRes
             HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
             try {
-                TimeTableResult result = response.isOK() ? createParser(query).parse(response.getInputStream(), query) : new TimeTableResult();
+                TimeTableResult result = response.isOK() ? createParser(query, response).parse(response.getInputStream(), query) : new TimeTableResult();
                 result.setResponseCode(response.getResponseCode());
                 return result;
             }
@@ -167,7 +167,7 @@ class TimeTableSearcher20100919 implements Searcher<TimeTableQuery, TimeTableRes
             TimeTableResult result;
             
             if (response.isOK()) {
-                result = createParser(query).parse(response.getInputStream(), query);
+                result = createParser(query, response).parse(response.getInputStream(), query);
                 
                 // 湘南新宿ラインがリストにないので独自に含める
                 Prefecture p = result.getAreas().get(0).getPrefectures().get(0);
@@ -239,7 +239,7 @@ class TimeTableSearcher20100919 implements Searcher<TimeTableQuery, TimeTableRes
             TimeTableResult result;
             
             if (response.isOK()) {
-                result = createParser(query).parse(response.getInputStream(), query);
+                result = createParser(query, response).parse(response.getInputStream(), query);
                 
             }
             else {
@@ -283,7 +283,7 @@ class TimeTableSearcher20100919 implements Searcher<TimeTableQuery, TimeTableRes
         result.setResponseCode(response.getResponseCode());
         if (response.isOK()) {
             try {
-                TimeTableResult ret = createParser(query).parse(response.getInputStream(), query);
+                TimeTableResult ret = createParser(query, response).parse(response.getInputStream(), query);
                 TimeTable timeTable = getResultTimeTable(ret);
                 station.addTimeTable(timeTable);
 
@@ -304,7 +304,7 @@ class TimeTableSearcher20100919 implements Searcher<TimeTableQuery, TimeTableRes
                     response = StreamUtils.getHttpResponse(url);
                     result.setResponseCode(response.getResponseCode());
                     if (response.isOK()) {
-                        ret = createParser(query).parse(response.getInputStream(), query);
+                        ret = createParser(query, response).parse(response.getInputStream(), query);
                         TimeTable tt = getResultTimeTable(ret);
                         if (!tt.getTimeLines().isEmpty()) {
                             station.addTimeTable(tt);
@@ -343,7 +343,7 @@ class TimeTableSearcher20100919 implements Searcher<TimeTableQuery, TimeTableRes
                         response = StreamUtils.getHttpResponse(url);
                         result.setResponseCode(response.getResponseCode());
                         if (response.isOK()) {
-                            ret = createParser(query).parse(response.getInputStream(), query);
+                            ret = createParser(query, response).parse(response.getInputStream(), query);
                             TimeTable tt = getResultTimeTable(ret);
                             if (!tt.getTimeLines().isEmpty()) {
                                 station.addTimeTable(tt);

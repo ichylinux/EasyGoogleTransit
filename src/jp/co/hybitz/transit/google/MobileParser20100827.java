@@ -201,8 +201,11 @@ public class MobileParser20100827 implements Parser<TransitQuery, TransitResult>
 
             result.addTransit(transit);
         }
+        
+        String[] split = text.split("-");
         transit = new Transit();
-        transit.setDurationAndFare(text);
+        transit.setDuration(split[0].trim());
+        transit.setFare(split[1].trim());
 	}
 	
 	private void handleDeparture(String text) {

@@ -40,7 +40,7 @@ public class StationApiSearcher20100825 extends AbstractSearcher<StationApiQuery
     protected StationApiResult parse(StationApiQuery query, HttpResponse response) throws Exception {
         StationApiResult result;
         if (response.isOK()) {
-            result = createParser(query).parse(response.getInputStream(), query);
+            result = createParser(query, response).parse(response.getInputStream(), query);
         }
         else {
             result = new StationApiResult();
@@ -51,8 +51,11 @@ public class StationApiSearcher20100825 extends AbstractSearcher<StationApiQuery
         return result;
     }
 
+    /**
+     * @see jp.co.hybitz.common.AbstractSearcher#createParser(java.lang.Object, jp.co.hybitz.common.HttpResponse)
+     */
     @Override
-	public Parser<StationApiQuery, StationApiResult> createParser(StationApiQuery query) {
+	public Parser<StationApiQuery, StationApiResult> createParser(StationApiQuery query, HttpResponse response) {
 		return new StationApiParser20100825(platform);
 	}
 	
@@ -62,7 +65,7 @@ public class StationApiSearcher20100825 extends AbstractSearcher<StationApiQuery
 	    longitude = longitude.setScale(4, BigDecimal.ROUND_HALF_UP);
         BigDecimal latitude = new BigDecimal(query.getGeoLocation().getLatitude());
         latitude = latitude.setScale(4, BigDecimal.ROUND_HALF_UP);
-	    
+
         return STATION_API_URL + "?longitude=" + longitude + "&latitude=" + latitude;
 	}
 }

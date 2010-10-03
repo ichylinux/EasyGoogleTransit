@@ -102,7 +102,7 @@ class YahooAreaParser20100831 extends AbstractParser<TimeTableQuery, TimeTableRe
     }
 
     @Override
-    protected void text(String text, XmlPullParser parser) {
+    protected boolean text(String text, XmlPullParser parser) {
         if (area != null && inDt) {
             area.setName(text);
         }
@@ -110,6 +110,8 @@ class YahooAreaParser20100831 extends AbstractParser<TimeTableQuery, TimeTableRe
             prefecture.setName(text);
             
         }
+
+        return false;
     }
 
 }

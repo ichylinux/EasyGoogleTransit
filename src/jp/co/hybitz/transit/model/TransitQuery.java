@@ -20,13 +20,15 @@ package jp.co.hybitz.transit.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import jp.co.hybitz.common.Engine;
+
 /**
  * 検索条件
  * 
  * @author ichy <ichylinux@gmail.com>
  */
 public class TransitQuery implements Serializable {
-
+    private Engine engine;
 	private String from;
 	private String fromCode;
 	private String to;
@@ -37,7 +39,13 @@ public class TransitQuery implements Serializable {
 	private boolean useAirline;
 	private String sort;
 
-	public String getFrom() {
+	public Engine getEngine() {
+        return engine;
+    }
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
+    public String getFrom() {
 		return from;
 	}
 	public void setFrom(String from) {

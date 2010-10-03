@@ -40,7 +40,7 @@ public abstract class AbstractParser<IN, OUT> implements Parser<IN, OUT> {
 
     protected abstract void startDocument(IN in);
     protected abstract boolean startTag(String name, XmlPullParser parser);
-    protected abstract void text(String text, XmlPullParser parser);
+    protected abstract boolean text(String text, XmlPullParser parser);
     protected abstract boolean endTag(String name, XmlPullParser parser);
     protected abstract OUT endDocument();
 
@@ -63,7 +63,7 @@ public abstract class AbstractParser<IN, OUT> implements Parser<IN, OUT> {
                 case XmlPullParser.TEXT :
                     String text = parser.getText().trim();
                     if (StringUtils.isNotEmpty(text)) {
-                        text(text, parser);
+                        finished = text(text, parser);
                     }
                     break;
                 case XmlPullParser.END_TAG :
@@ -120,6 +120,10 @@ public abstract class AbstractParser<IN, OUT> implements Parser<IN, OUT> {
         return false;
     }
 
+    protected String getAttribute(String name) {
+        return parser.getAttributeValue(null, name);
+    }
+    
     protected boolean is(String name) {
         return name.equalsIgnoreCase(parser.getName());
     }
@@ -156,8 +160,19 @@ public abstract class AbstractParser<IN, OUT> implements Parser<IN, OUT> {
         return "option".equalsIgnoreCase(parser.getName());
     }
     
-    protected String getAttribute(String name) {
-        return parser.getAttributeValue(null, name);
+    protected boolean isInput() {
+        return "input".equalsIgnoreCase(parser.getName());
     }
-    
+
+    protected boolean isDiv() {
+        return "div".equalsIgnoreCase(parser.getName());
+    }
+
+    protected boolean isTable() {
+        return "table".equalsIgnoreCase(parser.getName());
+    }
+
+    protected boolean isTd() {
+        return "td".equalsIgnoreCase(parser.getName());
+    }
 }

@@ -28,21 +28,22 @@ import org.xmlpull.v1.XmlPullParser;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, TransitResult> {
-    
+class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, TransitResult> {
+    private TransitQuery query;
     private TransitResult result;
 	private Station station;
 	private boolean inForm;
 	private boolean inFromCode;
 	private boolean inToCode;
 	private boolean inOption;
-	
+
 	public GooMobileStationParser20100930(Platform platform, String encoding) {
 	    super(platform, encoding);
 	}
 
     @Override
     protected void startDocument(TransitQuery in) {
+        query = in;
         result = new TransitResult();
     }
 
@@ -72,7 +73,21 @@ public class GooMobileStationParser20100930 extends AbstractParser<TransitQuery,
             station = new Station();
             station.setCode(getAttribute("value").replaceAll("'", ""));
         }
-        
+        else if (inForm && isInput()) {
+            if ("from_code".equals(getAttribute("name"))) {
+                station = new Station();
+                station.setName(normalize(query.getFrom()));
+                station.setCode(getAttribute("value"));
+                result.addFromStation(station);
+            }
+            else if ("to_code".equals(getAttribute("name"))) {
+                station = new Station();
+                station.setName(normalize(query.getTo()));
+                station.setCode(getAttribute("value"));
+                result.addToStation(station);
+            }
+        }
+
         return false;
     }
 
@@ -96,15 +111,23 @@ public class GooMobileStationParser20100930 extends AbstractParser<TransitQuery,
             station = null;
             inOption = false;
         }
-        
+
         return false;
     }
 
     @Override
-    protected void text(String text, XmlPullParser parser) {
+    protected boolean text(String text, XmlPullParser parser) {
         if (inOption) {
-            station.setName(text.replaceFirst("▼", ""));
+            station.setName(normalize(text));
         }
+        
+        return false;
     }
-
+    
+    private String normalize(String name) {
+        String ret = name.replaceFirst("▼", "");
+        ret = ret.replaceAll("\\(", "（");
+        ret = ret.replaceAll("\\)", "）");
+        return ret;
+    }
 }

@@ -15,15 +15,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.transit.google;
+package jp.co.hybitz.transit.goo;
 
-import jp.co.hybitz.common.Searcher;
-import jp.co.hybitz.transit.model.TransitQuery;
-import jp.co.hybitz.transit.model.TransitResult;
-
-/**
- * @author ichy <ichylinux@gmail.com>
- */
-public interface GoogleTransitSearcher extends Searcher<TransitQuery, TransitResult> {
-    public static final String GOOGLE_TRANSIT_MOBILE_URL = "http://www.google.co.jp/m/directions";
+public interface GooConst {
+    static final String STATION_URL = "http://mobile.goo.ne.jp/transit/train_routes/station_search";
+    static final String TRANSIT_SEARCH_URL = "http://mobile.goo.ne.jp/transit/train_routes/detail_search";
+    static final String TRANSIT_RESULT_URL = "http://mobile.goo.ne.jp/transit/train_routes/result";
+    static final String ENCODING = "Shift_JIS";
 }

@@ -19,6 +19,7 @@ public class SimpleXmlPullParser implements XmlPullParser {
     private static final int DO_ATTR_KEY = 3;
     private static final int DO_ATTR_VALUE = 4;
 
+    private String encoding;
     private int action = DO_TEXT;
     private InputStreamReader reader;
     private int eventType = START_DOCUMENT;
@@ -372,28 +373,19 @@ public class SimpleXmlPullParser implements XmlPullParser {
 
     @Override
     public int nextToken() throws XmlPullParserException, IOException {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
-    public void require(int arg0, String arg1, String arg2)
-            throws XmlPullParserException, IOException {
-        // TODO Auto-generated method stub
-        
+    public void require(int arg0, String arg1, String arg2) throws XmlPullParserException, IOException {
     }
 
     @Override
-    public void setFeature(String arg0, boolean arg1)
-            throws XmlPullParserException {
-        // TODO Auto-generated method stub
-        
+    public void setFeature(String arg0, boolean arg1) throws XmlPullParserException {
     }
 
     @Override
     public void setInput(Reader arg0) throws XmlPullParserException {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
@@ -401,7 +393,9 @@ public class SimpleXmlPullParser implements XmlPullParser {
         if (encoding == null) {
             encoding = "UTF-8";
         }
+
         try {
+            this.encoding = encoding;
             this.reader = new InputStreamReader(is, encoding);
         } catch (UnsupportedEncodingException e) {
             throw new XmlPullParserException(e.getMessage(), this, e);
@@ -409,10 +403,6 @@ public class SimpleXmlPullParser implements XmlPullParser {
     }
 
     @Override
-    public void setProperty(String arg0, Object arg1)
-            throws XmlPullParserException {
-        // TODO Auto-generated method stub
-        
+    public void setProperty(String arg0, Object arg1) throws XmlPullParserException {
     }
-
 }

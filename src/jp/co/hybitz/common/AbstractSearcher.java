@@ -21,11 +21,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 
-
 public abstract class AbstractSearcher<QUERY, RESULT> implements Searcher<QUERY, RESULT> {
     private HttpURLConnection con;
     
-    public abstract Parser<QUERY, RESULT> createParser(QUERY query);
+    public abstract Parser<QUERY, RESULT> createParser(QUERY query, HttpResponse response);
     public abstract String createUrl(QUERY query);
     protected abstract RESULT parse(QUERY query, HttpResponse response) throws Exception;
     

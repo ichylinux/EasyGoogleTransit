@@ -92,13 +92,15 @@ class YahooLineParser20100831 extends AbstractParser<TimeTableQuery, TimeTableRe
     }
 
     @Override
-    protected void text(String text, XmlPullParser parser) {
+    protected boolean text(String text, XmlPullParser parser) {
         if (inDt) {
             company = text;
         }
         else if (line != null) {
             line.setName(text);
         }
+        
+        return false;
     }
 
 }

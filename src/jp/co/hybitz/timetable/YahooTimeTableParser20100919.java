@@ -172,7 +172,7 @@ class YahooTimeTableParser20100919 extends AbstractParser<TimeTableQuery, TimeTa
     }
 
     @Override
-    protected void text(String text, XmlPullParser parser) {
+    protected boolean text(String text, XmlPullParser parser) {
         if (inH5) {
             if (inDirection) {
                 timeTable.setDirection(text);
@@ -207,6 +207,8 @@ class YahooTimeTableParser20100919 extends AbstractParser<TimeTableQuery, TimeTa
         else if (inBoundFor) {
             boundFor = text;
         }
+        
+        return false;
     }
 
     @Override

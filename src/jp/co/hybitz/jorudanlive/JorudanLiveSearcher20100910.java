@@ -36,7 +36,7 @@ public class JorudanLiveSearcher20100910 implements Searcher<JorudanLiveQuery, J
     }
     
     @Override
-    public Parser<JorudanLiveQuery, JorudanLiveResult> createParser(JorudanLiveQuery query) {
+    public Parser<JorudanLiveQuery, JorudanLiveResult> createParser(JorudanLiveQuery query, HttpResponse response) {
         return new JorudanLiveParser20100910(platform);
     }
 
@@ -50,7 +50,7 @@ public class JorudanLiveSearcher20100910 implements Searcher<JorudanLiveQuery, J
         HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
         try {
-            JorudanLiveResult result = response.isOK() ? createParser(query).parse(response.getInputStream(), query) : new JorudanLiveResult();
+            JorudanLiveResult result = response.isOK() ? createParser(query, response).parse(response.getInputStream(), query) : new JorudanLiveResult();
             result.setResponseCode(response.getResponseCode());
             return result;
         }

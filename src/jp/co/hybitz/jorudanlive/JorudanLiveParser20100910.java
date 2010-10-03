@@ -100,7 +100,7 @@ public class JorudanLiveParser20100910 extends AbstractParser<JorudanLiveQuery, 
     }
 
     @Override
-    protected void text(String text, XmlPullParser parser) {
+    protected boolean text(String text, XmlPullParser parser) {
         if (inHBig && inEm) {
             result.setLastUpdate(text);
         }
@@ -123,6 +123,8 @@ public class JorudanLiveParser20100910 extends AbstractParser<JorudanLiveQuery, 
                 }
             }
         }
+
+        return false;
     }
 
 }

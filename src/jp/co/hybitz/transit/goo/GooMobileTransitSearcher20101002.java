@@ -15,7 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>
  * 
  */
-package jp.co.hybitz.transit.google;
+package jp.co.hybitz.transit.goo;
 
 import java.text.SimpleDateFormat;
 
@@ -29,28 +29,97 @@ import jp.co.hybitz.transit.AbstractTransitSearcher;
 import jp.co.hybitz.transit.model.TimeType;
 import jp.co.hybitz.transit.model.TransitQuery;
 import jp.co.hybitz.transit.model.TransitResult;
+import android.util.Log;
 
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class MobileSearcher20100827 extends AbstractTransitSearcher {
-    private static final String GOOGLE_TRANSIT_MOBILE_URL = "http://www.google.co.jp/m/directions";
-    private static final String ENCODING = "UTF-8";
-	
+public class GooMobileTransitSearcher20101002 extends AbstractTransitSearcher implements GooConst {	
 	private Platform platform;
-	
-	public MobileSearcher20100827(Platform platform) {
+
+	public GooMobileTransitSearcher20101002(Platform platform) {
 		this.platform = platform;
 	}
-	
+
     /**
      * @see jp.co.hybitz.common.Searcher#createParser()
      */
-    public Parser<TransitQuery, TransitResult> createParser(TransitQuery query, HttpResponse response) {
-        return new MobileParser20100827(platform);
-    }
-    
     @Override
+    public Parser<TransitQuery, TransitResult> createParser(TransitQuery query, HttpResponse response) {
+        if (response.getUrl().startsWith(TRANSIT_RESULT_URL)) {
+            return new GooMobileTransitParser20101002(platform, ENCODING);
+        }
+        else {
+            return new GooMobileStationParser20100930(platform, ENCODING); 
+        }
+    }
+
+    @Override
+    public String createUrl(TransitQuery query) {
+        StringBuilder sb = new StringBuilder();
+        if (StringUtils.isNotEmpty(query.getFromCode()) && StringUtils.isNotEmpty(query.getToCode())) {
+            sb.append(TRANSIT_RESULT_URL);
+        }
+        else {
+            sb.append(TRANSIT_SEARCH_URL);
+        }
+
+        // 出発地
+        sb.append("?from_station=").append(StringUtils.urlEncode(query.getFrom(), ENCODING));
+        if (StringUtils.isNotEmpty(query.getFromCode())) {
+            sb.append("&from_code=").append(query.getFromCode());
+        }
+
+        // 到着地
+        sb.append("&to_station=").append(StringUtils.urlEncode(query.getTo(), ENCODING));
+        if (StringUtils.isNotEmpty(query.getToCode())) {
+            sb.append("&to_code=").append(query.getToCode());
+        }
+        
+        // TODO 経由
+        
+        // 日付・時刻
+        if (query.getTimeType() != null) {
+            if (query.getTimeType() == TimeType.DEPARTURE) {
+                sb.append("&must=0");
+                if (query.getDate() != null) {
+                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
+                    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
+                }
+            }
+            else if (query.getTimeType() == TimeType.ARRIVAL) {
+                sb.append("&must=1");
+                if (query.getDate() != null) {
+                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
+                    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
+                }
+            }
+            else if (query.getTimeType() == TimeType.LAST) {
+                sb.append("&must=2");
+                if (query.getDate() != null) {
+                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
+                }
+            }
+        }
+        
+        // 有料特急
+        sb.append("&ex=" + (query.isUseExpress() ? "1" : "0"));
+        
+        // 表示順
+        if ("time".equals(query.getSort())) {
+            sb.append("&pri=0");
+        }
+        else if ("fare".equals(query.getSort())) {
+            sb.append("&pri=1");
+        }
+        else if ("num".equals(query.getSort())) {
+            sb.append("&pri=2");
+        }
+
+        Log.i("HELLO", sb.toString());
+        return sb.toString();
+    }
+
     protected TransitResult searchImpl(TransitQuery query) throws HttpSearchException {
         HttpResponse response = StreamUtils.getHttpResponse(createUrl(query));
 
@@ -64,57 +133,5 @@ public class MobileSearcher20100827 extends AbstractTransitSearcher {
         catch (Exception e) {
             throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
         }
-	}
-	
-    public String createUrl(TransitQuery query) {
-		StringBuilder sb = new StringBuilder(GOOGLE_TRANSIT_MOBILE_URL);
-		
-        // 出発地
-        sb.append("?saddr=").append(StringUtils.urlEncode(query.getFrom(), ENCODING));
-
-        // 到着地
-        sb.append("&daddr=").append(StringUtils.urlEncode(query.getTo(), ENCODING));
-		
-        // 日付・時刻
-        if (query.getTimeType() != null) {
-            if (query.getTimeType() == TimeType.DEPARTURE) {
-                sb.append("&ttype=dep");
-                if (query.getDate() != null) {
-                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
-                    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
-                }
-            }
-            else if (query.getTimeType() == TimeType.ARRIVAL) {
-                sb.append("&ttype=arr");
-                if (query.getDate() != null) {
-                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
-                    sb.append("&time=").append(new SimpleDateFormat("HHmm").format(query.getDate()));
-                }
-            }
-            else if (query.getTimeType() == TimeType.LAST) {
-                sb.append("&ttype=last");
-                if (query.getDate() != null) {
-                    sb.append("&date=").append(new SimpleDateFormat("yyyyMMdd").format(query.getDate()));
-                }
-            }
-        }
-        
-		// 有料特急
-		if (!query.isUseExpress()) {
-		    sb.append("&noexp=1");
-		}
-		
-		// 飛行機
-		if (!query.isUseAirline()) {
-		    sb.append("&noal=1");
-		}
-		
-		// 表示順
-		if (StringUtils.isNotEmpty(query.getSort())) {
-		    sb.append("&sort=" + query.getSort());
-		}
-		
-		sb.append("&ie=UTF8&f=d&dirmode=transit&num=3&dirflg=r");
-		return sb.toString();
 	}
 }

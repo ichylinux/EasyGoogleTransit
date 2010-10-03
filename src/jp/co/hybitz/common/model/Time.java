@@ -38,7 +38,7 @@ public class Time implements Serializable, Comparable<Time> {
     }
     
     public Time(String HHmm) {
-        this(HHmm.substring(0, 2), HHmm.substring(2));
+        this(HHmm.replaceAll(":", "").substring(0, 2), HHmm.replaceAll(":", "").substring(2));
     }
     
     public int getHour() {
