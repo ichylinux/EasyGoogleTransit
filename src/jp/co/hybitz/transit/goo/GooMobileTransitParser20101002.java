@@ -100,8 +100,11 @@ class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, Transi
         else if (inTransit) {
             if (inTable) {
                 if ("再検索".equals(text)) {
-                    createTransitDetails();
-                    result.addTransit(transit);
+                    List<TransitDetail> list = createTransitDetails();
+                    if (!list.isEmpty()) {
+                        transit.setDetails(list);
+                        result.addTransit(transit);
+                    }
                     transit = null;
                     details = null;
                     inTransit = false;
@@ -167,8 +170,8 @@ class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, Transi
         }
     }
     
-    private void createTransitDetails() {
-        System.out.println(details);
+    private List<TransitDetail> createTransitDetails() {
+        List<TransitDetail> ret = new ArrayList<TransitDetail>();
         TransitDetail td = null;
         
         for (int i = 0; i < details.size(); i ++) {
@@ -187,11 +190,16 @@ class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, Transi
                 String depOrArr = details.get(++i);
                 if ("発".equals(depOrArr)) {
                     if (td != null) {
-                        transit.addDetail(td);
+                        ret.add(td);
                     }
                     
                     String place = details.get(i+1);
                     if ("↓".equals(place)) {
+                        // 出発地が特定できないパターンはおそらくルートなし
+                        if (td == null) {
+                            return new ArrayList<TransitDetail>();
+                        }
+
                         place = td.getArrival().getPlace();
                     }
                     td = new TransitDetail();
@@ -205,7 +213,9 @@ class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, Transi
         }
         
         if (td != null) {
-            transit.addDetail(td);
+            ret.add(td);
         }
+        
+        return ret;
     }
 }

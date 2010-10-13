@@ -29,7 +29,6 @@ import jp.co.hybitz.transit.AbstractTransitSearcher;
 import jp.co.hybitz.transit.model.TimeType;
 import jp.co.hybitz.transit.model.TransitQuery;
 import jp.co.hybitz.transit.model.TransitResult;
-import android.util.Log;
 
 /**
  * @author ichy <ichylinux@gmail.com>
@@ -76,7 +75,13 @@ public class GooMobileTransitSearcher20101002 extends AbstractTransitSearcher im
             sb.append("&to_code=").append(query.getToCode());
         }
         
-        // TODO 経由
+        // 経由地
+        if (StringUtils.isNotEmpty(query.getStopOver())) {
+            sb.append("&by_station=").append(StringUtils.urlEncode(query.getStopOver(), ENCODING));
+        }
+        if (StringUtils.isNotEmpty(query.getStopOverCode())) {
+            sb.append("&sv1=").append(query.getStopOverCode());
+        }
         
         // 日付・時刻
         if (query.getTimeType() != null) {
@@ -116,7 +121,6 @@ public class GooMobileTransitSearcher20101002 extends AbstractTransitSearcher im
             sb.append("&pri=2");
         }
 
-        Log.i("HELLO", sb.toString());
         return sb.toString();
     }
 

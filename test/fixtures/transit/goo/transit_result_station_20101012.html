@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja"> 
+<head> 
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=Shift_JIS" /> 
+<meta http-equiv="cache-control" content="no-cache" /> 
+<title>駅を選択 - goo路線</title> 
+<meta name="description" content="goo路線ﾓﾊﾞｲﾙ版｡全て無料!乗換案内,終電検索,時刻表,定期代" /> 
+<meta name="keywords" content="goo,路線,乗換,終電,検索,時刻表,定期代" /> 
+<style type="text/css"> 
+<![CDATA[
+a:link{color:#0000ff;}
+a:visited{color:#0000ff;}
+]]>
+</style> 
+<meta name="viewport" content="width=320;initial-scale=1.0;maximum-scale=1.0;user-scalable=0;" /> 
+<link media="only screen and (max-device-width:480px)" href="/transit/css/iphone.css" type="text/css" rel="stylesheet" /> 
+<link media="screen and (min-device-width:481px)" href="/transit/css/pc.css" type="text/css" rel="stylesheet" /> 
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="/transit/css/ie.css" />
+<![endif]--> 
+<link rel="apple-touch-icon" href="http://cmm001.goo.ne.jp/img/sp/sn/sn_36.png"> 
+</head> 
+ 
+<body link="#0000ff" vlink="#0000ff"> 
+<div id="ie"> 
+ 
+<!-- ad 2 am ct2 --> 
+<table width="100%"><tr><td><span style="font-size:smaller;"> [PR] <a href="http://dsearch.mobile.goo.ne.jp/transit/N329.html">旅行</a>|<a href="http://dsearch.mobile.goo.ne.jp/transit/N2.html">ﾏﾈｰ</a>|<a href="http://dsearch.mobile.goo.ne.jp/transit/N441.html">ｼｮｯﾋﾟﾝｸﾞ</a><br /></span></td></tr></table> 
+<!--/ad 2 am ct2 --> 
+ 
+<!-- contents --> 
+ 
+<!-- search area --> 
+<div style="background-color:#9dcce0;background-image:url(/transit/img/header_blue.gif);background-repeat:repeat-x;border-top: 1px solid #9dcce0;border-bottom: 1px solid #9dcce0;"> 
+<table width="100%"> 
+<tr> 
+<td align="center"></td> 
+</tr> 
+</table> 
+</div> 
+<!--/search area --> 
+ 
+<!-- transit guide --> 
+<div style="background-color:#dddddd;background-image:url(/transit/img/bg.gif);background-repeat:repeat-x;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;"> 
+<table> 
+<tr> 
+<td><span style="color:#9dcce0;"><b>|</b></span>乗換案内(駅を選択)<br /></td> 
+ 
+</tr> 
+</table> 
+</div> 
+ 
+<form method="get" action="/transit/train_routes/result"> 
+<table width="100%"> 
+<tr> 
+<td bgcolor="#daebf2"><span style="font-size:smaller;">出発駅</span><br /></td> 
+<td bgcolor="#daebf2"> 
+<select name="from_code" > 
+<option value='130255'  selected>▼品川</option> 
+<option value='130256' >品川シーサイド</option> 
+</select> 
+<br /></td> 
+</tr> 
+<tr> 
+<td bgcolor="#daebf2"><span style="font-size:smaller;">到着駅</span><br /></td> 
+<td bgcolor="#daebf2"> 
+飯田橋<input type="hidden" name="to_code" value="130037" /> 
+<br /></td> 
+</tr> 
+<tr> 
+<td bgcolor="#daebf2" rowspan="1"><span style="font-size:smaller;">経由駅</span><br /></td> 
+<td bgcolor="#daebf2">秋葉原<input type="hidden" name="sv1" value="130016" /> 
+<br /></td> 
+</tr></table> 
+ 
+<table> 
+<tr> 
+<td><input type="submit" name="station_fix" value="　決定　" /><br /></td> 
+</tr> 
+</table> 
+<input type="hidden" name="from_station" value="品川" /> 
+<input type="hidden" name="search_from" value="品川" /> 
+<input type="hidden" name="to_station" value="飯田橋" /> 
+<input type="hidden" name="search_to" value="飯田橋" /> 
+<input type="hidden" name="name" value="" /> 
+<input type="hidden" name="code" value="" /> 
+<input type="hidden" name="by_station" value="秋葉原" /> 
+<input type="hidden" name="search_by" value="秋葉原" /> 
+<input type="hidden" name="date" value="20101012" /> 
+<input type="hidden" name="time" value="0549" /> 
+<input type="hidden" name="pri" value="0" /> 
+<input type="hidden" name="must" value="0" /> 
+<input type="hidden" name="ex" value="1" /> 
+<input type="hidden" name="rsvd" value="0" /> 
+<input type="hidden" name="max" value="3" /> 
+<input type="hidden" name="stype" value="7" /> 
+<input type="hidden" name="time_flag" value="" /> 
+<input type="hidden" name="mode" value="" /> 
+<input type="hidden" name="FM" value="" /> 
+</form> 
+<hr style="border:1px solid #ffffff;margin:2px 0;color:#ffffff;" /> 
+<!-- /transit guide --> 
+ 
+<!-- menu --> 
+<div style="background-color:#dddddd;background-image:url(/transit/img/bg.gif);background-repeat:repeat-x;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;"> 
+<table> 
+<tr> 
+<td><span style="color:#9dcce0;"><b>|</b></span>メニュー<br /></td> 
+</tr> 
+</table> 
+</div> 
+ 
+<table width="100%"> 
+<tr> 
+ 
+<td><img src="/img/cmm/emoji/m_0030.gif" width="12" height="12"/><a href="/transit/">乗換案内</a><br /></td> 
+</tr> 
+<tr> 
+<td><img src="/img/cmm/emoji/m_0119.gif" width="12" height="12"/><a href="/transit/timetables/index">時刻表</a><br /></td> 
+</tr> 
+<tr> 
+<td><img src="/img/cmm/emoji/m_0119.gif" width="12" height="12"/><a href="/transit/train_operations/index">運行情報</a><br /></td> 
+</tr> 
+</table> 
+<hr style="border:1px solid #ffffff;margin:2px 0;color:#ffffff;" /> 
+<!--/menu --> 
+ 
+ 
+<!-- mypage --> 
+ 
+<!-- tools --> 
+<div style="background-color:#dddddd;background-image:url(/transit/img/bg.gif);background-repeat:repeat-x;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;"> 
+<table> 
+<tr> 
+<td><span style="color:#9dcce0;"><b>|</b></span>便利ツール<img src="/img/cmm/emoji/m_0114.gif" width="12" height="12"/><br /></td> 
+</tr> 
+</table> 
+</div> 
+ 
+<table width="100%"> 
+ 
+<tr> 
+<td><img src="/img/cmm/emoji/m_0001.gif" width="12" height="12"/><a href="http://mobile.goo.ne.jp/weather/">天気予報</a><br /></td> 
+</tr> 
+<tr> 
+<td><span style="color:#666666;font-size:smaller;">└各地の天気,警報注意報</span><br /></td> 
+</tr> 
+<tr> 
+<td><img src="/img/cmm/emoji/m_0050.gif" width="12" height="12"/><a href="http://search.machi.goo.ne.jp/m/mg_g_t.php?mg=0">グルメ検索</a><br /></td> 
+</tr> 
+<tr> 
+<td><span style="color:#666666;font-size:smaller;">└ぐるなび,食べログ検索</span><br /></td> 
+</tr> 
+<tr> 
+ 
+<td><img src="/img/cmm/emoji/m_0039.gif" width="12" height="12"/><a href="http://search.machi.goo.ne.jp/m/mg_s_t.php?mg=0">スポット検索</a><br /></td> 
+</tr> 
+<tr> 
+<td><span style="color:#666666;font-size:smaller;">└遊び,買い物,施設情報</span><br /></td> 
+</tr> 
+<tr> 
+<td><img src="/img/cmm/emoji/m_0030.gif" width="12" height="12"/><a href="/transit/">乗換案内</a><br /></td> 
+</tr> 
+<tr> 
+<td><span style="color:#666666;font-size:smaller;">└乗換,時刻表,運行情報</span><br /></td> 
+</tr> 
+<tr> 
+<td><img src="/img/cmm/emoji/m_0121.gif" width="12" height="12"/><a href="http://search.machi.goo.ne.jp/m/m.php?mg=0">地図検索</a><br /></td> 
+ 
+</tr> 
+<tr> 
+<td><span style="color:#666666;font-size:smaller;">└日本地図,世界地図</span><br /></td> 
+</tr> 
+<tr> 
+<td><img src="/img/cmm/emoji/m_0092.gif" width="12" height="12"/><a href="http://search.machi.goo.ne.jp/m/n_s.php?mg=0">ルートガイド</a><br /></td> 
+</tr> 
+<tr> 
+<td><span style="color:#666666;font-size:smaller;">└徒歩/乗換/車のルート検索</span><br /></td> 
+</tr> 
+</table> 
+<hr style="border:1px solid #ffffff;margin:2px 0;color:#ffffff;" /> 
+<!-- /tools --> 
+ 
+<!-- ad 5 cat --> 
+<div style="background-color:#dddddd;background-image:url(/transit/img/bg.gif);background-repeat:repeat-x;border-top: 1px solid #dddddd;border-bottom: 1px solid #dddddd;"> 
+<table> 
+<tr> 
+<td><span style="color:#9dcce0;"><b>|</b></span>[PR]<a href="http://dsearch.mobile.goo.ne.jp/transit/"><span style="color:#000000;">カテゴリ検索</span></a><br /></td> 
+</tr> 
+</table> 
+</div> 
+<table width="100%"> 
+<tr><td><a href="http://dsearch.mobile.goo.ne.jp/transit/N3039.html">悩み</a>&nbsp;<a href="http://dsearch.mobile.goo.ne.jp/transit/N2.html">マネー</a>&nbsp;<a href="http://dsearch.mobile.goo.ne.jp/transit/N266.html">占い</a>&nbsp;<a href="http://dsearch.mobile.goo.ne.jp/transit/N496.html">病院</a><br /></td></tr><tr><td><a href="http://dsearch.mobile.goo.ne.jp/transit/N2454.html">懸賞</a>&nbsp;<a href="http://dsearch.mobile.goo.ne.jp/transit/N441.html">ｼｮｯﾋﾟﾝｸﾞ</a>&nbsp;<a href="http://dsearch.mobile.goo.ne.jp/transit/N1306.html">美容</a>&nbsp;<a href="http://dsearch.mobile.goo.ne.jp/transit/N1452.html">着うた</a> 
+</table> 
+ 
+<hr style="border:1px solid #ffffff;margin:2px 0;color:#ffffff;" /> 
+<!--/ad 5 cat --> 
+ 
+<!-- footer blue --> 
+<div style="background-color:#9dcce0;background-image:url(/transit/img/header_blue.gif);background-repeat:repeat-x;border-top: 1px solid #9dcce0;border-bottom: 1px solid #9dcce0;"> 
+<table><tr><td></td></tr></table> 
+</div> 
+<!--/footer blue --> 
+<!--/contents --> 
+ 
+<!-- service footer --> 
+<table width="100%"> 
+<tr> 
+<td><span style="font-size:smaller;"><img src="/img/cmm/emoji/m_0110.gif" width="12" height="12"/><a href="mailto:?subject=%E9%A7%85%E3%82%92%E9%81%B8%E6%8A%9E%20-%20goo%E8%B7%AF%E7%B7%9A&amp;body=http%3A%2F%2Fmobile.goo.ne.jp%2Ftransit%2Ftrain_routes%2Fdetail_search%3F%26from_station%3D%2595i%2590%25EC%26from_code%3D%26search_from%3D%26to_station%3D%2594%25D1%2593c%258B%25B4%26to_code%3D%26search_to%3D%26name%3D%26code%3D%26by_station%3D%258FH%2597t%258C%25B4%26by_code%3D%26search_by%3D%26date%3D20101012%26time%3D0549%26pri%3D0%26must%3D0%26ex%3D1%26rsvd%3D0%26max%3D3%26stype%3D7%26time_flag%3D%26mode%3D%26FM%3D">友達に教える</a></span><br /></td> 
+</tr><tr> 
+<td><span style="font-size:smaller;"><img src="/img/cmm/emoji/m_0151.gif" width="12" height="12"/><a href="/transit/train_routes/help">ヘルプ/案内</a></span><br /></td> 
+</tr> 
+</table> 
+<hr style="border:1px solid #ffffff;margin:2px 0;color:#ffffff;" /> 
+<!--/service footer --> 
+ 
+<!-- mylink --> 
+<script type="text/javascript" src=" http://mobile.goo.ne.jp/js/mylink.js"></script> 
+<!--/mylink --> 
+ 
+<!-- global footer --> 
+ 
+<table width="100%"> 
+<tr> 
+<td colspan="2"><span style="font-size:smaller;"><img src="/img/cmm/emoji/m_0133.gif" width="12" height="12"/><a href="/transit/" accesskey="9">goo路線トップ</a></span><br /></td> 
+</tr> 
+<tr> 
+<td colspan="2"><span style="font-size:smaller;"><img src="/img/cmm/emoji/m_0134.gif" width="12" height="12"/><a href="http://mobile.goo.ne.jp/?guid=ON" accesskey="0">gooトップ</a></span><br /></td> 
+</tr> 
+<tr> 
+<td colspan="2"><span style="font-size:smaller;"><img src="/img/cmm/emoji/m_0110.gif" width="12" height="12"/><a href="https://gw.mobile.goo.ne.jp/gw/helps/mform/mcontact.php">お問い合わせ</a></span><br /></td> 
+</tr> 
+<tr> 
+<td><span style="font-size:smaller;"><img src="/img/cmm/emoji/m_0070.gif" width="12" height="12"/><a href="http://mobile.goo.ne.jp/help/agreement/">免責事項</a></span><br /></td> 
+ 
+<td align="right"><img src="/transit/img/nttr.gif" alt="NTTレゾナント" width="106" height="21" /><br /></td> 
+</tr> 
+</table> 
+<table bgcolor="#efefef" width="100%"> 
+<tr> 
+<td align="center">(C)NTT Resonant<br /></td> 
+</tr> 
+</table> 
+<!--/global footer --> 
+ 
+</div> 
+</body> 
+</html> 

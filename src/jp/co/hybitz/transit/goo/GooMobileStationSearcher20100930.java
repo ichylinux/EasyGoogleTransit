@@ -17,9 +17,7 @@
  */
 package jp.co.hybitz.transit.goo;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 import jp.co.hybitz.common.HttpResponse;
 import jp.co.hybitz.common.HttpSearchException;
@@ -27,6 +25,7 @@ import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.Searcher;
 import jp.co.hybitz.common.StreamUtils;
+import jp.co.hybitz.common.StringUtils;
 import jp.co.hybitz.transit.model.Station;
 import jp.co.hybitz.transit.model.TransitQuery;
 import jp.co.hybitz.transit.model.TransitResult;
@@ -105,20 +104,20 @@ public class GooMobileStationSearcher20100930 implements Searcher<TransitQuery, 
     
     @Override
     public String createUrl(TransitQuery query) {
-        try {
-            StringBuilder sb = new StringBuilder(STATION_URL);
-            
-            // 出発地
-            sb.append("?from_station=").append(URLEncoder.encode(query.getFrom(), ENCODING));
-            
-            // 到着地
-            sb.append("&to_station=").append(URLEncoder.encode(query.getTo(), ENCODING));
+        StringBuilder sb = new StringBuilder(STATION_URL);
+        
+        // 出発地
+        sb.append("?from_station=").append(StringUtils.urlEncode(query.getFrom(), ENCODING));
+        
+        // 到着地
+        sb.append("&to_station=").append(StringUtils.urlEncode(query.getTo(), ENCODING));
 
-            return sb.toString();
+        // 経由地
+        if (StringUtils.isNotEmpty(query.getStopOver())) {
+            sb.append("&by_station=").append(StringUtils.urlEncode(query.getStopOver(), ENCODING));
         }
-        catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException(e.getMessage(), e);
-        }
+
+        return sb.toString();
     }
 
     /**

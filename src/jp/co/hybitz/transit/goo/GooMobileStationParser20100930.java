@@ -35,6 +35,7 @@ class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, Transi
 	private boolean inForm;
 	private boolean inFromCode;
 	private boolean inToCode;
+	private boolean inByCode;
 	private boolean inOption;
 
 	public GooMobileStationParser20100930(Platform platform, String encoding) {
@@ -63,12 +64,20 @@ class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, Transi
         else if (inForm && isSelect("to_code")) {
             inToCode = true;
         }
+        else if (inForm && isSelect("sv1")) {
+            inByCode = true;
+        }
         else if (inFromCode && isOption()) {
             inOption = true;
             station = new Station();
             station.setCode(getAttribute("value").replaceAll("'", ""));
         }
         else if (inToCode && isOption()) {
+            inOption = true;
+            station = new Station();
+            station.setCode(getAttribute("value").replaceAll("'", ""));
+        }
+        else if (inByCode && isOption()) {
             inOption = true;
             station = new Station();
             station.setCode(getAttribute("value").replaceAll("'", ""));
@@ -86,6 +95,12 @@ class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, Transi
                 station.setCode(getAttribute("value"));
                 result.addToStation(station);
             }
+            else if ("sv1".equals(getAttribute("name"))) {
+                station = new Station();
+                station.setName(normalize(query.getStopOver()));
+                station.setCode(getAttribute("value"));
+                result.addStopOverStation(station);
+            }
         }
 
         return false;
@@ -100,6 +115,7 @@ class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, Transi
         else if (inForm && isSelect()) {
             inFromCode = false;
             inToCode = false;
+            inByCode = false;
         }
         else if (inFromCode && isOption()) {
             result.addFromStation(station);
@@ -108,6 +124,11 @@ class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, Transi
         }
         else if (inToCode && isOption()) {
             result.addToStation(station);
+            station = null;
+            inOption = false;
+        }
+        else if (inByCode && isOption()) {
+            result.addStopOverStation(station);
             station = null;
             inOption = false;
         }

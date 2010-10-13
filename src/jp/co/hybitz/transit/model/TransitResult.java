@@ -38,6 +38,7 @@ public class TransitResult extends HttpResponse {
     private Maybe maybe;
     private List<Station> fromStations = new ArrayList<Station>();
     private List<Station> toStations = new ArrayList<Station>();
+    private List<Station> stopOverStations = new ArrayList<Station>();
     
     public Date getQueryDate() {
         return queryDate;
@@ -141,5 +142,18 @@ public class TransitResult extends HttpResponse {
     
     public void addToStation(Station station) {
         toStations.add(station);
+    }
+    
+    /**
+     * 経由駅候補一覧を取得します。
+     * 
+     * @return
+     */
+    public List<Station> getStopOverStations() {
+        return stopOverStations;
+    }
+    
+    public void addStopOverStation(Station station) {
+        stopOverStations.add(station);
     }
 }

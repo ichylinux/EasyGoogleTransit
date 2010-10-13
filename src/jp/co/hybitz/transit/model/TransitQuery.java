@@ -33,6 +33,8 @@ public class TransitQuery implements Serializable {
 	private String fromCode;
 	private String to;
 	private String toCode;
+	private String stopOver;
+	private String stopOverCode;
     private TimeType timeType;
 	private Date date;
 	private boolean useExpress;
@@ -72,6 +74,23 @@ public class TransitQuery implements Serializable {
     public void setToCode(String toCode) {
         this.toCode = toCode;
     }
+    
+    public String getStopOver() {
+        return stopOver;
+    }
+
+    public void setStopOver(String stopOver) {
+        this.stopOver = stopOver;
+    }
+
+    public String getStopOverCode() {
+        return stopOverCode;
+    }
+
+    public void setStopOverCode(String stopOverCode) {
+        this.stopOverCode = stopOverCode;
+    }
+
     public TimeType getTimeType() {
         return timeType;
     }

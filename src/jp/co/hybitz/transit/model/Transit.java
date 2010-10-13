@@ -55,6 +55,10 @@ public class Transit implements Serializable {
 		details.add(detail);
 	}
 	
+	public void setDetails(List<TransitDetail> details) {
+	    this.details = details;
+	}
+	
 	public TransitDetail getFirstPublicTransportation() {
 	    for (int i = 0; i < details.size(); i ++) {
 	        TransitDetail detail = details.get(i);
