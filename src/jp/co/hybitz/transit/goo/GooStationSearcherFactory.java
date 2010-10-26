@@ -28,7 +28,7 @@ import jp.co.hybitz.transit.model.TransitResult;
 public class GooStationSearcherFactory {
 
     public static Searcher<TransitQuery, TransitResult> createSearcher() {
-        return new GooMobileStationSearcher20100930(Platform.HTML);
+        return new GooMobileStationSearcher(Platform.HTML);
     }
 
 }

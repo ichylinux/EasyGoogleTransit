@@ -28,7 +28,7 @@ import org.xmlpull.v1.XmlPullParser;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, TransitResult> {
+class GooMobileStationParser extends AbstractParser<TransitQuery, TransitResult> {
     private TransitQuery query;
     private TransitResult result;
 	private Station station;
@@ -38,7 +38,7 @@ class GooMobileStationParser20100930 extends AbstractParser<TransitQuery, Transi
 	private boolean inByCode;
 	private boolean inOption;
 
-	public GooMobileStationParser20100930(Platform platform, String encoding) {
+	public GooMobileStationParser(Platform platform, String encoding) {
 	    super(platform, encoding);
 	}
 

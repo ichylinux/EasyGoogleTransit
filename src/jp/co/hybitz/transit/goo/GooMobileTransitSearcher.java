@@ -33,10 +33,10 @@ import jp.co.hybitz.transit.model.TransitResult;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooMobileTransitSearcher20101002 extends AbstractTransitSearcher implements GooConst {	
+public class GooMobileTransitSearcher extends AbstractTransitSearcher implements GooConst {	
 	private Platform platform;
 
-	public GooMobileTransitSearcher20101002(Platform platform) {
+	public GooMobileTransitSearcher(Platform platform) {
 		this.platform = platform;
 	}
 
@@ -46,10 +46,10 @@ public class GooMobileTransitSearcher20101002 extends AbstractTransitSearcher im
     @Override
     public Parser<TransitQuery, TransitResult> createParser(TransitQuery query, HttpResponse response) {
         if (response.getUrl().startsWith(TRANSIT_RESULT_URL)) {
-            return new GooMobileTransitParser20101002(platform, ENCODING);
+            return new GooMobileTransitParser(platform, ENCODING);
         }
         else {
-            return new GooMobileStationParser20100930(platform, ENCODING); 
+            return new GooMobileStationParser(platform, ENCODING); 
         }
     }
 

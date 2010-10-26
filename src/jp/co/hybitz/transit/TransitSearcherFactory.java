@@ -20,7 +20,7 @@ package jp.co.hybitz.transit;
 import jp.co.hybitz.common.Engine;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.Searcher;
-import jp.co.hybitz.transit.goo.GooMobileTransitSearcher20101002;
+import jp.co.hybitz.transit.goo.GooMobileTransitSearcher;
 import jp.co.hybitz.transit.google.MobileSearcher20100827;
 import jp.co.hybitz.transit.model.TransitQuery;
 import jp.co.hybitz.transit.model.TransitResult;
@@ -32,7 +32,7 @@ public class TransitSearcherFactory {
 
     public static Searcher<TransitQuery, TransitResult> createSearcher(Engine engine) {
         if (engine == Engine.GOO) {
-            return new GooMobileTransitSearcher20101002(Platform.HTML);
+            return new GooMobileTransitSearcher(Platform.HTML);
         }
         else if (engine == Engine.GOOGLE) {
             return new MobileSearcher20100827(Platform.GENERIC);
@@ -43,7 +43,7 @@ public class TransitSearcherFactory {
 
     public static Searcher<TransitQuery, TransitResult> createSearcher(Engine engine, Platform platform) {
         if (engine == Engine.GOO) {
-            return new GooMobileTransitSearcher20101002(Platform.HTML);
+            return new GooMobileTransitSearcher(Platform.HTML);
         }
         else if (engine == Engine.GOOGLE) {
             return new MobileSearcher20100827(platform);

@@ -35,7 +35,7 @@ import org.xmlpull.v1.XmlPullParser;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, TransitResult> {
+class GooMobileTransitParser extends AbstractParser<TransitQuery, TransitResult> {
     private TransitResult result;
 	private Transit transit;
 	private List<String> details;
@@ -44,11 +44,11 @@ class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, Transi
 	private boolean inDiv;
 	private boolean inTable;
 	
-	public GooMobileTransitParser20101002(Platform platform) {
+	public GooMobileTransitParser(Platform platform) {
 	    super(platform);
 	}
 
-    public GooMobileTransitParser20101002(Platform platform, String encoding) {
+    public GooMobileTransitParser(Platform platform, String encoding) {
         super(platform, encoding);
     }
 
@@ -190,9 +190,16 @@ class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, Transi
                 String depOrArr = details.get(++i);
                 if ("発".equals(depOrArr)) {
                     if (td != null) {
-                        ret.add(td);
+                        // 徒歩の場合は追加
+                        if (td.isWalking()) {
+                            ret.add(td);
+                        }
+                        // 到着地がない場合は通過と思われるので無視
+                        else if (td.getArrival() != null) {
+                            ret.add(td);
+                        }
                     }
-                    
+
                     String place = details.get(i+1);
                     if ("↓".equals(place)) {
                         // 出発地が特定できないパターンはおそらくルートなし
@@ -202,8 +209,19 @@ class GooMobileTransitParser20101002 extends AbstractParser<TransitQuery, Transi
 
                         place = td.getArrival().getPlace();
                     }
-                    td = new TransitDetail();
-                    td.setDeparture(new TimeAndPlace(new Time(s), place));
+                    
+                    if (td == null) {
+                        td = new TransitDetail();
+                        td.setDeparture(new TimeAndPlace(new Time(s), place));
+                    }
+                    else if (td.isWalking()) {
+                        td = new TransitDetail();
+                        td.setDeparture(new TimeAndPlace(new Time(s), place));
+                    }
+                    else if (td.getArrival() != null) {
+                        td = new TransitDetail();
+                        td.setDeparture(new TimeAndPlace(new Time(s), place));
+                    }
                 }
                 else if ("着".equals(depOrArr)) {
                     String place = details.get(++i);

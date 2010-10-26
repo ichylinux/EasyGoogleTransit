@@ -33,10 +33,10 @@ import jp.co.hybitz.transit.model.TransitResult;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooMobileStationSearcher20100930 implements Searcher<TransitQuery, TransitResult>, GooConst {
+public class GooMobileStationSearcher implements Searcher<TransitQuery, TransitResult>, GooConst {
 	private Platform platform;
 
-	public GooMobileStationSearcher20100930(Platform platform) {
+	public GooMobileStationSearcher(Platform platform) {
 		this.platform = platform;
 	}
 
@@ -77,7 +77,7 @@ public class GooMobileStationSearcher20100930 implements Searcher<TransitQuery, 
                     result.addToStation(to);
                 }
                 else {
-                    Parser<TransitQuery, TransitResult> parser = new GooMobileStationParser20100930(platform, ENCODING); 
+                    Parser<TransitQuery, TransitResult> parser = new GooMobileStationParser(platform, ENCODING); 
                     result = parser.parse(response.getInputStream(), query);
                 }
             }
@@ -99,7 +99,7 @@ public class GooMobileStationSearcher20100930 implements Searcher<TransitQuery, 
      */
     @Override
     public Parser<TransitQuery, TransitResult> createParser(TransitQuery query, HttpResponse response) {
-        return new GooMobileStationParser20100930(platform, ENCODING);
+        return new GooMobileStationParser(platform, ENCODING);
     }
     
     @Override

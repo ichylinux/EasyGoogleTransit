@@ -30,7 +30,7 @@ public class GooMobileTransitParser20101002Test extends ParserTestCase {
 
     @Override
     protected Parser<TransitQuery, TransitResult> getParser() {
-        return new GooMobileTransitParser20101002(Platform.HTML, "UTF-8");
+        return new GooMobileTransitParser(Platform.HTML, "UTF-8");
     }    
 
     public void testParse20101002_01() {
