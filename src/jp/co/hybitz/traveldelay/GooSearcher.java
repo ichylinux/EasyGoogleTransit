@@ -37,11 +37,10 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooSearcher20100823 implements TravelDelaySearcher {
-	private static final String ENCODING = "EUC-JP";
+public class GooSearcher implements TravelDelaySearcher {
 	private Platform platform;
 	
-	public GooSearcher20100823(Platform platform) {
+	public GooSearcher(Platform platform) {
 		this.platform = platform;
 	}
 	
@@ -66,7 +65,7 @@ public class GooSearcher20100823 implements TravelDelaySearcher {
 		}
 		catch (Exception e) {
             try {
-                throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray(), ENCODING), e);
+                throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray(), query.getEncoding()), e);
             }
             catch (UnsupportedEncodingException e1) {
                 throw new IllegalStateException(e.getMessage(), e);
@@ -78,14 +77,15 @@ public class GooSearcher20100823 implements TravelDelaySearcher {
 		XmlPullParser xmlParser = XmlPullParserFactory.getParser(platform);
 		TravelDelayParser ret = null;
 		if (query.getCategory() == null) {
-		    ret = new GooParser20100818(xmlParser);
+		    ret = new GooParser(xmlParser);
 		}
 		else {
-            ret = new GooDetailParser20100823(xmlParser);
+            ret = new GooDetailParser(xmlParser);
             ret.setAirline(query.getCategory().isAirline());
+            ret.setSeaway(query.getCategory().isSeaway());
             ret.setArrival(query.getCategory().isArrival());
 		}
-		ret.setEncoding(ENCODING);
+		ret.setEncoding(query.getEncoding());
 		return ret;
 	}
 	

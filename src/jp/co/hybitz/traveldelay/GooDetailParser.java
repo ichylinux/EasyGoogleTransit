@@ -33,7 +33,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class GooDetailParser20100823 implements TravelDelayParser {
+class GooDetailParser implements TravelDelayParser {
     private XmlPullParser parser;
     private String encoding;
     private TravelDelayResult result = new TravelDelayResult();
@@ -41,9 +41,10 @@ class GooDetailParser20100823 implements TravelDelayParser {
 	private OperationCompany company;
 	private TravelDelay delay;
 	private boolean airline;
+    private boolean seaway;
 	private boolean arrival;
 	
-	public GooDetailParser20100823(XmlPullParser parser) {
+	public GooDetailParser(XmlPullParser parser) {
 	    this.parser = parser;
 	}
 	
@@ -54,6 +55,11 @@ class GooDetailParser20100823 implements TravelDelayParser {
     @Override
     public void setAirline(boolean airline) {
         this.airline = airline;
+    }
+
+    @Override
+    public void setSeaway(boolean seaway) {
+        this.seaway = seaway;
     }
 
     @Override
@@ -126,6 +132,20 @@ class GooDetailParser20100823 implements TravelDelayParser {
                         String text = parser.getText().trim();
                         if (StringUtils.isNotEmpty(text)) {
                             if (airline) {
+                                if (delay.getDate() == null) {
+                                    delay.setDate(text);
+                                }
+                                else if (delay.getAirline() == null) {
+                                    delay.setAirline(text);
+                                }
+                                else if (delay.getPlace() == null) {
+                                    delay.setPlace(text);
+                                }
+                                else if (delay.getCondition() == null) {
+                                    delay.setCondition(text);
+                                }
+                            }
+                            else if (seaway) {
                                 if (delay.getDate() == null) {
                                     delay.setDate(text);
                                 }

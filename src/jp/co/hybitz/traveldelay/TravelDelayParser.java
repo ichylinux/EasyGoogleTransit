@@ -28,5 +28,6 @@ public interface TravelDelayParser {
 	TravelDelayResult parse(InputStream in) throws Exception;
 	void setEncoding(String encoding);
 	void setAirline(boolean airline);
+    void setSeaway(boolean seaway);
 	void setArrival(boolean arrival);
 }

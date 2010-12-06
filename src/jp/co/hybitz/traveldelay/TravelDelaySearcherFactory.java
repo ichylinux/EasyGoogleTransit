@@ -25,10 +25,10 @@ import jp.co.hybitz.common.Platform;
 public class TravelDelaySearcherFactory {
 
     public static TravelDelaySearcher createSearcher() {
-        return new GooSearcher20100823(Platform.GENERIC);
+        return new GooSearcher(Platform.GENERIC);
     }
 
     public static TravelDelaySearcher createSearcher(Platform platform) {
-        return new GooSearcher20100823(platform);
+        return new GooSearcher(platform);
     }
 }

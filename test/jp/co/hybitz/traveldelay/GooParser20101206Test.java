@@ -17,9 +17,6 @@
  */
 package jp.co.hybitz.traveldelay;
 
-import jp.co.hybitz.common.SimpleXmlPullParser;
-import jp.co.hybitz.traveldelay.GooParser;
-import jp.co.hybitz.traveldelay.TravelDelayParser;
 import jp.co.hybitz.traveldelay.model.Category;
 import jp.co.hybitz.traveldelay.model.OperationCompany;
 import jp.co.hybitz.traveldelay.model.TravelDelay;
@@ -30,14 +27,9 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooParser20100818Test extends ParserTestCase {
+public class GooParser20101206Test extends GooParser20100818Test {
 
-    @Override
-    protected TravelDelayParser getParser() throws XmlPullParserException {
-        return new GooParser(new SimpleXmlPullParser());
-    }    
-
-    public void testParse20100818() {
+    public void testParse20101206() {
         TravelDelayParser parser = null;
         try {
             parser = getParser();
@@ -48,18 +40,18 @@ public class GooParser20100818Test extends ParserTestCase {
         
         TravelDelayResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/delay/travel_delay_result_20100818.html"));
+            result = parser.parse(getClass().getResourceAsStream("/delay/travel_delay_result_20101206.html"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
         }
         
-        assertEquals(9, result.getCategories().size());
+        assertEquals(8, result.getCategories().size());
 
-        Category c = result.getCategories().get(0);
-        assertEquals("東北", c.getName());
+        Category c = result.getCategories().get(1);
+        assertEquals("中部", c.getName());
         OperationCompany oc = c.getOperationCompanies().get(0);
         TravelDelay td = oc.getTravelDelays().get(0);
-        assertEquals("08/18 21:14 奥羽本線[新庄～青森] － 運転見合わせ", td.getCondition());
+        assertEquals("12/06 22:00 中央本線[大月～塩尻] － 列車遅延", td.getCondition());
     }
 }

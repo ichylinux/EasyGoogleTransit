@@ -32,7 +32,7 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-class GooParser20100818 implements TravelDelayParser {
+class GooParser implements TravelDelayParser {
     private XmlPullParser parser;
     private String encoding;
     private TravelDelayResult result = new TravelDelayResult();
@@ -40,7 +40,7 @@ class GooParser20100818 implements TravelDelayParser {
 	private OperationCompany company;
 	private TravelDelay delay;
 	
-	public GooParser20100818(XmlPullParser parser) {
+	public GooParser(XmlPullParser parser) {
 	    this.parser = parser;
 	}
 	
@@ -50,6 +50,10 @@ class GooParser20100818 implements TravelDelayParser {
 
     @Override
     public void setAirline(boolean airline) {
+    }
+
+    @Override
+    public void setSeaway(boolean seaway) {
     }
 
     @Override

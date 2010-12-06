@@ -41,6 +41,11 @@ public class HttpSearchException extends Exception implements Serializable {
         super(cause);
     }
 
+    public HttpSearchException(String message, String html) {
+        super(message);
+        this.html = html;
+    }
+
     public HttpSearchException(String message, String html, Throwable cause) {
         super(message, cause);
         this.html = html;

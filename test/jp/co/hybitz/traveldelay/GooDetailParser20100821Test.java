@@ -18,7 +18,7 @@
 package jp.co.hybitz.traveldelay;
 
 import jp.co.hybitz.common.SimpleXmlPullParser;
-import jp.co.hybitz.traveldelay.GooDetailParser20100823;
+import jp.co.hybitz.traveldelay.GooDetailParser;
 import jp.co.hybitz.traveldelay.TravelDelayParser;
 import jp.co.hybitz.traveldelay.model.Category;
 import jp.co.hybitz.traveldelay.model.OperationCompany;
@@ -34,7 +34,7 @@ public class GooDetailParser20100821Test extends ParserTestCase {
 
     @Override
     protected TravelDelayParser getParser() throws XmlPullParserException {
-        return new GooDetailParser20100823(new SimpleXmlPullParser());
+        return new GooDetailParser(new SimpleXmlPullParser());
     }    
 
     public void testParse20100821_01() {
@@ -48,7 +48,7 @@ public class GooDetailParser20100821Test extends ParserTestCase {
         
         TravelDelayResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/travel_delay_result_detail_20100821_01.html"));
+            result = parser.parse(getClass().getResourceAsStream("/delay/travel_delay_result_detail_20100821_01.html"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
@@ -77,7 +77,7 @@ public class GooDetailParser20100821Test extends ParserTestCase {
         
         TravelDelayResult result = null;
         try {
-            result = parser.parse(getClass().getResourceAsStream("/travel_delay_result_detail_20100821_02.html"));
+            result = parser.parse(getClass().getResourceAsStream("/delay/travel_delay_result_detail_20100821_02.html"));
         } catch (Exception e) {
             e.printStackTrace();
             fail(e.getMessage());
