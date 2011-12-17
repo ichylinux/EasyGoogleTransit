@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2010 Hybitz.co.ltd
+ * Copyright (C) 2010-2011 Hybitz.co.ltd
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,9 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import jp.co.hybitz.common.HttpResponse;
 import jp.co.hybitz.common.HttpSearchException;
+import jp.co.hybitz.common.Parser;
 import jp.co.hybitz.common.Platform;
 import jp.co.hybitz.common.StreamUtils;
 import jp.co.hybitz.common.XmlPullParserFactory;
@@ -48,13 +50,18 @@ public class GooSearcher implements TravelDelaySearcher {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
 		try {
-		    TravelDelayResult result;
+	        TravelDelayParser parser = createParser(query);
+	        if (parser == null) {
+	            return handleMobile(query);
+	        }
+
+	        TravelDelayResult result;
 		    
 		    HttpURLConnection con = openConnection(query);
 		    if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 StreamUtils.write(con.getInputStream(), baos);
                 ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		        result = createParser(query).parse(bais);
+                result = createParser(query).parse(bais);
 		    }
 		    else {
 		        result = new TravelDelayResult();
@@ -65,7 +72,7 @@ public class GooSearcher implements TravelDelaySearcher {
 		}
 		catch (Exception e) {
             try {
-                throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray(), query.getEncoding()), e);
+                throw new HttpSearchException(e.getMessage(), new String(baos.toByteArray(), getEncoding(query.isMobile())), e);
             }
             catch (UnsupportedEncodingException e1) {
                 throw new IllegalStateException(e.getMessage(), e);
@@ -73,20 +80,52 @@ public class GooSearcher implements TravelDelaySearcher {
 		}
 	}
 	
+	private TravelDelayResult handleMobile(TravelDelayQuery query) throws HttpSearchException {
+        HttpResponse response = StreamUtils.getHttpResponse(GOO_TRAVEL_DELAY_URL);
+        try {
+            TravelDelayResult result;
+            
+            if (response.isOK()) {
+                Parser<TravelDelayQuery, TravelDelayResult> parser = new GooMobileParser(platform, getEncoding(query.isMobile())); 
+                result = parser.parse(response.getInputStream(), query);
+            }
+            else {
+                result = new TravelDelayResult();
+            }
+            
+            result.setResponseCode(response.getResponseCode());
+            result.setRawResponse(response.getRawResponse());
+            return result;
+        }
+        catch (Exception e) {
+            throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
+        }
+	}
+	
+	private String getEncoding(boolean mobile) {
+	    return mobile ? "Shift_JIS" : "EUC-JP";
+	}
+	
 	private TravelDelayParser createParser(TravelDelayQuery query) throws XmlPullParserException {
 		XmlPullParser xmlParser = XmlPullParserFactory.getParser(platform);
-		TravelDelayParser ret = null;
+
 		if (query.getCategory() == null) {
-		    ret = new GooParser(xmlParser);
+		    if (query.isMobile()) {
+		        return null;
+		    } else {
+		        TravelDelayParser ret = new GooPcParser(xmlParser);
+	            ret.setEncoding(getEncoding(query.isMobile()));
+	            return ret;
+		    }
 		}
 		else {
-            ret = new GooDetailParser(xmlParser);
+		    TravelDelayParser ret = new GooDetailParser(xmlParser);
             ret.setAirline(query.getCategory().isAirline());
             ret.setSeaway(query.getCategory().isSeaway());
             ret.setArrival(query.getCategory().isArrival());
+            ret.setEncoding(getEncoding(query.isMobile()));
+            return ret;
 		}
-		ret.setEncoding(query.getEncoding());
-		return ret;
 	}
 	
 	protected HttpURLConnection openConnection(TravelDelayQuery query) throws IOException {

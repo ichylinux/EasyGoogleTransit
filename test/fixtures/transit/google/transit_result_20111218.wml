@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.2//EN" "http://www.wapforum.org/DTD/wml12.dtd">
+ <wml> 
+ <head> 
+ <meta http-equiv="Content-Type" content="text/vnd.wap.wml; charset=UTF-8"/>
+ <meta http-equiv="Cache-Control" content="no-cache"/> 
+ </head> 
+ <card title="枚方市駅～放出駅 - Googleトランジット"> 
+ <onevent type="onenterforward"> <refresh> <setvar value=""/> 
+ <setvar name="saddr" value=""/> <setvar name="time" value=""/> 
+ <setvar name="ttype" value=""/> <setvar name="daddr" value=""/> 
+ <setvar name="date" value=""/> </refresh> 
+ </onevent>  
+ <p>  <img src="http://www.gstatic.com/m/images/logo_small.gif" width="48" height="17" alt="Google"/> </p> 
+ <p>  </p> 
+ <p> 枚方市駅（大阪）～放出駅（大阪） 17:36発 </p> 
+ <p>   
+ <br/>31 分 - 480円 <br/>   
+ <img src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png" width="15" height="15" alt=""/>
+ 京阪本線 特急 <br/>17:38発 枚方市駅（大阪） <br/>17:55着 京橋駅（大阪） <br/>  
+ <img src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png" width="15" height="15" alt=""/>
+ ＪＲ東西線・学研都市線 快速 <br/>18:06発 京橋駅（大阪） <br/>18:09着 放出駅（大阪） <br/>  <br/>33 分 - 480円 <br/>   
+ <img src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png" width="15" height="15" alt=""/>
+ 京阪本線 特急 <br/>18:18発 枚方市駅（大阪） <br/>18:34着 京橋駅（大阪） <br/>  
+ <img src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png" width="15" height="15" alt=""/>
+ ＪＲ東西線・学研都市線 各停 <br/>18:46発 京橋駅（大阪） <br/>18:51着 放出駅（大阪） <br/>  <br/>29 分 - 480円 <br/>   <img src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png" width="15" height="15" alt=""/>京阪本線 特急 <br/>17:48発 枚方市駅（大阪） <br/>18:05着 京橋駅（大阪） <br/>  <img src="http://maps.gstatic.com/intl/ja_jp/mapfiles/transit/iw/2/rail.png" width="15" height="15" alt=""/>ＪＲ東西線・学研都市線 直通快速 <br/>18:12発 京橋駅（大阪） <br/>18:17着 放出駅（大阪） <br/> </p> <p>  <a href="/m/directions?sort=time&amp;ttype=dep&amp;date=20111217&amp;time=1736&amp;dirflg=r&amp;saddr=%E6%94%BE%E5%87%BA%E9%A7%85&amp;daddr=%E6%9E%9A%E6%96%B9%E5%B8%82%E9%A7%85">逆方向の経路を表示 </a> </p> <p>  </p> <p>   発 <input name="saddr" size="8" emptyok="true" value="枚方市駅"/> <br/> 着 <input name="daddr" size="8" emptyok="true" value="放出駅"/> <br/> <anchor> <go href="/m/directions" method="get"> <postfield name="dirflg" value="r"/> <postfield name="saddr" value="$(saddr)"/> <postfield name="daddr" value="$(daddr)"/> <postfield name="btnG" value="経路検索"/> <postfield name="date" value="$(date)"/> <postfield name="time" value="$(time)"/> <postfield name="ttype" value="$(ttype)"/> <postfield name="sa" value="2"/> </go>経路検索 </anchor> <br/> <br/>  日時設定 <br/> 日付: <input name="date" size="10" emptyok="true" value="20111217"/> <br/> 時刻: <input name="time" size="10" emptyok="true" value="1736"/> <br/> <select name="ttype" ivalue="2"> <option value="arr"> 到着時刻 </option> <option value="dep"> 出発時刻 </option> <option value="last"> 終電 </option> </select> <br/>  <select multiple="true"> <option value="1"> 有料特急を使わない </option> </select> <br/>  <select multiple="true"> <option value="1"> 飛行機を使わない </option> </select> <br/> <anchor> <go href="/m/directions" method="get"> <postfield name="dirflg" value="r"/> <postfield name="saddr" value="$(saddr)"/> <postfield name="daddr" value="$(daddr)"/> <postfield name="date" value="$(date)"/> <postfield name="time" value="$(time)"/> <postfield name="ttype" value="$(ttype)"/> <postfield name="btnG" value="この条件で検索"/> <postfield name="sa" value="2"/> </go>この条件で検索 </anchor> <br/> </p> <p>  <br/> </p> <p>  <a href="https://www.google.com/accounts/ServiceLogin?service=mobile&amp;passive=true&amp;cd=JP&amp;hl=ja&amp;continue=http://www.google.co.jp/m/directions?saddr%3D%25E6%259E%259A%25E6%2596%25B9%25E5%25B8%2582%25E9%25A7%2585%26daddr%3D%25E6%2594%25BE%25E5%2587%25BA%25E9%25A7%2585%26ttype%3Ddep%26date%3D20111217%26time%3D1736%26noexp%3D1%26noal%3D1%26sort%3Dtime%26ie%3DUTF8%26f%3Dd%26dirmode%3Dtransit%26num%3D3%26dirflg%3Dr%26sigp%3Dsaddr%2Bdaddr%2Bttype%2Bdate%2Btime%2Bnoexp%2Bnoal%2Bsort%2Bie%2Bf%2Bdirmode%2Bnum%2Bdirflg%26sig%3DAMctaOIBfOPK-jwomkk_Bs4WCekDGp_0OQ&amp;followup=http://www.google.co.jp/m/directions?saddr%3D%25E6%259E%259A%25E6%2596%25B9%25E5%25B8%2582%25E9%25A7%2585%26daddr%3D%25E6%2594%25BE%25E5%2587%25BA%25E9%25A7%2585%26ttype%3Ddep%26date%3D20111217%26time%3D1736%26noexp%3D1%26noal%3D1%26sort%3Dtime%26ie%3DUTF8%26f%3Dd%26dirmode%3Dtransit%26num%3D3%26dirflg%3Dr%26sigp%3Dsaddr%2Bdaddr%2Bttype%2Bdate%2Btime%2Bnoexp%2Bnoal%2Bsort%2Bie%2Bf%2Bdirmode%2Bnum%2Bdirflg%26sig%3DAMctaOIBfOPK-jwomkk_Bs4WCekDGp_0OQ&amp;btmpl=mobile_tier2">ログイン </a> </p> <p>   <a href="/m?ttype=dep&amp;dirflg=r&amp;sa=N">Google </a> <br/>  <a href="/m/survey/feedback?saddr=%E6%9E%9A%E6%96%B9%E5%B8%82%E9%A7%85&amp;sort=time&amp;ttype=dep&amp;daddr=%E6%94%BE%E5%87%BA%E9%A7%85&amp;date=20111217&amp;time=1736&amp;dirflg=r">ご意見 </a> -  <a href="/support/mobile/?p=search">ヘルプ </a> <br/>  表示モード: <br/> モバイル&nbsp;|&nbsp; <a href="/webhp?nomo=1">PC </a> <br/> </p> <p> &#169;2011 -  <a href="http://m.google.com/privacy?hl=ja">プライバシー </a> </p> </card> </wml>

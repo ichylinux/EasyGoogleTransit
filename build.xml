@@ -60,7 +60,7 @@
           <pathelement location="test/fixtures"/>
         </classpath>
       
-        <batchtest fork="yes">
+        <batchtest>
           <fileset dir="test" includes="${test.includes}"/>
         </batchtest>
       </junit>

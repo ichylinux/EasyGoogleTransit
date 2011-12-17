@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2010 Hybitz.co.ltd
+ * Copyright (C) 2010-2011 Hybitz.co.ltd
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -47,7 +47,7 @@ public class MobileSearcher20100827 extends AbstractTransitSearcher {
      * @see jp.co.hybitz.common.Searcher#createParser()
      */
     public Parser<TransitQuery, TransitResult> createParser(TransitQuery query, HttpResponse response) {
-        return new MobileParser20100827(platform);
+        return new MobileParser20111218(platform);
     }
     
     @Override
@@ -65,7 +65,7 @@ public class MobileSearcher20100827 extends AbstractTransitSearcher {
             throw new HttpSearchException(e.getMessage(), new String(response.getRawResponse()), e);
         }
 	}
-	
+    
     public String createUrl(TransitQuery query) {
 		StringBuilder sb = new StringBuilder(GOOGLE_TRANSIT_MOBILE_URL);
 		

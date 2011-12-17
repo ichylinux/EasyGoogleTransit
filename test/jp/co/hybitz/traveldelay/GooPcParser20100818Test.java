@@ -18,7 +18,7 @@
 package jp.co.hybitz.traveldelay;
 
 import jp.co.hybitz.common.SimpleXmlPullParser;
-import jp.co.hybitz.traveldelay.GooParser;
+import jp.co.hybitz.traveldelay.GooPcParser;
 import jp.co.hybitz.traveldelay.TravelDelayParser;
 import jp.co.hybitz.traveldelay.model.Category;
 import jp.co.hybitz.traveldelay.model.OperationCompany;
@@ -30,11 +30,11 @@ import org.xmlpull.v1.XmlPullParserException;
 /**
  * @author ichy <ichylinux@gmail.com>
  */
-public class GooParser20100818Test extends ParserTestCase {
+public class GooPcParser20100818Test extends ParserTestCase {
 
     @Override
     protected TravelDelayParser getParser() throws XmlPullParserException {
-        return new GooParser(new SimpleXmlPullParser());
+        return new GooPcParser(new SimpleXmlPullParser());
     }    
 
     public void testParse20100818() {

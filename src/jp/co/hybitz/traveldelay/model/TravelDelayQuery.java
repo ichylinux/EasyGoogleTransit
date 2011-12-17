@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2010 Hybitz.co.ltd
+ * Copyright (C) 2010-2011 Hybitz.co.ltd
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,15 +20,15 @@ package jp.co.hybitz.traveldelay.model;
 import java.io.Serializable;
 
 public class TravelDelayQuery implements Serializable {
-    private String encoding;
+    private boolean mobile;
     private Category category;
 
-    public String getEncoding() {
-        return encoding;
+    public boolean isMobile() {
+        return mobile;
     }
 
-    public void setEncoding(String encoding) {
-        this.encoding = encoding;
+    public void setMobile(boolean mobile) {
+        this.mobile = mobile;
     }
 
     public Category getCategory() {
